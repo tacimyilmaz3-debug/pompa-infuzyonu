@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f6f8fb" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+<meta name="format-detection" content="telephone=no">
+<title>Pompa Hızı Çizelgesi v5 — Dr. Tacim Yılmaz</title>
+<style>
+@font-face{font-family:'IBM Plex Sans';font-style:normal;font-weight:400;font-display:swap;src:url(data:font/woff2;base64,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) format('woff2')}
+
+:root{
+  color-scheme: light dark;
+  --bg:#0d1117; --panel:#161b22; --panel2:#1c2230; --line:#2b3444;
+  --ink:#e8edf5; --dim:#93a1b5; --accent:#4da3ff; --warn:#ffb454; --bad:#ff6b6b; --ok:#5ddba1;
+  --r:12px;
+}
+@media (prefers-color-scheme: light){
+  :root{ --bg:#f6f8fb; --panel:#fff; --panel2:#eef2f7; --line:#d6dee9;
+         --ink:#101720; --dim:#54637a; --accent:#0b62c4; --warn:#8a5000; --bad:#b3261e; --ok:#0f7a52; }
+}
+*,*::before,*::after{box-sizing:border-box;min-width:0}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:'IBM Plex Sans',ui-sans-serif,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+  font-size:16px;line-height:1.55;font-synthesis-weight:none;font-synthesis-style:none;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  font-variant-numeric:lining-nums;
+  overflow-wrap:break-word;word-break:normal;
+  text-rendering:optimizeLegibility;
+  overscroll-behavior-y:contain;
+}
+.wrap{
+  max-width:860px;margin:0 auto;
+  padding:calc(16px + env(safe-area-inset-top)) max(14px,env(safe-area-inset-right))
+          calc(56px + env(safe-area-inset-bottom)) max(14px,env(safe-area-inset-left));
+}
+h1{font-size:clamp(1.2rem,4.2vw,1.42rem);font-weight:600;margin:.2rem 0 .1rem;letter-spacing:-.012em;line-height:1.25}
+h2{font-size:clamp(.98rem,3.4vw,1.08rem);font-weight:600;margin:28px 0 10px;padding-bottom:6px;
+   border-bottom:1px solid var(--line);letter-spacing:.005em}
+.sub{color:var(--dim);font-size:.86rem;margin-bottom:18px;line-height:1.5}
+b,strong{font-weight:600}
+p{margin:.2rem 0 .6rem}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+      padding:14px;margin-bottom:14px}
+.formula{background:var(--panel2);border-left:3px solid var(--accent);border-radius:8px;
+         padding:12px 14px;margin:10px 0;font-size:.95rem;line-height:1.6}
+.formula b{color:var(--accent)}
+label{display:block;font-size:.75rem;color:var(--dim);margin-bottom:5px;
+      text-transform:uppercase;letter-spacing:.05em;font-weight:600}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.fld{flex:1 1 140px;margin-bottom:12px;min-width:0}
+input,select,button{font-family:inherit;font-size:inherit}
+input{width:100%;padding:11px 10px;font-size:1.05rem;border-radius:9px;
+      border:1px solid var(--line);background:var(--bg);color:var(--ink);
+      font-variant-numeric:tabular-nums}
+input:focus-visible,.chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.out{background:var(--panel2);border-radius:10px;padding:16px 12px;text-align:center;margin-top:6px}
+.big{font-size:clamp(1.9rem,9vw,2.5rem);font-weight:700;color:var(--accent);line-height:1.1;
+     letter-spacing:-.02em;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.big small{font-size:clamp(.85rem,3.4vw,1rem);font-weight:500;color:var(--dim);letter-spacing:0}
+.out .note{font-size:.82rem;color:var(--dim);margin-top:8px;line-height:1.5}
+.chips{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px}
+.chip{background:var(--panel2);border:1px solid var(--line);color:var(--ink);
+      border-radius:999px;padding:8px 13px;font-size:.82rem;cursor:pointer;
+      min-height:38px;line-height:1.2;
+      -webkit-appearance:none;appearance:none;
+      display:inline-flex;align-items:center;text-decoration:none;
+      -webkit-tap-highlight-color:transparent}
+.chip:visited{color:var(--ink)}
+.chip.on:visited{color:#fff}
+.betiksiz{display:none;background:var(--panel2);border:1px solid var(--warn);
+      border-radius:10px;padding:11px 13px;margin-bottom:12px;font-size:.85rem;
+      line-height:1.5}
+.chip:hover{border-color:var(--accent);color:var(--accent)}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+@media (prefers-color-scheme: light){ .chip.on{color:#fff} }
+
+/* ---------- TABLOLAR ---------- */
+.tbl{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse;font-size:.85rem;margin:10px 0 16px;line-height:1.5;}
+table:first-child{margin-top:2px}
+table:last-child{margin-bottom:2px}
+th,td{padding:8px 9px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top;overflow-wrap:break-word}
+th{color:var(--dim);font-weight:600;font-size:.74rem;text-transform:uppercase;letter-spacing:.05em}
+tr.sec th{color:var(--ink);background:var(--panel2);border-radius:6px;font-size:.76rem;text-align:left;}
+td.n, th.n{text-align:right;font-variant-numeric:tabular-nums}
+tr:last-child td{border-bottom:0}
+td:first-child{font-weight:600}
+tr.sec + tr.hdr th{padding-top:10px}
+
+/* Kilo Çizelgeleri Hizalama ve Genişlik Ayarları */
+.kgtab {
+  table-layout: fixed; /* Sütun genişliklerinin kilitlenmesini sağlar */
+  width: 100%;
+  min-width: 580px;   /* Mobilde içeriğin sıkışıp taşmaması için */
+}
+
+/* 7 Sütunlu (Kiloya Göre) Tablo Dağılımı */
+.kgtab th:first-child,
+.kgtab td:first-child {
+  width: 28%;
+  text-align: left;
+}
+
+.kgtab th.n,
+.kgtab td.n {
+  width: 12%;
+  text-align: right;
+}
+
+/* 2 Sütunlu (Kilodan Bağımsız) Tablo Dağılımı */
+.kgtab-fixed {
+  min-width: 100%;
+}
+.kgtab-fixed th:first-child,
+.kgtab-fixed td:first-child {
+  width: 40%;
+}
+.kgtab-fixed th.n,
+.kgtab-fixed td.n {
+  width: 60%;
+}
+
+/* Kurum Standartları Tablo Ayarları */
+@media (min-width:620px){
+  .tbl table:not(.kgtab) td:first-child{width:25%;min-width:8.5em}
+  .tbl table:not(.kgtab) td:nth-child(2){width:35%}
+  .tbl table:not(.kgtab) td:nth-child(3){width:40%}
+}
+
+/* Mobil İyileştirmeleri */
+@media (max-width:619px){
+  .kgsar{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .kgtab td, .kgtab th{padding:6px 4px;font-size:.75rem}
+}
+
+/* ---------- UYARI KUTULARI ---------- */
+.warn{border-left:3px solid var(--warn);background:var(--panel2);border-radius:8px;
+      padding:11px 13px;margin:12px 0;font-size:.88rem;line-height:1.6}
+.warn b{color:var(--warn)}
+.bad{border-left-color:var(--bad)} .bad b{color:var(--bad)}
+.ok{border-left-color:var(--ok)} .ok b{color:var(--ok)}
+.foot{color:var(--dim);font-size:.78rem;margin-top:28px;padding-top:12px;
+      border-top:1px solid var(--line);line-height:1.6}
+code{background:var(--panel2);padding:.5px 4px;border-radius:4px;font-size:.9em;
+     font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:nowrap}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ---------- YAZDIRMA ---------- */
+@media print{
+  :root{--bg:#fff;--panel:#fff;--panel2:#f4f6f9;--line:#c8d0dc;--ink:#000;--dim:#444;
+        --accent:#0b3d8c;--warn:#7a4200;--bad:#8a1a14;--ok:#0a5c3e}
+  body{font-size:10.5pt}
+  .wrap{max-width:none;padding:0}
+  .chips,#hesapKart{display:none}
+  table,tbody,tr,td,th{display:revert}
+  tr.hdr{display:table-row}
+  table{page-break-inside:auto;font-size:9.5pt}
+  tr{page-break-inside:avoid}
+  h2{page-break-after:avoid}
+  .card,.warn{break-inside:avoid;border:1px solid var(--line)}
+}
+
+details.giris{background:var(--panel2);border-left:3px solid var(--bad);border-radius:8px;
+      margin:10px 0 12px;font-size:.8rem;line-height:1.5}
+details.giris>summary{cursor:pointer;list-style:none;padding:10px 13px;min-height:40px;
+      color:var(--ink);display:block}
+details.giris>summary::-webkit-details-marker{display:none}
+details.giris>summary b{color:var(--bad)}
+details.giris>summary .ac{color:var(--dim);white-space:nowrap}
+details.giris[open]>summary .ac{visibility:hidden}
+details.giris .ic{padding:0 13px 12px;border-top:1px solid var(--line);margin-top:2px;
+      padding-top:10px}
+details.giris .ic p{margin:0 0 .55rem}
+details.giris .ic p:last-child{margin-bottom:0}
+details.giris .ic b{color:var(--bad)}
+details.giris .ic .kap b{color:var(--warn)}
+.formula.kucuk{font-size:.85rem;padding:10px 13px;margin:14px 0 10px}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<h1>Pompa hızı çizelgesi</h1>
+<div class="sub">Yoğun bakım ve acil infüzyonlarında pompa hızı hesabı &nbsp;·&nbsp; <b>paylaşım sürümü v5</b> &nbsp;·&nbsp; 13.08.2026 &nbsp;·&nbsp; Hazırlayan: Dr. Tacim Yılmaz</div>
+
+<details class="giris">
+  <summary><b>Kullanmadan önce.</b> Hesap aracıdır, kılavuz değildir. Çizelgeler <b>yalnız
+    başlıklarında yazan derişim</b> için geçerlidir; bağlayıcı olan kendi biriminizin
+    protokolüdür. <span class="ac">▾ ayrıntı</span></summary>
+  <div class="ic">
+    <p>Çizelgelerdeki mL/saat değerleri her çizelgenin başlığında yazan derişime göre
+    hesaplanmıştır. <b>Derişim kurumdan kuruma değişir.</b> Sizin biriminizde farklı bir
+    seyreltme kullanılıyorsa o çizelge <b>sizin için geçersizdir</b> — bu durumda çizelgeye
+    değil, aşağıdaki hesap alanına kendi derişiminizi girin. Bağlayıcı olan tek şey
+    <b>kendi biriminizin protokolü ve akıllı pompa ilaç kütüphanesidir.</b> Doz kararı
+    hastaya göre verilir. Bu dosya hiçbir kurumu ya da derneği bağlamaz.</p>
+    <p class="kap"><b>Kapsam.</b> İçerik erişkin hastaya yöneliktir; <b>çocuk ve yenidoğan
+    dozları kapsam dışıdır.</b> Sayılar, başlıklarında adı geçen kılavuz ve kurum
+    belgelerinden alınmış, hesaplar bağımsız olarak yeniden doğrulanmıştır; yine de
+    <b>hata payı vardır ve kullanmadan önce doğrulama okuyucunun sorumluluğundadır.</b>
+    Hata bildirimi ve öneri için hazırlayana ulaşabilirsiniz.</p>
+  </div>
+</details>
+
+<h2>Hesapla</h2>
+<div class="card" id="hesapKart">
+  <noscript><div class="betiksiz" style="display:block"><b>Canlı hesap burada çalışmaz</b> — sonuç satırı “—” kalır, girdiğiniz değerlere tepki vermez. WhatsApp, Dosyalar ve Drive önizlemeleri betik çalıştırmaz; <b>iPhone’da hiç çalışmaz.</b> <b>Aşağıdaki hazır çizelgeleri kullanın</b> — hepsi dosyada yazılıdır ve her görüntüleyicide geçerlidir; ilaç düğmeleri ilgili çizelgeye götürür.</div></noscript>
+  <div class="chips" id="chips"><a class="chip on" href="#ilac-0">Noradrenalin, periferik</a><a class="chip" href="#ilac-1">Noradrenalin, santral</a><a class="chip" href="#ilac-2">Adrenalin</a><a class="chip" href="#ilac-3">Dopamin</a><a class="chip" href="#ilac-4">Dobutamin</a><a class="chip" href="#ilac-5">Deksmedetomidin</a><a class="chip" href="#ilac-6">Esmolol</a><a class="chip" href="#ilac-7">Vazopressin</a><a class="chip" href="#ilac-8">Nitrogliserin</a><a class="chip" href="#ilac-9">Milrinon</a><a class="chip" href="#ilac-10">Propofol %1</a><a class="chip" href="#ilac-11">Propofol %2</a><a class="chip" href="#ilac-12">Ketamin</a><a class="chip" href="#ilac-13">Midazolam</a><a class="chip" href="#ilac-14">Fenilefrin</a></div>
+
+  <div class="row">
+    <div class="fld"><label>Kilo (kg)</label><input id="kg" type="number" inputmode="decimal" value="70" min="1" step="1"></div>
+    <div class="fld"><label id="dozLbl">Doz (mcg/kg/dk)</label><input id="doz" type="number" inputmode="decimal" value="0.1" step="0.01" min="0"></div>
+  </div>
+  <div class="row">
+    <div class="fld"><label>İlaç miktarı (mg)</label><input id="mg" type="number" inputmode="decimal" value="4" step="0.1" min="0"></div>
+    <div class="fld"><label>Toplam hacim (mL)</label><input id="ml" type="number" inputmode="decimal" value="100" step="1" min="1"></div>
+  </div>
+
+  <div class="out">
+    <div class="big" id="hiz">— <small>mL/saat</small></div>
+    <div class="note" id="not"></div>
+    <noscript><div class="betiksiz" style="display:block;margin:10px 0 0">
+      <b>Sonuç hesaplanmıyor</b> — bu görüntüleyici betik çalıştırmıyor; ne yazarsanız yazın
+      “—” kalır. <b>Aşağıdaki hazır çizelgeleri kullanın.</b>
+    </div></noscript>
+  </div>
+</div>
+
+<div class="formula kucuk">
+  <b>mL/saat = (doz [mcg/kg/dk] × kilo × 60) ÷ derişim [mcg/mL]</b><br>
+  <span style="color:var(--dim)">Tersi:</span> doz = (mL/saat × derişim) ÷ (60 × kilo)<br>
+  <span style="color:var(--dim)">Nitrogliserin ve vazopressin kiloya bağlı değildir — kilo terimi düşer.</span>
+</div>
+
+<div class="warn ok">
+  <b>Pompa yoksa.</b> Mikrodrip set <b>60 damla/mL</b>'dir (ISO 8536-4) ve bu yüzden
+  <b>damla/dakika = mL/saat</b>, birebir. 60'lar sadeleşir — tesadüf değil tasarımdır.
+  Makrodripte 10 damla/mL ise <code>mL/saat ÷ 6</code>, 15 damla/mL ise <code>÷ 4</code>,
+  20 damla/mL ise <code>÷ 3</code>. <b>Vazopresör damla sayarak verilmez</b>; bu yol yalnız
+  pompasız nakilde geçici çözümdür.
+</div>
+
+<h2>Türkiye ampul tuzakları</h2>
+
+<div class="warn bad">
+  <b>Adrenalin üç ayrı güçte ruhsatlı.</b> 0,25 · 0,5 · 1 mg/mL. "Bir ampul adrenalin" ifadesi
+  burada anlamsızdır. Anafilakside erişkin dozu <b>0,5 mg kas içine</b>; elinizdekine göre
+  <b>2 mL, 1 mL ya da 0,5 mL</b> çekersiniz. Yalnız <b>1 mg/mL = 1:1000</b> (kas içi);
+  <b>1:10.000 = 0,1 mg/mL</b> (damar içi, arrest).
+</div>
+
+<div class="warn bad">
+  <b>Noradrenalin ampulü baz üzerinden etiketli.</b> 4 mg/4 mL ampul <b>8 mg bitartarat</b>
+  içerir ve bu <b>4 mg baza eşdeğerdir</b>. Hesapta <b>4 mg baz</b> kullanılır. 1 mg baz = 2 mg
+  bitartarat; dozu tartarat üzerinden veren kaynaktan (Fransız protokolleri) doğrudan aktarım
+  <b>iki kat doz hatası</b> yapar.
+</div>
+
+<div class="warn">
+  <b>Atropinde 1 mg/mL yok.</b> Türkiye'de yalnız 0,25 ve 0,5 mg/mL vardır. AHA'nın 1 mg'ı
+  <b>iki ila dört ampul</b>, 3 mg tavanı altı ila on iki ampul demektir.
+  <span style="color:var(--dim)">(İlk doz: AHA 2025 1 mg · ERC 2025 0,5 mg.)</span>
+</div>
+
+<div class="warn">
+  <b>Nitrogliserinde set önemli.</b> PVC ve poliüretan setlerde <b>%40-80 etkin madde kaybı</b>
+  olur. Polietilen, polipropilen ya da politetrafloroetilen set kullanılır — hasta yanıtsızsa
+  önce seti sorgulayın.
+</div>
+
+<div class="warn">
+  <b>Kolistinde birim karışıklığı.</b> 1 milyon ünite ≈ <b>33 mg kolistin baz etkinliği</b>
+  ≈ <b>80 mg kolistimetat sodyum</b>. Karıştırılırsa 2,5 kat doz hatası doğar.
+</div>
+
+<h2 id="kilocizelge">Hazır çizelgeler — kiloya göre</h2>
+<div class="warn ok"><b>Hesap yapmadan.</b> Bu değerler yukarıdaki formülün 50-100 kg için önceden hesaplanmış hâlidir; <b>hiçbir betik gerektirmez</b> ve her görüntüleyicide açılır. Ara kilolarda değer <b>doğrusaldır</b>: 75 kg, 70 kg değerinin 75/70 katıdır. <b>Vazopressin ve nitrogliserin kilodan bağımsızdır</b> ve tek sütunlu verilmiştir. Yukarıdaki ilaç düğmesine dokunmak ilgili çizelgeye götürür. Çizelgeler dar ekranda <b>yana kaydırılır</b>. <b>Her çizelgenin başlığında o çizelgenin varsaydığı derişim ve derişimin kaynağı yazar.</b> On bir çizelgenin derişimi aşağıdaki bölümde künyesi verilen <b>YB.RH.02</b> belgesinden, dört çizelgeninki (vazopressin, nitrogliserin, milrinon, fenilefrin) <b>yaygın seyreltmelerden</b> gelir. <b>Derişiminiz farklıysa çizelge geçersizdir</b>; hesap alanını kullanın.</div>
+
+<div class="tbl kgsar">
+  <table class="kgtab" id="ilac-0">
+    <thead>
+      <tr class="sec"><th colspan="7">Noradrenalin, periferik &nbsp;·&nbsp; 4 mg / 100 mL &nbsp;·&nbsp; 40 mcg/mL &nbsp;·&nbsp; <span style="font-weight:400;color:var(--dim)">derişim kaynağı: YB.RH.02</span></th></tr>
+      <tr class="hdr"><th>Doz</th><th class="n">50 kg</th><th class="n">60 kg</th><th class="n">70 kg</th><th class="n">80 kg</th><th class="n">90 kg</th><th class="n">100 kg</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>0,025 mcg/kg/dk</td><td class="n">1,9</td><td class="n">2,3</td><td class="n">2,6</td><td class="n">3,0</td><td class="n">3,4</td><td class="n">3,8</td></tr>
+      <tr><td>0,05 mcg/kg/dk</td><td class="n">3,8</td><td class="n">4,5</td><td class="n">5,3</td><td class="n">6,0</td><td class="n">6,8</td><td class="n">7,5</td></tr>
+      <tr><td>0,1 mcg/kg/dk</td><td class="n">7,5</td><td class="n">9,0</td><td class="n">10,5</td><td class="n">12,0</td><td class="n">13,5</td><td class="n">15,0</td></tr>
+      <tr><td>0,2 mcg/kg/dk</td><td class="n">15,0</td><td class="n">18,0</td><td class="n">21,0</td><td class="n">24,0</td><td class="n">27,0</td><td class="n">30,0</td></tr>
+      <tr><td>0,3 mcg/kg/dk</td><td class="n">22,5</td><td class="n">27,0</td><td class="n">31,5</td><td class="n">36,0</td><td class="n">40,5</td><td class="n">45,0</td></tr>
+      <tr><td>0,5 mcg/kg/dk</td><td class="n">37,5</td><td class="n">45,0</td><td class="n">52,5</td><td class="n">60,0</td><td class="n">67,5</td><td class="n">75,0</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="tbl kgsar">
+  <table class="kgtab" id="ilac-1">
+    <thead>
+      <tr class="sec"><th colspan="7">Noradrenalin, santral &nbsp;·&nbsp; 16 mg / 100 mL &nbsp;·&nbsp; 160 mcg/mL &nbsp;·&nbsp; <span style="font-weight:400;color:var(--dim)">derişim kaynağı: YB.RH.02</span></th></tr>
+      <tr class="hdr"><th>Doz</th><th class="n">50 kg</th><th class="n">60 kg</th><th class="n">70 kg</th><th class="n">80 kg</th><th class="n">90 kg</th><th class="n">100 kg</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>0,025 mcg/kg/dk</td><td class="n">0,5</td><td class="n">0,6</td><td class="n">0,7</td><td class="n">0,8</td><td class="n">0,8</td><td class="n">0,9</td></tr>
+      <tr><td>0,05 mcg/kg/dk</td><td class="n">0,9</td><td class="n">1,1</td><td class="n">1,3</td><td class="n">1,5</td><td class="n">1,7</td><td class="n">1,9</td></tr>
+      <tr><td>0,1 mcg/kg/dk</td><td class="n">1,9</td><td class="n">2,3</td><td class="n">2,6</td><td class="n">3,0</td><td class="n">3,4</td><td class="n">3,8</td></tr>
+      <tr><td>0,25 mcg/kg/dk</td><td class="n">4,7</td><td class="n">5,6</td><td class="n">6,6</td><td class="n">7,5</td><td class="n">8,4</td><td class="n">9,4</td></tr>
+      <tr><td>0,5 mcg/kg/dk</td><td class="n">9,4</td><td class="n">11,3</td><td class="n">13,1</td><td class="n">15,0</td><td class="n">16,9</td><td class="n">18,8</td></tr>
+      <tr><td>1 mcg/kg/dk</td><td class="n">18,8</td><td class="n">22,5</td><td class="n">26,3</td><td class="n">30,0</td><td class="n">33,8</td><td class="n">37,5</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="tbl kgsar">
+  <table class="kgtab" id="ilac-2">
+    <thead>
+      <tr class="sec"><th colspan="7">Adrenalin &nbsp;·&nbsp; 10 mg / 100 mL &nbsp;·&nbsp; 100 mcg/mL &nbsp;·&nbsp; <span style="font-weight:400;color:var(--dim)">derişim kaynağı: YB.RH.02</span></th></tr>
+      <tr class="hdr"><th>Doz</th><th class="n">50 kg</th><th class="n">60 kg</th><th class="n">70 kg</th><th class="n">80 kg</th><th class="n">90 kg</th><th class="n">100 kg</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>0,01 mcg/kg/dk</td><td class="n">0,3</td><td class="n">0,4</td><td class="n">0,4</td><td class="n">0,5</td><td class="n">0,5</td><td class="n">0,6</td></tr>
+      <tr><td>0,02 mcg/kg/dk</td><td class="n">0,6</td><td class="n">0,7</td><td class="n">0,8</td><td class="n">1,0</td><td class="n">1,1</td><td class="n">1,2</td></tr>
+      <tr><td>0,05 mcg/kg/dk</td><td class="n">1,5</td><td class="n">1,8</td><td class="n">2,1</td><td class="n">2,4</td><td class="n">2,7</td><td class="n">3,0</td></tr>
+      <tr><td>0,1 mcg/kg/dk</td><td class="n">3,0</td><td class="n">3,6</td><td class="n">4,2</td><td class="n">4,8</td><td class="n">5,4</td><td class="n">6,0</td></tr>
+      <tr><td>0,2 mcg/kg/dk</td><td class="n">6,0</td><td class="n">7,2</td><td class="n">8,4</td><td class="n">9,6</td><td class="n">10,8</td><td class="n">12,0</td></tr>
+      <tr><td>0,5 mcg/kg/dk</td><td class="n">15,0</td><td class="n">18,0</td><td class="n">21,0</td><td class="n">24,0</td><td class="n">27,0</td><td class="n">30,0</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="tbl kgsar">
+  <table class="kgtab" id="ilac-3">
+    <thead>
+      <tr class="sec"><th colspan="7">Dopamin &nbsp;·&nbsp; 400 mg / 100 mL &nbsp;·&nbsp; 4 mg/mL &nbsp;·&nbsp; <span style="font-weight:400;color:var(--dim)">derişim kaynağı: YB.RH.02</span></th></tr>
+      <tr class="hdr"><th>Doz</th><th class="n">50 kg</th><th class="n">60 kg</th><th class="n">70 kg</th><th class="n">80 kg</th><th class="n">90 kg</th><th class="n">100 kg</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1 mcg/kg/dk</td><td class="n">0,8</td><td class="n">0,9</td><td class="n">1,1</td><td class="n">1,2</td><td class="n">1,4</td><td class="n">1,5</td></tr>
+      <tr><td>2 mcg/kg/dk</td><td class="n">1,5</td><td class="n">1,8</td><td class="n">2,1</td><td class="n">2,4</td><td class="n">2,7</td><td class="n">3,0</td></tr>
+      <tr><td>5 mcg/kg/dk</td><td class="n">3,8</td><td class="n">4,5</td><td class="n">5,3</td><td class="n">6,0</td><td class="n">6,8</td><td class="n">7,5</td></tr>
+      <tr><td>10 mcg/kg/dk</td><td class="n">7,5</td><td class="n">9,0</td><td class="n">10,5</td><td class="n">12,0</td><td class="n">13,5</td><td class="n">15,0</td></tr>
+      <tr><td>15 mcg/kg/dk</td><td class="n">11,3</td><td class="n">13,5</td><td class="n">15,8</td><td class="n">18,0</td><td class="n">20,3</td><td class="n">22,5</td></tr>
+      <tr><td>20 mcg/kg/dk</td><td class="n">15,0</td><td class="n">18,0</td><td class="n">21,0</td><td class="n">24,0</td><td class="n">27,0</td><td class="n">30,0</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="tbl kgsar">
+  <table class="kgtab" id="ilac-4">
+    <thead>
+      <tr class="sec"><th colspan="7">Dobutamin &nbsp;·&nbsp; 500 mg / 100 mL &nbsp;·&nbsp; 5 mg/mL &nbsp;·&nbsp; <span style="font-weight:400;color:var(--dim)">derişim kaynağı: YB.RH.02</span></th></tr>
+      <tr class="hdr"><th>Doz</th><th class="n">50 kg</th><th class="n">60 kg</th><th class="n">70 kg</th><th class="n">80 kg</th><th class="n">90 kg</th><th class="n">100 kg</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>2 mcg/kg/dk</td><td class="n">1,2</td><td class="n">1,4</td><td class="n">1,7</td><td class="n">1,9</td><td class="n">2,2</td><td class="n">2,4</td></tr>
+      <tr><td>5 mcg/kg/dk</td><td class="n">3,0</td><td class="n">3,6</td><td class="n">4,2</td><td class="n">4,8</td><td class="n">5,4</td><td class="n">6,0</td></tr>
+      <tr><td>10 mcg/kg/dk</td><td class="n">6,0</td><td class="n">7,2</td><td class="n">8,4</td><td class="n">9,6</td><td class="n">10,8</td><td class="n">12,0</td></tr>
+      <tr><td>15 mcg/kg/dk</td><td class="n">9,0</td><td class="n">10,8</td><td class="n">12,6</td><td class="n">14,4</td><td class="n">16,2</td><td class="n">18,0</td></tr>
+      <tr><td>20 mcg/kg/dk</td><td class="n">12,0</td><td class="n">14,4</td><td class="n">16,8</td><td class="n">19,2</td><td class="n">21,6</td><td class="n">24,0</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="tbl kgsar">
+  <table class="kgtab" id="ilac-5">
+    <thead>
+      <tr class="sec"><th colspan="7">Deksmedetomidin &nbsp;·&nbsp; 0,4 mg / 100 mL &nbsp;·&nbsp; 4 mcg/mL &nbsp;·&nbsp; <span style="font-weight:400;color:var(--dim)">derişim kaynağı: YB.RH.02</span></th></tr>
+      <tr class="hdr"><th>Doz</th><th class="n">50 kg</th><th class="n">60 kg</th><th class="n">70 kg</th><th class="n">80 kg</th><th class="n">90 kg</th><th class="n">100 kg</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>0,2 mcg/kg/saat</td><td class="n">2,5</td><td class="n">3,0</td><td class="n">3,5</td><td class="n">4,0</td><td class="n">4,5</td><td class="n">5,0</td></tr>
+      <tr><td>0,4 mcg/kg/saat</td><td class="n">5,0</td><td class="n">6,0</td><td class="n">7,0</td><td class="n">8,0</td><td class="n">9,0</td><td class="n">10,0</td></tr>
+      <tr><td>0,7 mcg/kg/saat</td><td class="n">8,8</td><td class="n">10,5</td><td class="n">12,3</td><td class="n">14,0</td><td class="n">15,7</td><td class="n">17,5</td></tr>
+      <tr><td>1 mcg/kg/saat</td><td class="n">12,5</td><td class="n">15,0</td><td class="n">17,5</td><td class="n">20,0</td><td class="n">22,5</td><td class="n">25,0</td></tr>
+      <tr><td>1,4 mcg/kg/saat</td><td class="n">17,5</td><td class="n">21,0</td><td class="n">24,5</td><td class="n">28,0</td><td class="n">31,5</td><td class="n">35,0</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="tbl kgsar">
+  <table class="kgtab" id="ilac-6">
+    <thead>
+      <tr class="sec"><th colspan="7">Esmolol &nbsp;·&nbsp; 2500 mg / 250 mL &nbsp;·&nbsp; 10 mg/mL &nbsp;·&nbsp; <span style="font-weight:400;color:var(--dim)">derişim kaynağı: YB.RH.02</span></th></tr>
+      <tr class="hdr"><th>Doz</th><th class="n">50 kg</th><th class="n">60 kg</th><th class="n">70 kg</th><th class="n">80 kg</th><th class="n">90 kg</th><th class="n">100 kg</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>25 mcg/kg/dk</td><td class="n">7,5</td><td class="n">9,0</td><td class="n">10,5</td><td class="n">12,0</td><td class="n">13,5</td><td class="n">15,0</td></tr>
+      <tr><td>50 mcg/kg/dk</td><td class="n">15,0</td><td class="n">18,0</td><td class="n">21,0</td><td class="n">24,0</td><td class="n">27,0</td><td class="n">30,0</td></tr>
+      <tr><td>100 mcg/kg/dk</td><td class="n">30,0</td><td class="n">36,0</td><td class="n">42,0</td><td class="n">48,0</td><td class="n">54,0</td><td class="n">60,0</td></tr>
+      <tr><td>150 mcg/kg/dk</td><td class="n">45,0</td><td class="n">54,0</td><td class="n">63,0</td><td class="n">72,0</td><td class="n">81,0</td><td class="n">90,0</td></tr>
+      <tr><td>200 mcg/kg/dk</td><td class="n">60,0</td><td class="n">72,0</td><td class="n">84,0</td><td class="n">96,0</td><td class="n">108,0</td><td class="n">120,0</td></tr>
+      <tr><td>300 mcg/kg/dk</td><td class="n">90,0</td><td class="n">108,0</td><td class="n">126,0</td><td class="n">144,0</td><td class="n">162,0</td><td class="n">180,0</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="tbl kgsar">
+  <table class="kgtab kgtab-fixed" id="ilac-7">
+    <thead>
+      <tr class="sec"><th colspan="2">Vazopressin &nbsp;·&nbsp; 20 ünite / 100 mL &nbsp;·&nbsp; 0,20 ünite/mL &nbsp;·&nbsp; kilodan bağımsız &nbsp;·&nbsp; <span style="font-weight:400;color:var(--dim)">derişim kaynağı: yaygın seyreltme</span></th></tr>
+      <tr class="hdr"><th>Doz</th><th class="n">mL/saat</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>0,01 ünite/dk</td><td class="n"><b>3,0</b></td></tr>
+      <tr><td>0,02 ünite/dk</td><td class="n"><b>6,0</b></td></tr>
+      <tr><td>0,03 ünite/dk</td><td class="n"><b>9,0</b></td></tr>
+      <tr><td>0,04 ünite/dk</td><td class="n"><b>12,0</b></td></tr>
+      <tr><td>0,07 ünite/dk</td><td class="n"><b>21,0</b></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="tbl kgsar">
+  <table class="kgtab kgtab-fixed" id="ilac-8">
+    <thead>
+      <tr class="sec"><th colspan="2">Nitrogliserin &nbsp;·&nbsp; 50 mg / 250 mL &nbsp;·&nbsp; 200 mcg/mL &nbsp;·&nbsp; kilodan bağımsız &nbsp;·&nbsp; <span style="font-weight:400;color:var(--dim)">derişim kaynağı: yaygın seyreltme</span></th></tr>
+      <tr class="hdr"><th>Doz</th><th class="n">mL/saat</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>10 mcg/dk</td><td class="n"><b>3,0</b></td></tr>
+      <tr><td>20 mcg/dk</td><td class="n"><b>6,0</b></td></tr>
+      <tr><td>50 mcg/dk</td><td class="n"><b>15,0</b></td></tr>
+      <tr><td>100 mcg/dk</td><td class="n"><b>30,0</b></td></tr>
+      <tr><td>200 mcg/dk</td><td class="n"><b>60,0</b></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="tbl kgsar">
+  <table class="kgtab" id="ilac-9">
+    <thead>
+      <tr class="sec"><th colspan="7">Milrinon &nbsp;·&nbsp; 20 mg / 100 mL &nbsp;·&nbsp; 200 mcg/mL &nbsp;·&nbsp; <span style="font-weight:400;color:var(--dim)">derişim kaynağı: yaygın seyreltme</span></th></tr>
+      <tr class="hdr"><th>Doz</th><th class="n">50 kg</th><th class="n">60 kg</th><th class="n">70 kg</th><th class="n">80 kg</th><th class="n">90 kg</th><th class="n">100 kg</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>0,375 mcg/kg/dk</td><td class="n">5,6</td><td class="n">6,8</td><td class="n">7,9</td><td class="n">9,0</td><td class="n">10,1</td><td class="n">11,3</td></tr>
+      <tr><td>0,5 mcg/kg/dk</td><td class="n">7,5</td><td class="n">9,0</td><td class="n">10,5</td><td class="n">12,0</td><td class="n">13,5</td><td class="n">15,0</td></tr>
+      <tr><td>0,625 mcg/kg/dk</td><td class="n">9,4</td><td class="n">11,3</td><td class="n">13,1</td><td class="n">15,0</td><td class="n">16,9</td><td class="n">18,8</td></tr>
+      <tr><td>0,75 mcg/kg/dk</td><td class="n">11,3</td><td class="n">13,5</td><td class="n">15,8</td><td class="n">18,0</td><td class="n">20,3</td><td class="n">22,5</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="tbl kgsar">
+  <table class="kgtab" id="ilac-10">
+    <thead>
+      <tr class="sec"><th colspan="7">Propofol %1 &nbsp;·&nbsp; 1000 mg / 100 mL &nbsp;·&nbsp; 10 mg/mL &nbsp;·&nbsp; <span style="font-weight:400;color:var(--dim)">derişim kaynağı: YB.RH.02</span></th></tr>
+      <tr class="hdr"><th>Doz</th><th class="n">50 kg</th><th class="n">60 kg</th><th class="n">70 kg</th><th class="n">80 kg</th><th class="n">90 kg</th><th class="n">100 kg</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>5 mcg/kg/dk</td><td class="n">1,5</td><td class="n">1,8</td><td class="n">2,1</td><td class="n">2,4</td><td class="n">2,7</td><td class="n">3,0</td></tr>
+      <tr><td>10 mcg/kg/dk</td><td class="n">3,0</td><td class="n">3,6</td><td class="n">4,2</td><td class="n">4,8</td><td class="n">5,4</td><td class="n">6,0</td></tr>
+      <tr><td>20 mcg/kg/dk</td><td class="n">6,0</td><td class="n">7,2</td><td class="n">8,4</td><td class="n">9,6</td><td class="n">10,8</td><td class="n">12,0</td></tr>
+      <tr><td>30 mcg/kg/dk</td><td class="n">9,0</td><td class="n">10,8</td><td class="n">12,6</td><td class="n">14,4</td><td class="n">16,2</td><td class="n">18,0</td></tr>
+      <tr><td>50 mcg/kg/dk</td><td class="n">15,0</td><td class="n">18,0</td><td class="n">21,0</td><td class="n">24,0</td><td class="n">27,0</td><td class="n">30,0</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="tbl kgsar">
+  <table class="kgtab" id="ilac-11">
+    <thead>
+      <tr class="sec"><th colspan="7">Propofol %2 &nbsp;·&nbsp; 2000 mg / 100 mL &nbsp;·&nbsp; 20 mg/mL &nbsp;·&nbsp; <span style="font-weight:400;color:var(--dim)">derişim kaynağı: YB.RH.02</span></th></tr>
+      <tr class="hdr"><th>Doz</th><th class="n">50 kg</th><th class="n">60 kg</th><th class="n">70 kg</th><th class="n">80 kg</th><th class="n">90 kg</th><th class="n">100 kg</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>5 mcg/kg/dk</td><td class="n">0,8</td><td class="n">0,9</td><td class="n">1,1</td><td class="n">1,2</td><td class="n">1,4</td><td class="n">1,5</td></tr>
+      <tr><td>10 mcg/kg/dk</td><td class="n">1,5</td><td class="n">1,8</td><td class="n">2,1</td><td class="n">2,4</td><td class="n">2,7</td><td class="n">3,0</td></tr>
+      <tr><td>20 mcg/kg/dk</td><td class="n">3,0</td><td class="n">3,6</td><td class="n">4,2</td><td class="n">4,8</td><td class="n">5,4</td><td class="n">6,0</td></tr>
+      <tr><td>30 mcg/kg/dk</td><td class="n">4,5</td><td class="n">5,4</td><td class="n">6,3</td><td class="n">7,2</td><td class="n">8,1</td><td class="n">9,0</td></tr>
+      <tr><td>50 mcg/kg/dk</td><td class="n">7,5</td><td class="n">9,0</td><td class="n">10,5</td><td class="n">12,0</td><td class="n">13,5</td><td class="n">15,0</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="tbl kgsar">
+  <table class="kgtab" id="ilac-12">
+    <thead>
+      <tr class="sec"><th colspan="7">Ketamin &nbsp;·&nbsp; 1000 mg / 100 mL &nbsp;·&nbsp; 10 mg/mL &nbsp;·&nbsp; <span style="font-weight:400;color:var(--dim)">derişim kaynağı: YB.RH.02</span></th></tr>
+      <tr class="hdr"><th>Doz</th><th class="n">50 kg</th><th class="n">60 kg</th><th class="n">70 kg</th><th class="n">80 kg</th><th class="n">90 kg</th><th class="n">100 kg</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>0,1 mg/kg/saat</td><td class="n">0,5</td><td class="n">0,6</td><td class="n">0,7</td><td class="n">0,8</td><td class="n">0,9</td><td class="n">1,0</td></tr>
+      <tr><td>0,2 mg/kg/saat</td><td class="n">1,0</td><td class="n">1,2</td><td class="n">1,4</td><td class="n">1,6</td><td class="n">1,8</td><td class="n">2,0</td></tr>
+      <tr><td>0,5 mg/kg/saat</td><td class="n">2,5</td><td class="n">3,0</td><td class="n">3,5</td><td class="n">4,0</td><td class="n">4,5</td><td class="n">5,0</td></tr>
+      <tr><td>1 mg/kg/saat</td><td class="n">5,0</td><td class="n">6,0</td><td class="n">7,0</td><td class="n">8,0</td><td class="n">9,0</td><td class="n">10,0</td></tr>
+      <tr><td>1,5 mg/kg/saat</td><td class="n">7,5</td><td class="n">9,0</td><td class="n">10,5</td><td class="n">12,0</td><td class="n">13,5</td><td class="n">15,0</td></tr>
+      <tr><td>2 mg/kg/saat</td><td class="n">10,0</td><td class="n">12,0</td><td class="n">14,0</td><td class="n">16,0</td><td class="n">18,0</td><td class="n">20,0</td></tr>
+      <tr><td>2,5 mg/kg/saat</td><td class="n">12,5</td><td class="n">15,0</td><td class="n">17,5</td><td class="n">20,0</td><td class="n">22,5</td><td class="n">25,0</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="tbl kgsar">
+  <table class="kgtab" id="ilac-13">
+    <thead>
+      <tr class="sec"><th colspan="7">Midazolam &nbsp;·&nbsp; 100 mg / 100 mL &nbsp;·&nbsp; 1 mg/mL &nbsp;·&nbsp; <span style="font-weight:400;color:var(--dim)">derişim kaynağı: YB.RH.02</span></th></tr>
+      <tr class="hdr"><th>Doz</th><th class="n">50 kg</th><th class="n">60 kg</th><th class="n">70 kg</th><th class="n">80 kg</th><th class="n">90 kg</th><th class="n">100 kg</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>0,01 mg/kg/saat</td><td class="n">0,5</td><td class="n">0,6</td><td class="n">0,7</td><td class="n">0,8</td><td class="n">0,9</td><td class="n">1,0</td></tr>
+      <tr><td>0,02 mg/kg/saat</td><td class="n">1,0</td><td class="n">1,2</td><td class="n">1,4</td><td class="n">1,6</td><td class="n">1,8</td><td class="n">2,0</td></tr>
+      <tr><td>0,05 mg/kg/saat</td><td class="n">2,5</td><td class="n">3,0</td><td class="n">3,5</td><td class="n">4,0</td><td class="n">4,5</td><td class="n">5,0</td></tr>
+      <tr><td>0,1 mg/kg/saat</td><td class="n">5,0</td><td class="n">6,0</td><td class="n">7,0</td><td class="n">8,0</td><td class="n">9,0</td><td class="n">10,0</td></tr>
+      <tr><td>0,2 mg/kg/saat</td><td class="n">10,0</td><td class="n">12,0</td><td class="n">14,0</td><td class="n">16,0</td><td class="n">18,0</td><td class="n">20,0</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="tbl kgsar">
+  <table class="kgtab" id="ilac-14">
+    <thead>
+      <tr class="sec"><th colspan="7">Fenilefrin &nbsp;·&nbsp; 20 mg / 250 mL &nbsp;·&nbsp; 80 mcg/mL &nbsp;·&nbsp; <span style="font-weight:400;color:var(--dim)">derişim kaynağı: yaygın seyreltme</span></th></tr>
+      <tr class="hdr"><th>Doz</th><th class="n">50 kg</th><th class="n">60 kg</th><th class="n">70 kg</th><th class="n">80 kg</th><th class="n">90 kg</th><th class="n">100 kg</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>0,5 mcg/kg/dk</td><td class="n">18,8</td><td class="n">22,5</td><td class="n">26,3</td><td class="n">30,0</td><td class="n">33,8</td><td class="n">37,5</td></tr>
+      <tr><td>1 mcg/kg/dk</td><td class="n">37,5</td><td class="n">45,0</td><td class="n">52,5</td><td class="n">60,0</td><td class="n">67,5</td><td class="n">75,0</td></tr>
+      <tr><td>2 mcg/kg/dk</td><td class="n">75,0</td><td class="n">90,0</td><td class="n">105,0</td><td class="n">120,0</td><td class="n">135,0</td><td class="n">150,0</td></tr>
+      <tr><td>3 mcg/kg/dk</td><td class="n">112,5</td><td class="n">135,0</td><td class="n">157,5</td><td class="n">180,0</td><td class="n">202,5</td><td class="n">225,0</td></tr>
+      <tr><td>4 mcg/kg/dk</td><td class="n">150,0</td><td class="n">180,0</td><td class="n">210,0</td><td class="n">240,0</td><td class="n">270,0</td><td class="n">300,0</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h2>Kurum standart derişimleri</h2>
+<div class="sub" style="margin:-4px 0 8px">SBÜ Kartal Dr. Lütfi Kırdar Şehir Hastanesi, Ameliyathane ve
+Yoğun Bakımlar İlaç Hazırlama Rehberi · belge kodu <b>YB.RH.02</b> · yayın 10.12.2024, revizyon 00.</div>
+
+<div class="warn bad">
+  <b>Bu belge büyük olasılıkla sizin kurumunuzun belgesi değildir.</b> Aşağıdaki değerler tek bir
+  hastanenin ilaç hazırlama rehberinden alınmıştır. Değeri, "yaygın karışım" gibi kaynaksız bir
+  ifadenin yerine <b>adı, kodu ve tarihi verilebilen bir Türkiye protokolü</b> koymasıdır — ama
+  <b>ulusal bir standart değildir ve sizi bağlamaz.</b> Kendi biriminizin protokolü ile
+  karşılaştırın; çelişirse <b>kendi protokolünüz geçerlidir.</b>
+</div>
+
+<div class="card tbl">
+<table>
+  <tr><th colspan="3">Vazopresör ve inotrop · YB.RH.02</th></tr>
+  <tr><th>İlaç</th><th>Derişim</th><th>Not</th></tr>
+  <tr><td><b>Noradrenalin, santral</b></td><td><b>16 mg/100 mL</b> = 160 mcg/mL</td>
+      <td><b>%5 dekstrozla</b> seyreltilmesi önerilir. Refrakter şokta en yüksek aralık 1-3 mcg/kg/dk.</td></tr>
+  <tr><td><b>Noradrenalin, periferik</b></td><td><b>4 mg/100 mL</b> = 40 mcg/mL</td>
+      <td><b>0,25 mcg/kg/dk üzeri için santral yol.</b> Obezde başlangıç ideal vücut ağırlığından.</td></tr>
+  <tr><td><b>Adrenalin</b></td><td><b>10 mg/100 mL</b> = 100 mcg/mL</td>
+      <td>Periferik önerilmez; zorunluysa <b>5 mg/100 mL = 50 mcg/mL</b> ve en kısa sürede santrale geçilir.</td></tr>
+  <tr><td>Dopamin</td><td>400 mg/100 mL = <b>4000 mcg/mL</b></td>
+      <td>Santral önerilir; periferik verilecekse daha düşük derişim.</td></tr>
+  <tr><td>Dobutamin</td><td>500 mg/100 mL = <b>5000 mcg/mL</b></td>
+      <td><b>En yüksek derişim 5 mg/mL</b>; her ampul en az 50 mL ile seyreltilir.</td></tr>
+</table>
+
+<table>
+  <tr><th colspan="3">Sedasyon, analjezi ve antiaritmik · YB.RH.02</th></tr>
+  <tr><th>İlaç</th><th>Derişim</th><th>Not</th></tr>
+  <tr><td><b>Deksmedetomidin</b></td><td><b>4 mcg/mL</b></td>
+      <td>200 mcg (2 mL) + 48 mL ya da 400 mcg (4 mL) + 100 mL <b>%0,9 NaCl</b>. Belge yükleme dozu
+          <b>1 mcg/kg 10 dakikada</b> diyor; <b>Türkiye ürün bilgisi yükleme önermez</b>.</td></tr>
+  <tr><td>Propofol</td><td>%1 <b>10 mg/mL</b> · %2 <b>20 mg/mL</b></td><td>—</td></tr>
+  <tr><td>Ketamin</td><td><b>10 mg/mL</b> (2 mg/mL de olabilir)</td><td>1000 mg/100 mL.</td></tr>
+  <tr><td>Midazolam · Morfin</td><td><b>1 mg/mL</b></td><td>—</td></tr>
+  <tr><td>Fentanil</td><td><b>50 mcg/mL</b> seyreltilmeden</td><td>Seyreltilirse <b>10 mcg/mL</b>.</td></tr>
+  <tr><td>Remifentanil</td><td>10 mg/100 mL = <b>100 mcg/mL</b></td><td>—</td></tr>
+  <tr><td><b>Esmolol</b></td><td>2500 mg/250 mL = <b>10 mg/mL</b></td>
+      <td>Yükleme <b>500 mcg/kg 1 dakikada</b>; <b>5 dakika arayla ±25-50 mcg/kg/dk</b> titrasyon.</td></tr>
+  <tr><td><b>Diltiazem</b></td><td><b>1 mg/mL</b> (125 mg/125 mL)</td>
+      <td><b>24 saatten uzun infüzyon önerilmez.</b> Bolus 0,25 mg/kg (~20 mg), 15 dk sonra 0,35 mg/kg.</td></tr>
+  <tr><td><b>Nikardipin</b></td><td><b>0,1 ya da 0,2 mg/mL</b></td>
+      <td>Periferikte <b>en çok 0,2 mg/mL</b> ve <b>12 saatte bir yer değişimi</b>; sıvı kısıtlıysa
+          santralden 0,5 mg/mL. En yüksek doz 15 mg/saat.</td></tr>
+  <tr><td><b>Amiodaron</b></td><td>Yükleme <b>150 mg/100 mL</b> %5 dekstroz, 10 dakikada</td>
+      <td>İdame <b>900 mg/500 mL</b>: 6 saat 1 mg/dk = <b>33,3 mL/saat</b> → 18 saat 0,5 mg/dk =
+          <b>16,6 mL/saat</b>. <b>Periferikte en çok 2 mg/mL.</b></td></tr>
+</table>
+</div>
+
+<div class="warn bad">
+  <b>Belgenin kendi tablosunda altı hücre tutmuyor.</b> Rehberdeki bütün infüzyon çizelgeleri
+  <b>518 hücre</b> üzerinden yeniden hesaplandı; <b>512'si doğru</b>, altısı sapıyor.
+  <b>Adrenalin 0,02 mcg/kg/dk satırı 70 kg ve üzerinde yanlıştır:</b> belge
+  <b>1,4 · 1,6 · 1,8 · 2 mL/saat</b> yazıyor, doğrusu <b>0,84 · 0,96 · 1,08 · 1,2</b> —
+  yani <b>yaklaşık 1,7 kat yüksek hız</b>. Bu dört değer <b>midazolam tablosunun 0,02 mg/kg/saat
+  satırının aynısıdır</b>, kopyalama hatası görünüyor. Fentanilde de iki hücre sapıyor:
+  4 mcg/kg/saat 80 kg <b>16</b> yazıyor (doğrusu <b>6,4</b>), 8 mcg/kg/saat 80 kg <b>24</b>
+  (doğrusu <b>12,8</b>). <b>Yukarıdaki hesap makinesi formülle çalışır ve bu hatalardan etkilenmez.</b>
+</div>
+
+<div class="warn">
+  <b>Periferik noradrenalin derişiminde iki değer var.</b> Periferik vazopresör yazınının yerleşik
+  seyreltmesi <b>16 mcg/mL</b>'dir. <b>Bu kurum protokolü periferik yol için
+  40 mcg/mL</b> yazıyor, santrali 160 mcg/mL'ye ayırıyor ve <b>0,25 mcg/kg/dk üzerini santrale
+  bağlıyor</b>. İkisi de doğrudur; hangisinin sizin biriminizde geçerli olduğunu protokolünüz söyler.
+</div>
+
+<div class="warn">
+  <b>Aynı belgeden dört ek sayı.</b>
+  <b>Digoksin</b> yüklemesi <b>yağsız vücut ağırlığı</b> üzerinden, 24 saatte <b>0,75-1,5 mg</b>
+  aşılmadan, en az 5 dakikada. <b>Kalsiyum glukonat</b> %10'luk 10 mL = 1 g = <b>93 mg elemental
+  kalsiyum</b>; bolusta 10-50 mg/mL'ye seyreltilir ve <b>hız 200 mg/dakikayı geçmez</b>; masif
+  transfüzyonda <b>her 4 ünite kan için 1-2 g</b>. <b>Potasyum klorür</b> periferikte 100 mL'de
+  <b>10 mEq</b>, santralde <b>40 mEq</b>; hız <b>10-20 mEq/saat</b>, ciddi hipopotasemide 40 ve
+  <b>20 mEq/saat üzeri santral</b>. <b>Traneksamik asit</b> hızı <b>100 mg/dakikayı</b> geçmez.
+</div>
+
+<div class="warn bad">
+  <b>Y setinde birlikte verilmeyecekler.</b> <b>Furosemid</b> adrenalin, noradrenalin, esmolol,
+  nitrogliserin ve propofolle geçimsizdir. <b>Fenitoin sodyum, diazepam, fenobarbital, sodyum
+  bikarbonat ve tiyopental</b> neredeyse her infüzyonla geçimsizdir. <b>Potasyum klorür kalsiyum ya
+  da magnezyum içeren taşıyıcı çözeltiyle verilmez.</b> "Aynı hattan verilebilir mi" sorusunun
+  cevabı bu listedir. <span style="color:var(--dim)">YB.RH.02</span>
+</div>
+
+<h2>Tedavi dozları</h2>
+<div class="sub" style="margin:-4px 0 8px">Bu bölümdeki sayılar kılavuz ve kurum belgelerinden
+derlenmiştir; ilgili kaynak satırın ya da tablonun içinde anılır. Aşağıdakiler <b>doz aralıklarıdır</b>,
+kurum protokolünün yerine geçmez.</div>
+
+<div class="card tbl">
+<table>
+  <tr class="sec"><th colspan="3">Vazopresör ve inotrop infüzyonu</th></tr>
+  <tr class="hdr"><th>İlaç</th><th>Doz</th><th>Kilit uyarı</th></tr>
+  <tr><td><b>Noradrenalin</b></td><td>Başlangıç <b>0,05-0,2</b> · etkin <b>0,05-1</b> mcg/kg/dk</td>
+      <td>Birinci basamak. <b>Santral yol beklenmez, periferden başlanır</b> (16 mcg/mL, 20G, bilek proksimali). Etiket tavanı yok.</td></tr>
+  <tr><td><b>Adrenalin</b></td><td><b>0,01-0,5</b> mcg/kg/dk</td>
+      <td>Septik şokta üçüncü ajan; anafilaktik ve kardiyojenik şok. <b>Laktatı metabolik olarak yükseltir</b>, laktat klirensiyle titrasyonu bozar.</td></tr>
+  <tr><td><b>Vazopressin</b></td><td><b>Sabit 0,03 ünite/dk</b> (etiket tavanı 0,07)</td>
+      <td><b>Titre edilmez.</b> Noradrenaline eklenen ikinci ajan; ani kesilmede hipotansiyon. Ekleme eşiği ortanca 0,3 mcg/kg/dk noradrenalin.</td></tr>
+  <tr><td><b>Dobutamin</b></td><td><b>2-20</b> mcg/kg/dk</td>
+      <td>Kardiyak işlev bozukluğu + süren hipoperfüzyon. <b>Hipovolemi önce düzeltilir</b>; sodyum metabisülfit içerir.</td></tr>
+  <tr><td><b>Dopamin</b></td><td>2-5 başla, en çok 50 mcg/kg/dk</td>
+      <td><b>Yalnız noradrenalin yoksa.</b> Aritmi yapar. "Renal doz" randomize çalışmayla çürütüldü (n=328, p=0,93).</td></tr>
+  <tr><td><b>Milrinon</b></td><td>Yükleme 50 mcg/kg · idame <b>0,375-0,75</b> mcg/kg/dk</td>
+      <td>İnodilatör: beta bloker altındaki hasta, sağ kalp yetmezliği. <b>Böbrek doz ayarı zorunlu</b>; furosemidle aynı hatta verilmez.</td></tr>
+  <tr><td><b>Fenilefrin</b></td><td>İtme <b>50-250 mcg</b> · infüzyon 0,5-6 mcg/kg/dk</td>
+      <td>Saf alfa-1: taşiaritmiyle birlikte hipotansiyon. <b>Refleks bradikardi ve kardiyak debi düşüşü.</b></td></tr>
+  <tr><td><b>Levosimendan</b></td><td>Yükleme 6-12 mcg/kg (hipotansifte atlanır) · idame <b>0,1 mcg/kg/dk, 24 saat</b></td>
+      <td>Akut dekompanse ağır kalp yetmezliği. Kreatinin klerensi <b>&lt;30 ise kontrendike</b>.</td></tr>
+  <tr><td><b>Nitrogliserin</b></td><td>10-200 mcg/dk · <b>kilodan bağımsız</b></td>
+      <td><b>PVC ve poliüretan sette %40-80 etkin madde kaybı.</b> Hasta yanıtsızsa önce seti sorgulayın.</td></tr>
+</table>
+
+<div class="warn bad">
+  <b>Ekstravazasyon.</b> Fentolamin <b>5-10 mg</b>, 10-15 mL serum fizyolojik içinde,
+  en kısa sürede infiltre edilir. 
+</div>
+
+<table>
+  <tr class="sec"><th colspan="3">Sedasyon ve analjezi infüzyonu</th></tr>
+  <tr class="hdr"><th>İlaç</th><th>Doz</th><th>Kilit uyarı</th></tr>
+  <tr><td><b>Propofol</b></td><td><b>5-50 mcg/kg/dk = 0,3-3 mg/kg/saat</b> · indüksiyon 1,5-2,5 mg/kg</td>
+      <td><b>Üst sınır 4 mg/kg/saat.</b> 1 mL = 1,1 kcal ve 0,1 g yağ, beslenmeden düşülür. %1 propofol 20 mL/saat = günde 528 kcal, 48 g yağ.</td></tr>
+  <tr><td><b>Deksmedetomidin</b></td><td><b>0,2-1,4 mcg/kg/saat</b>, başlangıç 0,7</td>
+      <td><b>Türkiye ürün bilgisinde yükleme dozu önerilmez</b> (Avrupa etiketi). Hipotansiyon ~%25, bradikardi ~%13.</td></tr>
+  <tr><td><b>Ketamin, analjezi</b></td><td><b>0,5 mg/kg itme</b>, sonra 1-2 mcg/kg/dk</td>
+      <td>Opioid koruyucu.</td></tr>
+  <tr><td><b>Midazolam</b></td><td>Yükleme 0,02-0,1 mg/kg</td>
+      <td>Böbrek yetmezliğinde <b>alfa-1-hidroksimidazolam glukuronidi birikir</b>.</td></tr>
+</table>
+
+<div class="warn">
+  <b>Propofol infüzyon sendromu.</b> Yüksek risk <b>&gt;4 mg/kg/saat ve &gt;48 saat</b>, ama daha
+  düşük dozda da görülür. Tanı <b>açıklanamayan metabolik asidoz artı yeni bradikardi ya da artan
+  vazopresör ihtiyacıdır</b>. <b>Yeşil idrar tanı ölçütü değildir.</b>
+  
+</div>
+
+<table>
+  <tr class="sec"><th colspan="2">Kardiyak arrest</th></tr>
+  <tr><td><b>Adrenalin</b>, şoklanamayan ritim</td><td class="n"><b>1 mg</b> damar içi, en kısa sürede</td></tr>
+  <tr><td><b>Adrenalin</b>, şoklanabilir ritim</td><td class="n"><b>1 mg</b>, 3. şoktan sonra</td></tr>
+  <tr><td>Adrenalin yinelemesi</td><td class="n"><b>3-5 dakikada bir 1 mg</b></td></tr>
+  <tr><td><b>Amiodaron</b></td><td class="n"><b>300 mg</b> (3. şok) · <b>150 mg</b> (5. şok)</td></tr>
+  <tr><td>Lidokain (amiodaron yoksa)</td><td class="n">ERC 100 mg → 50 mg · AHA 1-1,5 mg/kg</td></tr>
+  <tr><td>Hiperpotasemik arrest</td><td class="n">%10 Ca klorür 10 mL/5 dk <i>ya da</i> %10 Ca glukonat 30 mL/10 dk</td></tr>
+  <tr><td>Lokal anestezik toksisitesi</td><td class="n">%20 lipit 1,5 mL/kg itme → 15 mL/kg/saat</td></tr>
+</table>
+
+<div class="warn bad">
+  <b>Arrestte verilmeyecekler.</b> Rutin kalsiyum, sodyum bikarbonat ve kortikosteroid; yüksek doz
+  adrenalin; <b>vazopressin</b> — septik şokta yeri vardır, arrestte adrenaline üstünlük
+  sağlamamıştır. 
+</div>
+
+<table>
+  <tr class="sec"><th colspan="2">Amiodaron — dört ayrı ortam</th></tr>
+  <tr><td>Kardiyak arrest</td><td class="n"><b>300 mg itme</b>, 3. şok sonrası; 150 mg, 5. şok sonrası</td></tr>
+  <tr><td>Stabil geniş QRS / ventrikül taşikardisi</td><td class="n"><b>150 mg, 10 dakikada</b></td></tr>
+  <tr><td>Bunun idamesi</td><td class="n">6 saat <b>1 mg/dk</b> → 18 saat <b>0,5 mg/dk</b> (24 saatte 1050 mg)</td></tr>
+  <tr><td>Atriyal fibrilasyon (ESC 2024)</td><td class="n">300 mg / 250 mL, 30-60 dk → 24 saatte 900-1200 mg</td></tr>
+</table>
+
+<div class="warn">
+  <b>Amiodaron uygulama kuralı.</b> Derişim <b>2 mg/mL'yi aşacaksa santral yol</b> (periferik flebit).
+  <b>Hat içi filtre gerekli</b> ve <b>volümetrik pompa zorunlu</b> — damla sayıcı %30'a varan doz
+  eksikliği yapar. Hipotansiyon %16. 
+</div>
+
+<table>
+  <tr class="sec"><th colspan="3">Hızlı ventrikül yanıtlı atriyal fibrilasyon · hedef istirahatte &lt;110/dk</th></tr>
+  <tr class="hdr"><th>İlaç</th><th>Damar içi</th><th>Ağızdan idame</th></tr>
+  <tr><td><b>Metoprolol</b></td><td><b>2,5-5 mg, 2 dakikada</b>; en çok 3 doz, toplam 15 mg</td><td>25-100 mg × 2</td></tr>
+  <tr><td><b>Esmolol</b></td><td>500 mcg/kg, 1 dakikada → <b>50-300 mcg/kg/dk</b></td><td>—</td></tr>
+  <tr><td><b>Diltiazem</b></td><td><b>0,25 mg/kg</b>, 2 dakikada; 15 dk sonra 0,35 mg/kg; infüzyon <b>5-15 mg/saat</b></td><td>60 mg × 3</td></tr>
+  <tr><td><b>Verapamil</b></td><td>2,5-10 mg, 5 dakikada</td><td>40 mg × 2</td></tr>
+  <tr><td><b>Digoksin</b></td><td><b>0,5 mg itme</b>; 24 saatte bölünmüş 0,75-1,5 mg</td><td>0,0625-0,25 mg × 1</td></tr>
+</table>
+
+<div class="warn bad">
+  <b>Kalsiyum kanal blokeri verilmez:</b> ejeksiyon fraksiyonu <b>≤%40</b>, dekompanse kalp
+  yetmezliği, preeksite atriyal fibrilasyon, <b>geniş QRS taşikardi</b> (sınıf 3 — zararlı),
+  hasta sinüs sendromu ve ileri blok.<br>
+  <b>Preeksite atriyal fibrilasyonda verilmeyecekler:</b> adenozin, beta bloker, verapamil,
+  diltiazem, digoksin — <b>ve amiodaron</b> (ESC 2019'da sınıf III). Yerine: kararsızda senkronize
+  kardiyoversiyon, stabilde ibutilid ya da prokainamid.
+  
+</div>
+
+<table>
+  <tr class="sec"><th colspan="2">Digoksin</th></tr>
+  <tr><td>Damar içi toplam yükleme</td><td class="n"><b>8-12 mcg/kg</b> — yarısı ilk doz, kalanın ¼'ü 6-8 saat arayla iki kez</td></tr>
+  <tr><td>Etki başlangıcı ve pik</td><td class="n"><b>5-30 dakika; pik 1-4 saat</b> — acil hız kontrolü yapmaz</td></tr>
+  <tr><td>Hedef düzey (kalp yetmezliği)</td><td class="n"><b>0,5-0,9 ng/mL</b>; düzey dozdan ≥8 saat sonra</td></tr>
+  <tr><td>Türkiye ampulü</td><td class="n"><b>0,5 mg / 2 mL</b></td></tr>
+  <tr><td>Antidot</td><td class="n">Digoksine özgü Fab, 40 mg/flakon — temin için <b>114</b></td></tr>
+</table>
+
+<table>
+  <tr class="sec"><th colspan="2">Adenozin, atropin, magnezyum</th></tr>
+  <tr><td><b>Adenozin</b></td><td class="n"><b>6 mg hızlı itme + hemen 20 mL serum fizyolojik</b>; yanıt yoksa 12 mg</td></tr>
+  <tr><td>Adenozin 3 mg'a inilecek üç durum</td><td class="n">Santral kateter · dipiridamol · karbamazepin</td></tr>
+  <tr><td><b>Atropin</b>, bradikardi</td><td class="n"><b>AHA 1 mg · ERC 0,5 mg</b>, 3-5 dakikada bir, <b>en çok 3 mg</b></td></tr>
+  <tr><td>Atropin yanıtsızsa</td><td class="n">Transkutan pil · dopamin 5-20 mcg/kg/dk · adrenalin 2-10 mcg/dk · (ERC) izoprenalin 5 mcg/dk</td></tr>
+  <tr><td><b>Magnezyum</b>, burulmalı VT</td><td class="n">Kılavuzlar sayı vermez; yerleşik uygulama <b>2 g damar içi</b></td></tr>
+</table>
+</div>
+
+<div class="warn">
+  <b>Bu bölümün iki sınırı.</b> <i>Bir:</i> <b>levosimendanın standart sulandırması bu dosyada
+  yoktur</b>; doz aralığı var ama hazır çizelgesi yok, hesap için kendi biriminizin derişimini hesap
+  alanına elle girin. <b>Fenilefrinin çizelgesi vardır ama derişimi YB.RH.02'de geçmez</b>
+  (yaygın seyreltme: 20 mg/250 mL = 80 mcg/mL) — kullanmadan önce kendi derişiminizi doğrulayın.
+  <i>İki:</i> arrest dozu ile stabil hasta dozunu karıştırmak bu dosyanın en pahalı hatasıdır —
+  amiodaron arrestte
+  <b>300 mg itme</b>, stabil ventrikül taşikardisinde <b>150 mg 10 dakikada</b>dır.
+</div>
+
+<h2>En sık üç hata</h2>
+<div class="card">
+  <table>
+    <tr><td style="width: 50px;"><b>1</b></td><td>Derişimi mikrograma çevirmemek. <code>4 mg/100 mL</code> önce
+        <b>40 mcg/mL</b> yapılır — yoksa bin kat sapar.</td></tr>
+    <tr><td><b>2</b></td><td><b>60 ile çarpmayı unutmak</b> → 60 kat düşük hız.</td></tr>
+    <tr><td><b>3</b></td><td>Kilodan bağımsız ilacı (nitrogliserin, vazopressin) kiloyla çarpmak
+        → 70 kat sapma.</td></tr>
+  </table>
+</div>
+
+<h2>"Altı kuralı" iki ayrı şeydir</h2>
+<div class="card">
+  <p style="margin:.2rem 0 .6rem"><b>Sulandırma reçetesi (1994, pediatri).</b> 6 × kilo kadar mg
+  ilacı 100 mL'ye koyarsanız <b>1 mL/saat = 1 mcg/kg/dk</b> olur. Cebiri: 6W mg/100 mL = 60W mcg/mL;
+  1 mL/saatte 60W mcg/saat = W mcg/dk. <b>Ama bu kural terk edilmiştir</b> — akreditasyon kuruluşu
+  2004'te standart derişim gerekliliklerini karşılamadığını bildirdi; hastaya özel sulandırma on kat
+  doz hatası üretiyor ve akıllı pompa ilaç kütüphanesi kurulmasını engelliyor. Zihinsel doğrulama
+  için kullanılır, hazırlama reçetesi olarak değil.</p>
+  <p style="margin:.2rem 0 0"><b>Damla faktörü — gerçek olan bu.</b> ISO 8536-4 setlerin damla
+  büyüklüğünü tanımlar. Mikrodrip 60 damla/mL'dir, makrodripte bölen <b>6</b>'dır. Klinikte sık
+  duyulan "ampuller damla sayısı tutsun diye üretiliyor" sözünün karşılığı büyük olasılıkla budur.</p>
+</div>
+
+<div class="foot">
+  <b>Pompa Hızı Çizelgesi · paylaşım sürümü v5 · 13.08.2026</b><br>
+  Hazırlayan: Dr. Tacim Yılmaz. Kişisel çalışma notlarından türetilmiştir; hiçbir kurumun ya da
+  derneğin resmî belgesi değildir.<br><br>
+  <b>Kaynaklar.</b> Kurum standart derişimleri: <b>SBÜ Kartal Dr. Lütfi Kırdar Şehir Hastanesi,
+  Ameliyathane ve Yoğun Bakımlar İlaç Hazırlama Rehberi, YB.RH.02, 10.12.2024, revizyon 00</b>
+  (belge tek bir hastaneye aittir, ulusal standart değildir). Arrest ve bradiaritmi dozları
+  <b>AHA 2025</b> ve <b>ERC 2025</b> erişkin ileri yaşam desteği metinlerinden; atriyal fibrilasyonda
+  hız kontrolü hedefi ilgili kardiyoloji kılavuzundan. Damla faktörü <b>ISO 8536-4</b>. Ampul güçleri
+  Türkiye ürün bilgilerinden.<br><br>
+  <b>Sınırlar.</b> Yalnız erişkin; çocuk ve yenidoğan kapsam dışıdır. Hazır çizelgeler yalnızca
+  başlıklarında yazan derişim için geçerlidir. Fenilefrin, levosimendan ve YB.RH.02'de geçmeyen
+  ilaçların seyreltmesi kuruma göre değişir.<br><br>
+  <b>Bu çizelge bir hesap aracıdır, kılavuz değildir; doz kararı hastaya, klinik duruma ve kurum
+  protokolüne göre verilir. Kullanmadan önce kendi biriminizin protokolüyle doğrulayın.</b>
+</div>
+
+</div>
+
+<script>
+var ILAC = [
+  {ad:"Noradrenalin, periferik", mg:4, ml:100, birim:"mcg/kg/dk", doz:0.1, kilo:true,
+   dozlar:[0.025,0.05,0.1,0.2,0.3,0.5]},
+  {ad:"Noradrenalin, santral", mg:16, ml:100, birim:"mcg/kg/dk", doz:0.1, kilo:true,
+   dozlar:[0.025,0.05,0.1,0.25,0.5,1]},
+  {ad:"Adrenalin", mg:10, ml:100, birim:"mcg/kg/dk", doz:0.05, kilo:true,
+   dozlar:[0.01,0.02,0.05,0.1,0.2,0.5]},
+  {ad:"Dopamin", mg:400, ml:100, birim:"mcg/kg/dk", doz:5, kilo:true,
+   dozlar:[1,2,5,10,15,20]},
+  {ad:"Dobutamin", mg:500, ml:100, birim:"mcg/kg/dk", doz:5, kilo:true,
+   dozlar:[2,5,10,15,20]},
+  {ad:"Deksmedetomidin", mg:0.4, ml:100, birim:"mcg/kg/saat", doz:0.7, kilo:true, saat:true,
+   dozlar:[0.2,0.4,0.7,1,1.4]},
+  {ad:"Esmolol", mg:2500, ml:250, birim:"mcg/kg/dk", doz:50, kilo:true,
+   dozlar:[25,50,100,150,200,300]},
+  {ad:"Vazopressin", mg:20, ml:100, birim:"ünite/dk", doz:0.03, kilo:false, unite:true,
+   dozlar:[0.01,0.02,0.03,0.04,0.07]},
+  {ad:"Nitrogliserin", mg:50, ml:250, birim:"mcg/dk", doz:20, kilo:false,
+   dozlar:[10,20,50,100,200]},
+  {ad:"Milrinon", mg:20, ml:100, birim:"mcg/kg/dk", doz:0.5, kilo:true,
+   dozlar:[0.375,0.5,0.625,0.75]},
+  {ad:"Propofol %1", mg:1000, ml:100, birim:"mcg/kg/dk", doz:20, kilo:true,
+   dozlar:[5,10,20,30,50]},
+  {ad:"Propofol %2", mg:2000, ml:100, birim:"mcg/kg/dk", doz:20, kilo:true,
+   dozlar:[5,10,20,30,50]},
+  {ad:"Ketamin", mg:1000, ml:100, birim:"mg/kg/saat", doz:1, kilo:true, saat:true, mgdoz:true,
+   dozlar:[0.1,0.2,0.5,1,1.5,2,2.5]},
+  {ad:"Midazolam", mg:100, ml:100, birim:"mg/kg/saat", doz:0.05, kilo:true, saat:true, mgdoz:true,
+   dozlar:[0.01,0.02,0.05,0.1,0.2]},
+  {ad:"Fenilefrin", mg:20, ml:250, birim:"mcg/kg/dk", doz:1, kilo:true,
+   dozlar:[0.5,1,2,3,4]}
+];
+
+var secili = 0;
+
+function vir(x, basamak){
+  if (!isFinite(x)) return "—";
+  var s = x.toFixed(basamak === undefined ? 1 : basamak);
+  return s.replace(".", ",");
+}
+
+function dozYaz(d){
+  var s = String(Math.round(d * 1000) / 1000);
+  return s.replace(".", ",");
+}
+
+function akis(il, doz, kg, der){
+  var d = il.mgdoz ? doz * 1000 : doz;
+  var pay = il.kilo ? (d * kg) : d;
+  if (!il.saat) pay = pay * 60;
+  return pay / der;
+}
+
+function hesapla(){
+  var kg = parseFloat(document.getElementById("kg").value);
+  var doz = parseFloat(document.getElementById("doz").value);
+  var mg = parseFloat(document.getElementById("mg").value);
+  var ml = parseFloat(document.getElementById("ml").value);
+  var il = ILAC[secili];
+  var out = document.getElementById("hiz");
+  var not = document.getElementById("not");
+
+  if (!(mg > 0) || !(ml > 0) || !(doz >= 0) || (il.kilo && !(kg > 0))){
+    out.innerHTML = "—";
+    not.textContent = "Alanları doldurun.";
+    return;
+  }
+
+  var der = il.unite ? (mg / ml) : (mg * 1000 / ml);
+  var hiz = akis(il, doz, kg, der);
+
+  out.innerHTML = vir(hiz) + " <small>mL/saat</small>";
+
+  var p = [];
+  p.push("Derişim " + (il.unite ? vir(der,2) + " ünite/mL"
+        : (der >= 1000 ? vir(der/1000,0) + " mg/mL" : vir(der,0) + " mcg/mL")));
+  p.push("Mikrodriple " + vir(hiz, 0) + " damla/dakika");
+  if (il.kilo && Math.abs(kg - 70) < 0.5 && il.ad === "Noradrenalin" && Math.abs(der - 40) < 0.5){
+    p.push("kısayol: mL/saat ÷ 100 ≈ mcg/kg/dk");
+  }
+  not.textContent = p.join(" · ");
+}
+
+function sec(i){
+  secili = i;
+  var il = ILAC[i];
+  document.getElementById("mg").value = il.mg;
+  document.getElementById("ml").value = il.ml;
+  document.getElementById("doz").value = il.doz;
+  document.getElementById("dozLbl").textContent = "Doz (" + il.birim + ")";
+  document.getElementById("kg").disabled = !il.kilo;
+  document.getElementById("kg").style.opacity = il.kilo ? "1" : "0.45";
+  var cs = document.querySelectorAll(".chip");
+  for (var k = 0; k < cs.length; k++) cs[k].className = "chip" + (k === i ? " on" : "");
+  hesapla();
+}
+
+(function init(){
+  var c = document.getElementById("chips");
+  var mevcut = c.querySelectorAll(".chip");
+  if (mevcut.length === ILAC.length){
+    Array.prototype.forEach.call(mevcut, function(b, i){
+      b.addEventListener("click", function(e){ e.preventDefault(); sec(i); });
+    });
+  } else {
+    ILAC.forEach(function(il, i){
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "chip"; b.textContent = il.ad;
+      b.onclick = function(){ sec(i); };
+      c.appendChild(b);
+    });
+  }
+
+  ["kg","doz","mg","ml"].forEach(function(id){
+    document.getElementById(id).addEventListener("input", hesapla);
+  });
+  sec(0);
+})();
+</script>
+</body>
+</html>
