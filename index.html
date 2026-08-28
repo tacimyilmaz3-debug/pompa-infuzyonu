@@ -7,7 +7,7 @@
 <meta name="theme-color" content="#f6f8fb" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
 <meta name="format-detection" content="telephone=no">
-<title>Pompa Hızı Çizelgesi v18 — Dr. Tacim Yılmaz</title>
+<title>Pompa Hızı Çizelgesi v25 — Dr. Tacim Yılmaz</title>
 <style>
 /* IBM Plex Sans 3.201 (Google Fonts dagitimi, 09.09.2025) — Copyright 2017 IBM Corp.,
    SIL Open Font License 1.1 (https://openfontlicense.org). Degisken Roman, agirlik ekseni
@@ -31,6 +31,86 @@
          --ink:#101720; --dim:#54637a; --accent:#0b62c4; --warn:#8a5000; --bad:#b3261e; --ok:#0f7a52;
          --gov:400; }
 }
+/* ————— Üst çubuk, içindekiler ve arama (v19) —————
+   Üç kuralla çalışır: (1) betik kapalı görüntüleyicide de içindekiler
+   ulaşılabilir kalmalı — bu yüzden liste durağan yazılıdır ve düğme bir
+   bağlantıdır, :target ile açılır; (2) masaüstünde sütun sürekli açıktır ve
+   sayfayla birlikte yapışık kayar; (3) arama yalnız betik varken görünür. */
+:root{ --ust:52px; }
+@media (min-width:1100px){ :root{ --ust:56px; } }
+
+[id]{scroll-margin-top:calc(var(--ust) + 12px)}
+
+.ust{position:sticky;top:0;z-index:40;background:var(--panel);
+     border-bottom:1px solid var(--line);
+     padding-top:env(safe-area-inset-top)}
+@supports (backdrop-filter:blur(8px)){
+  .ust{background:color-mix(in srgb,var(--panel) 86%,transparent);backdrop-filter:blur(10px)}
+}
+/* Üst çubuğun iç genişliği ve yan boşluğu .wrap ile birebir aynı tutulur;
+   böylece içindekiler düğmesi ile arama kutusu, gövde metniyle aynı hizada başlar ve biter. */
+.ust-ic{max-width:860px;margin:0 auto;height:var(--ust);display:flex;align-items:center;gap:10px;
+        padding:0 max(14px,env(safe-area-inset-right)) 0 max(14px,env(safe-area-inset-left))}
+.ust-nav{display:flex;align-items:center;gap:9px;min-width:0;flex:1 1 auto;
+         color:var(--ink);text-decoration:none;border-radius:8px;padding:6px 8px;margin-left:-8px;
+         -webkit-tap-highlight-color:transparent}
+.ust-nav:hover{background:var(--panel2)}
+.ust-ikon{flex:none;width:16px;height:2px;background:currentColor;border-radius:2px;color:var(--dim);
+          box-shadow:0 -5px 0 currentColor,0 5px 0 currentColor}
+.ust-baslik{font-size:.85rem;font-weight:600;letter-spacing:-.005em;
+            white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ust-ara{position:relative;flex:0 0 auto;display:none}
+.js .ust-ara{display:block}
+.ust-ara input{width:150px;max-width:42vw;background:var(--panel2);color:var(--ink);
+      border:1px solid var(--line);border-radius:999px;padding:7px 12px;font:inherit;font-size:.82rem;
+      min-height:34px;-webkit-appearance:none;appearance:none}
+.ust-ara input:focus{outline:2px solid var(--accent);outline-offset:1px;width:230px;max-width:60vw}
+@media (min-width:1100px){ .ust-ara input{width:260px} .ust-ara input:focus{width:300px} }
+.ara-sonuc{position:absolute;right:0;top:calc(100% + 7px);width:min(340px,86vw);z-index:50;
+      background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;
+      box-shadow:0 12px 30px rgba(0,0,0,.28);max-height:min(60vh,420px);overflow-y:auto}
+.ara-sonuc a{display:block;padding:9px 12px;color:var(--ink);text-decoration:none;
+      border-bottom:1px solid var(--line);font-size:.84rem;line-height:1.35}
+.ara-sonuc a:last-child{border-bottom:0}
+.ara-sonuc a:hover,.ara-sonuc a.secili{background:var(--panel2)}
+.ara-sonuc .tur{display:block;color:var(--dim);font-size:.72rem;margin-top:1px}
+.ara-bos{padding:11px 12px;color:var(--dim);font-size:.82rem}
+
+.toc{background:var(--panel);border:1px solid var(--line);border-radius:var(--r)}
+.toc-bas{display:flex;align-items:center;justify-content:space-between;gap:8px;
+      font-size:.74rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);
+      padding:12px 14px 8px}
+.toc-kapat{color:var(--dim);text-decoration:none;font-size:1.3rem;line-height:1;padding:0 4px}
+.toc-liste{list-style:none;margin:0;padding:0 8px 10px}
+.toc-liste a{display:block;padding:7px 10px;border-radius:7px;color:var(--dim);text-decoration:none;
+      font-size:.82rem;line-height:1.35;border-left:2px solid transparent}
+.toc-liste a:hover{background:var(--panel2);color:var(--ink)}
+.toc-liste a.acik{color:var(--accent);background:var(--panel2);border-left-color:var(--accent);font-weight:600}
+
+/* İçindekiler her genişlikte yandan açılan bir çekmecedir.
+   v19'da masaüstünde sürekli açık bir sol sütundu; sütun, gövdeyi daraltıp
+   satır sayısını artırdığı için v20'de kaldırıldı — metin sütunu her ekranda
+   860 pikselde kalıyor. Betik yoksa çekmece :target ile açılır. */
+.toc{position:fixed;z-index:60;top:0;left:0;bottom:0;width:min(320px,86vw);
+     border-radius:0;border-width:0 1px 0 0;overflow-y:auto;
+     padding-top:calc(8px + env(safe-area-inset-top));
+     padding-bottom:calc(12px + env(safe-area-inset-bottom));
+     transform:translateX(-102%);transition:transform .22s ease;
+     box-shadow:0 0 40px rgba(0,0,0,.35)}
+.toc:target,body.toc-acik .toc{transform:none}
+.toc-perde{position:fixed;inset:0;z-index:55;background:rgba(0,0,0,.42)}
+body.toc-acik .toc-perde{display:block}
+.ana{min-width:0}
+@media (prefers-reduced-motion:reduce){ .toc{transition:none} }
+
+/* Aramadan ya da içindekilerden gelen hedef kısa süre işaretlenir. */
+.vurgu{animation:vurgula 1.7s ease-out 1}
+@keyframes vurgula{
+  0%,55%{background:color-mix(in srgb,var(--accent) 22%,transparent)}
+  100%{background:transparent}
+}
+@media (prefers-reduced-motion:reduce){ .vurgu{animation:none;outline:2px solid var(--accent)} }
+
 *,*::before,*::after{box-sizing:border-box;min-width:0}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{
@@ -223,6 +303,10 @@ code{background:var(--panel2);padding:.5px 4px;border-radius:4px;font-size:.9em;
   tr{page-break-inside:avoid}
   h2{page-break-after:avoid}
   .card,.warn{break-inside:avoid;border:1px solid var(--line)}
+  /* Gezinme katmanı kağıda basılmaz. Dosyada üç ayrı baskı bloğu vardır;
+     bu kural ortadaki bloktadır ve !important taşıdığı için sonraki blok onu
+     ezemez. Yeni bir .wrap kuralı yazılacaksa en sondaki bloğa yazılır. */
+  .ust,.toc,.toc-perde{display:none !important}
 }
 
 
@@ -310,10 +394,46 @@ details.kat .ic{padding:0 14px 14px;border-top:1px solid var(--line)}
 </head>
 <body>
 
+<header class="ust" id="ust">
+  <div class="ust-ic">
+    <a class="ust-nav" id="tocBtn" href="#toc" aria-controls="toc" aria-expanded="false">
+      <span class="ust-ikon" aria-hidden="true"></span>
+      <span class="ust-baslik" id="ustBaslik">Pompa hızı çizelgesi</span>
+    </a>
+    <div class="ust-ara">
+      <input id="ara" type="search" placeholder="İlaç ya da bölüm ara" autocomplete="off"
+             spellcheck="false" aria-label="İlaç ya da bölüm ara">
+      <div class="ara-sonuc" id="araSonuc" hidden></div>
+    </div>
+  </div>
+</header>
+<a class="toc-perde" id="tocPerde" href="#" aria-label="İçindekileri kapat" hidden></a>
+
 <div class="wrap">
 
+<nav class="toc" id="toc" aria-label="İçindekiler">
+  <div class="toc-bas">İçindekiler <a class="toc-kapat" href="#" aria-label="Kapat">×</a></div>
+  <ol class="toc-liste" id="tocListe">
+    <li><a href="#b-hesapla">Hesapla</a></li>
+    <li><a href="#b-ampul">Türkiye ampul tuzakları</a></li>
+    <li><a href="#b-kg">Hazır çizelgeler — kiloya göre</a></li>
+    <li><a href="#b-tedavi">Tedavi dozları</a></li>
+    <li><a href="#entubasyon">Entübasyon — indüksiyon ve kas gevşetici</a></li>
+    <li><a href="#nobet">Ateşi olmayan jeneralize nöbet — status epileptikus</a></li>
+    <li><a href="#b-arrest">Kardiyak arrest</a></li>
+    <li><a href="#b-aritmi">Aritmi, elektrolit ve kanama</a></li>
+    <li><a href="#b-hata">En sık üç hata</a></li>
+    <li><a href="#b-alti">“Altı kuralı” iki ayrı şeydir</a></li>
+    <li><a href="#b-ek">Kurum rehberinden aktarılan ek çizelgeler</a></li>
+    <li><a href="#b-kaynak">Kaynaklar — kılavuz, yıl, kapsam</a></li>
+    <li><a href="#b-gunluk">Değişiklik günlüğü</a></li>
+  </ol>
+</nav>
+
+<main class="ana">
+
 <h1>Pompa hızı çizelgesi</h1>
-<div class="sub">Yoğun bakım ve acil infüzyonlarında pompa hızı hesabı &nbsp;·&nbsp; <b>paylaşım sürümü v18</b> &nbsp;·&nbsp; 27.08.2026 &nbsp;·&nbsp; Hazırlayan: Dr. Tacim Yılmaz</div>
+<div class="sub">Yoğun bakım ve acil infüzyonlarında pompa hızı hesabı &nbsp;·&nbsp; <b>paylaşım sürümü v25</b> &nbsp;·&nbsp; 27.08.2026 &nbsp;·&nbsp; Hazırlayan: Dr. Tacim Yılmaz</div>
 
 <div class="qr-kutu">
   <a class="qr-link" href="https://tacimyilmaz3-debug.github.io/pompa-infuzyonu/" aria-label="Güncel sürümün adresi">
@@ -351,7 +471,7 @@ details.kat .ic{padding:0 14px 14px;border-top:1px solid var(--line)}
 
 
 
-<h2>Hesapla</h2>
+<h2 id="b-hesapla">Hesapla</h2>
 <div class="card" id="hesapKart">
   <noscript><div class="betiksiz" style="display:block"><b>Canlı hesap burada çalışmaz</b> — sonuç satırı “—” kalır, girdiğiniz değerlere tepki vermez. WhatsApp, Dosyalar ve Drive önizlemeleri betik çalıştırmaz; <b>iPhone’da hiç çalışmaz.</b> <b>Aşağıdaki hazır çizelgeleri kullanın</b> — hepsi dosyada yazılıdır ve her görüntüleyicide geçerlidir; ilaç düğmeleri ilgili çizelgeye götürür.</div></noscript>
   <div class="chips" id="chips"><a class="chip on" href="#ilac-0">Noradrenalin, periferik</a><a class="chip" href="#ilac-1">Noradrenalin, santral</a><a class="chip" href="#ilac-2">Adrenalin</a><a class="chip" href="#ilac-3">Dopamin</a><a class="chip" href="#ilac-4">Dobutamin</a><a class="chip" href="#ilac-5">Deksmedetomidin</a><a class="chip" href="#ilac-6">Esmolol</a><a class="chip" href="#ilac-7">Vazopressin</a><a class="chip" href="#ilac-8">Nitrogliserin</a><a class="chip" href="#ilac-9">Milrinon</a><a class="chip" href="#ilac-10">Propofol %1</a><a class="chip" href="#ilac-11">Propofol %2</a><a class="chip" href="#ilac-12">Ketamin</a><a class="chip" href="#ilac-13">Midazolam</a><a class="chip" href="#ilac-14">Fenilefrin</a></div>
@@ -415,7 +535,7 @@ details.kat .ic{padding:0 14px 14px;border-top:1px solid var(--line)}
   pompasız nakilde geçici çözümdür.
 </div>
 
-<h2>Türkiye ampul tuzakları</h2>
+<h2 id="b-ampul">Türkiye ampul tuzakları</h2>
 
 <div class="warn bad">
   <b>Adrenalin üç ayrı güçte ruhsatlı.</b> 0,25 · 0,5 · 1 mg/mL. "Bir ampul adrenalin" ifadesi
@@ -466,7 +586,7 @@ details.kat .ic{padding:0 14px 14px;border-top:1px solid var(--line)}
   bildirilmiştir.</b> İstemde hangi birimin kullanıldığı yazılmalıdır.
 </div>
 
-<h2>Hazır çizelgeler — kiloya göre</h2>
+<h2 id="b-kg">Hazır çizelgeler — kiloya göre</h2>
 <details class="kat" id="kilocizelge">
   <summary><span class="bas">On beş ilacın 50-100 kg çizelgesi</span><span class="roz"></span><span class="aciklama">Hesap yapmadan doğrudan mL/saat okumak için. Kapalı geldi ki belgeyi tararken araya girmesin; <b>dokununca açılır</b>.</span></summary>
   <div class="ic">
@@ -489,7 +609,7 @@ details.kat .ic{padding:0 14px 14px;border-top:1px solid var(--line)}
   </div>
 </details>
 
-<h2>Tedavi dozları</h2>
+<h2 id="b-tedavi">Tedavi dozları</h2>
 <div class="sub" style="margin:-4px 0 10px">Her satır üç şeyi birlikte taşır: <b>ne verilecek</b>,
 <span class="uy" style="display:inline;margin:0">kırmızıyla</span> <b>kimde verilmeyecek ya da azaltılacak</b>,
 ve <span class="k">gri rozette kaynağı</span>. Acelesi olan yalnız kalın satırı ve kırmızıyı okur;
@@ -598,7 +718,7 @@ rozetler tartışma içindir. Seyreltmeler <b>KİH-02</b>'dendir (bkz. Kaynaklar
         <b>Standart sulandırması bu dosyada yoktur</b> — hesap için kendi derişiminizi elle girin.</span></td>
       <td data-l="Yeri, dikkat ve kontrendikasyon"><span class="ey">Akut dekompanse ağır kalp yetmezliği.</span>
         <span class="uy"><b>Kreatinin klerensi &lt;30 ise kontrendike.</b> Ağır karaciğer yetmezliği,
-        ağır hipotansiyon ve taşikardi, ciddi çıkış yolu darlığı ve burulmalı VT öyküsünde verilmez.
+        ağır hipotansiyon ve taşikardi, ciddi çıkış yolu darlığı ve burulmalı VT (torsades de pointes) öyküsünde verilmez.
         Etkisi metaboliti üzerinden <b>günlerce sürer</b>. <b>Septik şokta önerilmez.</b></span>
         <span class="k">SSC 2026 · koşullu, düşük kanıt</span></td></tr>
 
@@ -727,6 +847,28 @@ rozetler tartışma içindir. Seyreltmeler <b>KİH-02</b>'dendir (bkz. Kaynaklar
         ilaç kesilip başka ajana geçilir.</span>
         <span class="k">UpToDate Topic 1616 · 06.05.2026</span><span class="k">KİH-02 · derişim</span></td></tr>
 
+  <tr><td><b>Lorazepam</b></td>
+      <td data-l="Doz ve seyreltme"><span class="ey">Yükleme 0,02-0,04 mg/kg (1-2 mg) · aralıklı 0,02-0,06 mg/kg, 2-6 saatte bir (1-4 mg)</span>
+        <span class="ip">Gerekirse infüzyon 0,01-0,1 mg/kg/saat (<b>0,5-10 mg/saat</b>) — sık yinelenen yüksek doz gereken hastada.
+        Kiloya bağlı olmayan dozlama yeğlenebilir. Etki <b>15-20 dakikada</b>, tek dozun süresi <b>6-8 saat</b>.</span></td>
+      <td data-l="Yeri, dikkat ve kontrendikasyon"><span class="ey">Uzun sürecek sedasyonda benzodiazepin seçilecekse midazolama göre daha öngörülebilir.</span>
+        Glukuronidasyonla etkin olmayan metabolitlere çevrilir; ilaç etkileşimi azdır, hafif-orta karaciğer ve böbrek yetmezliğinde görece güvenlidir.
+        <span class="uy"><b>Taşıyıcısı propilen glikoldür</b> — yüksek doz ya da uzun infüzyonda <b>propilen glikol zehirlenmesi</b>:
+        hiperosmolarite, anyon açıklı metabolik asidoz, akut böbrek hasarı, ağırsa çoklu organ yetmezliği.
+        Çoğunlukla <b>0,1 mg/kg/saat üzerinde</b> ve böbrek yetmezliğinde görülür; <b>osmolar açık &gt;10 mmol/L</b> uyarır.
+        Tedavi ilacı kesmek, ağır olguda diyalizdir. Etkisi geç başlar — titre ederken aşırı sedasyon riski vardır.
+        Damar içi geçimsizlikleri ve hatta çökelme riski. Deliryumu artırır.</span>
+        <span class="k">UpToDate Topic 1616 · 06.05.2026</span></td></tr>
+
+  <tr><td><b>Diazepam</b></td>
+      <td data-l="Doz ve seyreltme"><span class="ey">Yükleme 0,05-0,2 mg/kg (5-10 mg) · aralıklı 0,03-0,1 mg/kg, 30 dakika-6 saatte bir (1-7 mg)</span>
+        <span class="ip"><b>Sürekli infüzyon önerilmez.</b> Etki <b>2-5 dakikada</b>, tek dozun süresi <b>20-60 dakika</b>.</span></td>
+      <td data-l="Yeri, dikkat ve kontrendikasyon"><span class="ey">Yoğun bakım sedasyonunda seyrek kullanılır; yeri alkol yoksunluğu ve ilaç-zehirlenme nöbetidir.</span>
+        <span class="uy">CYP2C19 ve CYP3A4 ile <b>etkin metabolitlere</b> çevrilir; uzun kullanımda birikir ve sedasyonu uzatır.
+        Karaciğer ve/veya böbrek yetmezliğinde yarı ömrü uzar. <b>Propilen glikol içerir</b>, bu yüzden sürekli infüzyon olarak verilemez.
+        Enjeksiyon yerinde ağrı ve <b>flebit</b>; damar içi kullanımda venöz tromboz riski. Deliryumu artırır.</span>
+        <span class="k">UpToDate Topic 1616 · 06.05.2026</span></td></tr>
+
   <tr><td><b>Fentanil</b></td>
       <td data-l="Doz ve seyreltme"><span class="ey">Yükleme 1-2 mcg/kg (25-100 mcg) · infüzyon 0,7-10 mcg/kg/saat</span>
         <span class="ip">Çoğu hastada <b>1-3 mcg/kg/saat (50-300 mcg/saat)</b> ve gerektikçe aralıklı itme yeter.
@@ -764,15 +906,28 @@ rozetler tartışma içindir. Seyreltmeler <b>KİH-02</b>'dendir (bkz. Kaynaklar
 </table>
 
 <div class="warn ok">
-  <span class="ey">Ajan seçimi — PADIS 2025 odaklı güncellemesi.</span> Mekanik ventilasyondaki erişkinde
-  <b>hafif sedasyon ve/veya deliryumun azaltılması en yüksek öncelikse deksmedetomidin propofole
-  tercih edilir</b> (koşullu öneri, orta düzey kanıt). Gerekçe: deliryum sıklığını azaltması ve
-  hedef sedasyon düzeyinde geçen süreyi artırması; bedeli <b>bradikardi</b> ve daha az olasılıkla
-  hipotansiyondur. <b>Derin sedasyon gereken ya da hemodinamisi kararsız hastada bu öneri
-  geçerli değildir.</b> Aynı güncelleme anksiyetede benzodiazepin ve deliryumda antipsikotik için
-  öneri yapılamadığını bildirir. <b>Kılavuz doz aralığı vermez</b> — yukarıdaki tablodaki sayılar
-  bu öneriden etkilenmez, yalnız ajan sırası değişir.
-  <span class="k">Lewis K, ve ark. Crit Care Med 2025;53(3):e711-e727</span>
+  <span class="ey">Ajan seçimi.</span> Sürekli infüzyon gerektiren ajitasyonda <b>benzodiazepin yerine
+  propofol ya da deksmedetomidin</b> kullanılır. <b>Benzodiazepinin birinci basamak kaldığı iki durum:</b>
+  alkol ya da madde yoksunluğu, ve <b>daha derin sedasyon gerektiren hastalık ağırlığı</b> (örneğin yüzüstü
+  pozisyona alınacak hasta). Benzodiazepin infüzyonundan kaçınmanın gerekçesi deliryum riskinin, ventilatör
+  gününün ve yoğun bakım yatış süresinin artmasıdır.
+  <b>Deksmedetomidin, hafif sedasyonun yettiği ya da deliryumu en aza indirmenin amaçlandığı hastada
+  birinci basamak sayılır</b>; <b>kılavuz doz aralığı vermez</b>, yukarıdaki tablodaki sayılar bu öneriden
+  etkilenmez, yalnız ajan sırası değişir.
+  <span class="k">UpToDate Topic 1606 · 14.08.2026</span><span class="k">SCCM · PADIS odaklı güncellemesi 2025</span>
+  <span class="ip"><b>Kanıt tek yönlü değil — 2025'te iki sonuç yan yana durdu.</b>
+  <b>SCCM'nin 29 randomize çalışmalık meta-analizi:</b> deksmedetomidin propofole göre deliryum sıklığını
+  azaltıyor (RR 0,55; %95 GA 0,37-0,81), süresini yaklaşık 26 saat kısaltıyor; yoğun bakım yatışına etkisi
+  çok küçük (0,19 gün), <b>ventilasyon süresine ve ölüme etkisi yok</b>; <b>bradikardiyi artırıyor</b>
+  (RR 1,65), hipotansiyonu artırmıyor.
+  <b>Buna karşılık A2B çalışması (2025, 41 yoğun bakım, 1404 hasta)</b> deksmedetomidin ya da klonidini
+  propofolle karşılaştırdı ve <b>ekstübasyona kadar geçen sürede fark bulmadı</b> (HR 1,09; %95 GA 0,96-1,25);
+  90 ve 180 günlük ölüm, yoğun bakımdan çıkış süresi, deliryum ve koma oranları da benzerdi.
+  Üstelik <b>ajitasyon deksmedetomidin ve klonidinle daha sıktı</b> ve <b>ağır bradikardi %33'e karşı %20</b>
+  görüldü. Çalışmanın açık etiketli olması ve karşılaştırma gruplarında da propofol kullanılması sınırlarıdır.
+  <b>Pratik karşılığı:</b> deksmedetomidin tercihi <b>deliryum önceliğine dayanan bir tercihtir</b>,
+  gösterilmiş bir sağkalım ya da ventilatör günü üstünlüğüne değil; <b>bradikardi bedeli gerçektir</b>.</span>
+  <span class="k">Lewis K, ve ark. Crit Care Med 2025;53(3):e711-e727</span><span class="k">A2B · randomize, 2025</span>
 </div>
 
 <div class="warn">
@@ -805,6 +960,149 @@ rozetler tartışma içindir. Seyreltmeler <b>KİH-02</b>'dendir (bkz. Kaynaklar
   48 saatten sonra günlük kreatin kinaz yazıyordu, kaynakta böyle bir kural yok.
   <b>Yeşil idrar tanı ölçütü değildir</b> (yeşil ya da beyaz idrar rengi, seyrek görülen ayrı bir yan etkidir).
   <span class="k">UpToDate Topic 1616 · 06.05.2026</span><span class="k">Bray 1998 · Kam 2007</span>
+</div>
+
+<table>
+  <tr class="sec"><th colspan="3">Deliryumda antipsikotikler — aralıklı verilir, infüzyon değildir</th></tr>
+  <tr class="hdr"><th>İlaç</th><th>Doz</th><th>Yeri, dikkat ve kontrendikasyon</th></tr>
+
+  <tr><td><b>Haloperidol</b></td>
+      <td data-l="Doz"><span class="ey">1,25-5 mg damar içi, 8-12 saatte bir</span>
+        <span class="ip">Kiloya göre karşılığı 0,03-0,15 mg/kg; ajitasyonun ağırlığına, yaşa ve kardiyovasküler riske göre
+        yinelenir ya da titre edilir. <b>24 saatte en çok 20-40 mg.</b> Etki <b>5-20 dakikada</b>, süre 30 dakika-6 saat;
+        yinelenen dozla yarı ömrü uzar. <b>Sürekli infüzyon seyrek endikedir</b> (0,5-2 mg/saat).
+        Güvenli en yüksek günlük doz bilinmiyor.</span></td>
+      <td data-l="Yeri, dikkat ve kontrendikasyon"><span class="ey">Hızlı denetim gereken <b>hiperaktif (ajite) deliryumda</b> damar içi yolla kullanılır.</span>
+        <b>Önleyici olarak verilmez.</b> Beş randomize çalışmanın (1750 hasta) meta-analizinde antipsikotikler
+        deliryumsuz-komasız gün sayısını, ölümü, ventilasyon süresini ve yatış süresini değiştirmedi.
+        <span class="uy"><b>QTc uzar ve burulmalı VT (torsades de pointes) yapabilir</b> — özellikle aralıklı yüksek doz damar içi uygulamada.
+        <b>QTc 500 msn'yi aşarsa verilmez.</b> Aralıklı kullanımda <b>ilk iki-üç gün günlük EKG</b>; doz artırılırken ve
+        QT uzatan başka ilaç eklenirken de bakılır. <b>Damar içi kullanım FDA onaylı değildir</b> (etiket dışı).
+        Amiodaron, dronedaron, metadon, eritromisin, florokinolonlar ve yüksek doz ondansetronla birlikte
+        QT etkisi katlanır; azoller, HIV/HCV proteaz inhibitörleri ve siklosporin etkisini uzatır.
+        <b>Metoklopramid birlikte verilmez.</b> Akut distoni, parkinsonizm, akatizi ve nöroleptik malign sendrom seyrektir.
+        <b>Demansı olan yaşlıda tüm antipsikotikler dikkatle</b> — kardiyovasküler ölüm riski artar.</span>
+        <span class="k">UpToDate Topic 1616 · 06.05.2026</span><span class="k">UpToDate Topic 1606 · 14.08.2026</span></td></tr>
+
+  <tr><td><b>Olanzapin</b></td>
+      <td data-l="Doz"><span class="ey">5-10 mg kas içine · gerekirse 2-4 saatte bir yinelenir (toplam en çok 30 mg)</span>
+        <span class="ip">Ağızdan: başlangıç günde bir 5-10 mg, 24 saatte bir 5 mg artırılarak <b>en çok 20 mg/gün</b>.
+        Kas içi etki 15-45 dakikada, süre <b>en az 2 saat</b>.</span></td>
+      <td data-l="Yeri, dikkat ve kontrendikasyon"><span class="ey">Haloperidole seçenek ya da ek; kısa etkili kas içi biçimi vardır.</span>
+        Ekstrapiramidal belirti ve QT uzaması riski haloperidolden düşüktür.
+        <span class="uy">Ortostatik hipotansiyon, <b>hiperglisemi</b>, uykuya eğilim, QT uzaması, antikolinerjik etkiler.
+        Yarı ömrü <b>50 saati aşabilir</b>; yaşlıda, kadında, sigara içmeyende ve karaciğer-böbrek yetmezliğinde birikir —
+        bu hastalarda en düşük dozla başlanıp daha yavaş artırılır.</span>
+        <span class="k">UpToDate Topic 1616 · 06.05.2026</span></td></tr>
+
+  <tr><td><b>Ketiapin</b></td>
+      <td data-l="Doz"><span class="ey">Ağızdan 50 mg, 12 saatte bir</span>
+        <span class="ip">24 saatte bir artırılarak <b>en çok 400 mg/gün</b>. İlk etki yaklaşık 60 dakikada, tam etki
+        <b>24 saati bulur</b>; etki süresi 6-12 saat.</span></td>
+      <td data-l="Yeri, dikkat ve kontrendikasyon"><span class="ey">Sürekli denetim gereken durumda yeğlenen enteral ajan: gece deliryumu, sedasyondan ayırmayı engelleyen deliryum.</span>
+        <span class="uy"><b>Enteral yol zorunludur</b> ve etkisi yavaş başlar — acil ajitasyonda uygun değildir.
+        Uykuya eğilim, ortostatik hipotansiyon, QT uzaması sürer. CYP3A4 ile metabolize olur;
+        ileri karaciğer yetmezliğinde düşük dozla başlanır.</span>
+        <span class="k">UpToDate Topic 1616 · 06.05.2026</span></td></tr>
+
+  <tr><td>Ziprasidon</td>
+      <td data-l="Doz"><span class="ey">10 mg kas içine, 2 saatte bir · ya da 20 mg kas içine, 4 saat sonra bir kez</span>
+        <span class="ip">Her iki şemada da <b>toplam en çok 40 mg</b>. Ağızdan 20-40 mg, 12 saatte bir.
+        Kas içi etki 30 dakikada, süre en az 90 dakika.</span></td>
+      <td data-l="Yeri, dikkat ve kontrendikasyon"><span class="ey">Seçenek ajan; kanıtı küçük çalışmalara dayanır.</span>
+        <span class="uy">Ortostatik hipotansiyon, hiperglisemi, <b>QT uzaması</b>. Kas içi biçimi
+        <b>siklodekstrin</b> içerir; böbrek yetmezliğinde birikir, bu hastalarda uzun süreli kas içi kullanımdan kaçınılır.
+        <b>Damar içi biçimi yoktur.</b> Ağızdan biçimi güvenilir emilim için <b>tok karnına</b> (≥500 kalori) verilir.</span>
+        <span class="k">UpToDate Topic 1616 · 06.05.2026</span></td></tr>
+</table>
+
+<div class="warn bad">
+  <span class="ey">Antipsikotiklerde iki kural.</span> <b>Bir:</b> deliryumu <b>önlemek için verilmezler</b> —
+  yerleşik kanıt, rutin kullanımın deliryumu önlemediğini ve süresini kısaltmadığını gösteriyor; yeri
+  <b>hiperaktif deliryumun belirtilerini geçici olarak denetlemektir</b>.
+  <b>İki:</b> <b>QTc 500 msn'yi aşıyorsa hiçbiri verilmez.</b> Bu dosyada birlikte kullanılması olası
+  <b>amiodaron, eritromisin, klaritromisin, florokinolonlar, flukonazol, vorikonazol, ondansetron ve metadon</b>
+  aynı yönde etki eder; birden çoğu bir aradaysa EKG izlemi seyreklik değil kuraldır.
+  <b>Ajan seçimi:</b> hızlı denetim gerekiyorsa damar içi haloperidol, süregen denetim gerekiyorsa enteral ketiapin.
+  <span class="k">UpToDate Topic 1606 · 14.08.2026</span>
+</div>
+
+<table>
+  <tr class="sec"><th colspan="3">Nonopioid analjezikler — opioid koruyucu, tek başına yeterli değil</th></tr>
+  <tr class="hdr"><th>İlaç</th><th>Doz</th><th>Yeri, dikkat ve kontrendikasyon</th></tr>
+
+  <tr><td><b>Parasetamol</b></td>
+      <td data-l="Doz"><span class="ey">Damar içi 650 mg her 4 saatte ya da 1000 mg her 6 saatte · en çok 4 g/gün</span>
+        <span class="ip">Ağızdan 325-1000 mg, 4-6 saatte bir (en çok 4 g/gün). Rektal 325-650 mg, 4-6 saatte bir
+        (en çok 3,9 g/gün). <b>50 kilonun altında damar içi 15 mg/kg, 6 saatte bir.</b>
+        <b>Damar içi biçimi 15 dakikada verilir.</b> Etki ağızdan 30-60, damar içi 5-10 dakikada; süre 4-6 saat.</span></td>
+      <td data-l="Yeri, dikkat ve kontrendikasyon"><span class="ey">Hafif-orta ağrıda ve ateşte ilk seçenek; opioid gereksinimini azaltır.</span>
+        Bağımlılık ve tolerans yapmaz; NSAİİ'lerin antiplatelet etkisi ve sindirim sistemi zararı yoktur.
+        <span class="uy"><b>Anlamlı karaciğer yetmezliğinde günlük doz ≤2 g'a indirilir ya da kaçınılır.</b>
+        Yaşlıda, çok alkol kullanan ve beslenme bozukluğu olan hastada doz düşürülür.
+        <b>Varfarinle etkileşir</b> (INR uzayabilir); CYP uyaran ilaçlarla birlikte karaciğer hasarı riski artar.
+        Anlamlı antiinflamatuvar etkisi yoktur.</span>
+        <span class="k">UpToDate Topic 1616 · 06.05.2026</span></td></tr>
+
+  <tr><td><b>Ketorolak</b></td>
+      <td data-l="Doz"><span class="ey">15-30 mg, 6 saatte bir · en çok 120 mg/gün · en çok 5 gün</span>
+        <span class="ip"><b>65 yaş üstünde ya da 50 kilonun altında: 15 mg, 6 saatte bir, en çok 60 mg/gün.</b>
+        Seçimlik tek yükleme 30 mg. Etki damar içi yaklaşık 30 dakikada, süre 6-8 saat.</span></td>
+      <td data-l="Yeri, dikkat ve kontrendikasyon"><span class="ey">Etkili antiinflamatuvar; opioid gereksinimini azaltır.</span>
+        <span class="uy"><b>Şu durumlarda kaçınılır:</b> böbrek yetmezliği, sindirim sistemi kanaması, trombosit işlev bozukluğu,
+        iskemik kalp hastalığı, kalp yetmezliği, <b>düşük kardiyak debi</b>, hipovolemi, astım, siroz.
+        <b>Koroner arter baypas cerrahisinin perioperatif ağrısında kontrendikedir.</b>
+        Böbrek yetmezliğini başlatır ya da ağırlaştırır; doza bağlı gastropati; trombosit işlevini geri dönüşümlü baskılar;
+        aspirinin koruyucu etkisini bozabilir. <b>Hasta iyi hidrate olmalıdır</b> — bu dosyanın hastası çoğunlukla değildir.</span>
+        <span class="k">UpToDate Topic 1616 · 06.05.2026</span></td></tr>
+
+  <tr><td><b>İbuprofen</b></td>
+      <td data-l="Doz"><span class="ey">Damar içi 400-800 mg, 6 saatte bir · en çok 3,2 g/gün</span>
+        <span class="ip">Ağızdan 400 mg 4 saatte bir ya da 600-800 mg 6-8 saatte bir (akutta en çok 3,2 g/gün,
+        süregen kullanımda 2,4 g/gün). Etki yaklaşık 30 dakikada, süre 4-6 saat.</span></td>
+      <td data-l="Yeri, dikkat ve kontrendikasyon"><span class="ey">Orta şiddette akut ağrı ve ateşte kısa süreli kullanım.</span>
+        <span class="uy"><b>Ketorolakla aynı kaçınma listesi geçerlidir</b> ve koroner baypas cerrahisinin
+        perioperatif ağrısında aynı biçimde kontrendikedir.</span>
+        <span class="k">UpToDate Topic 1616 · 06.05.2026</span></td></tr>
+
+  <tr><td>Gabapentin</td>
+      <td data-l="Doz"><span class="ey">Ağızdan başlangıç 100 mg, günde üç kez</span>
+        <span class="ip">İdame <b>900-3600 mg/gün</b>, üçe bölünmüş. Etki değişkendir.</span></td>
+      <td data-l="Yeri, dikkat ve kontrendikasyon"><span class="ey">Nöropatik ve ameliyat sonrası ağrıda ek ajan; enteral yolu olan hastada.</span>
+        <span class="uy"><b>Enteral yol, düzenli saatli doz ve günler-haftalar süren titrasyon gerektirir</b> — acil ağrıda yeri yoktur.
+        Ağızdan biyoyararlanımı değişkendir (%27-60) ve dozla ters orantılıdır.
+        Sedasyon, baş dönmesi ve ataksi; <b>böbrek yetmezliğinde şiddetlenir, doz ayarı gerekir</b>.
+        <b>Birden kesilmez</b> — kesilme belirtileri görülür.</span>
+        <span class="k">UpToDate Topic 1616 · 06.05.2026</span></td></tr>
+
+  <tr><td>Pregabalin</td>
+      <td data-l="Doz"><span class="ey">Ağızdan başlangıç 75 mg, günde bir ya da iki kez</span>
+        <span class="ip">İdame <b>150-300 mg, günde iki kez</b>. Etki saatler-günler içinde.</span></td>
+      <td data-l="Yeri, dikkat ve kontrendikasyon"><span class="ey">Gabapentinle aynı yer; biyoyararlanımı (&gt;%90) daha güvenilirdir ve tam doza daha çabuk çıkılır.</span>
+        <span class="uy">Sedasyon, bulanık görme, ağız kuruluğu, baş dönmesi, ataksi; <b>böbrek yetmezliğinde doz ayarı</b>.
+        <b>Birden kesilmez.</b> Enteral yol ve saatli doz zorunludur.</span>
+        <span class="k">UpToDate Topic 1616 · 06.05.2026</span></td></tr>
+</table>
+
+<div class="warn">
+  <span class="ey">Kesme ve yoksunluk.</span>
+  <b>Sıra:</b> birden çok ajan varsa ve <b>ağrı değerlendirilemiyorsa opioid en sona bırakılır</b> —
+  hasta ağrıyla uyanmasın diye. Ağrı değerlendirilebiliyorsa ajanlar birlikte azaltılabilir.
+  <b>Hız:</b> ajan <b>7 gün ya da daha kısa</b> verildiyse saatler içinde kesmek kabul edilebilir;
+  <b>7 günü aşmışsa ve taşiflaksi varsa günde yaklaşık %10-25</b> azaltılır.
+  Uzun süre yüksek doz almış, ilaç birikimiyle derin sedasyonda olan hastada <b>birden kesmek uygun olabilir</b>:
+  yağda çözünen ilaçlar dokuda biriktiği için azaltmayla uyanma arasında <b>günler</b> geçebilir.
+  <span class="uy"><b>Yoksunluk hastaların üçte birine kadar görülür</b>; benzodiazepin ve opioid dozu yükseldikçe risk artar.
+  <b>Benzodiazepin yoksunluğunda</b> aralıklı lorazepama geçilir (0,5-1 mg, 6-12 saatte bir, damar içi ya da ağızdan).
+  <b>Deksmedetomidin yoksunluğunda</b> (ajitasyon, deliryum, taşikardi, sistolik basınç yükselmesi)
+  ağızdan <b>klonidin 0,1-0,3 mg, 6 saatte bir</b> başlanır ve 5-6 gün içinde doz aralığı açılarak azaltılır.
+  <b>Opioid yoksunluğunda üzerinde uzlaşılmış bir yöntem yoktur</b> — doz azaltma, uzun etkili ağızdan eşdeğere
+  (metadon) geçiş, fenobarbital ve alfa-2 agonisti eklenmesi önerilmiştir; kanıt olgu bildirimi düzeyindedir.</span>
+  <span class="ip"><b>Valproik asit</b> dirençli ajitasyon ve deliryumda kimi uzmanlarca kullanılır ve başka sedatiflerin
+  gereksinimini azaltabilir; rutin bakımın parçası değildir. Doz karaciğer işlevine göre kişiselleştirilir.
+  <b>Karbapenem alan hastaya verilmez</b> — tedavi edici valproik asit düzeyine ulaşılamaz.
+  Hiperamonyemi ve trombositopeni en sık görülen yan etkileridir.</span>
+  <span class="k">UpToDate Topic 1606 · 14.08.2026</span>
 </div>
 </div>
 
@@ -999,7 +1297,242 @@ rozetler tartışma içindir. Seyreltmeler <b>KİH-02</b>'dendir (bkz. Kaynaklar
 </div>
 </div>
 
-<h2>Kardiyak arrest</h2>
+<h2 id="nobet">Ateşi olmayan jeneralize nöbet — status epileptikus</h2>
+<div class="card tbl">
+<div class="warn">
+  <span class="ey">Bu bölüm arrest için değildir.</span> Nöbetteki hastanın nabzı ve solunumu vardır;
+  aşağıdaki dozlar <b>konvülzif nöbeti süren erişkin</b> içindir. <b>Status epileptikus</b>, beş dakika
+  ve daha uzun süren konvülziyon ya da <b>arada bilinç açılmadan</b> yinelenen nöbettir; otuz dakika
+  beklenmez. <b>İlk beş dakika ilaç değildir:</b> hava yolu, oksijen, monitör (EKG, kan basıncı, satürasyon),
+  damar yolu ve <b>parmak ucu kan şekeri</b>. Hipoglisemi varsa damar içi dekstroz verilir —
+  ama <b>şeker sonucunu beklemek nöbet tedavisini geciktirmez</b>.
+  <span class="uy"><b>Kapsam dışı:</b> çocuk ve yenidoğan dozları (bu bölüm erişkin içindir),
+  gebelik ve eklampsi (kılavuzlar obstetrik hastayı kendi kapsamlarının dışında bırakır),
+  ateşli nöbet. <b>Ateş varsa</b> merkezi sinir sistemi enfeksiyonu ayrıca araştırılır ve tedavisi
+  geciktirilmez.</span>
+  <span class="k">ENLS 6.0 · NCS · 07.2024</span><span class="k">AES 2016</span><span class="k">ICS 2025</span>
+</div>
+
+<table>
+  <tr class="sec"><th colspan="3">Basamak 1 — ilk ilaç, benzodiazepin (5.-20. dakika)</th></tr>
+  <tr class="hdr"><th>İlaç</th><th>Doz ve veriliş</th><th>Yeri, dikkat ve kontrendikasyon</th></tr>
+
+  <tr><td><b>Midazolam</b>, kas içi</td>
+      <td data-l="Doz ve veriliş"><span class="ey">10 mg kas içi, tek doz</span>
+        <span class="ip">Kiloya bölünmez, sabit dozdur. Seçenekler: <b>diazepam 20 mg rektal</b>,
+        bukkal ya da burun içi midazolam.</span>
+        <span class="k">ENLS 6.0</span></td>
+      <td data-l="Yeri, dikkat ve kontrendikasyon"><span class="ey">Damar yolu hemen yoksa birinci seçenek.</span>
+        Damar yolu aramak için beklenmez. Hastane öncesi ortamda kas içi midazolam, damar yolu açıp
+        lorazepam vermekten <b>daha hızlı ve daha etkilidir</b>; bu, damar yolu olmayan erişkinde
+        <b>düzey A</b> ile gösterilmiştir.
+        <span class="k">AES 2016 · düzey A</span><span class="k">RAMPART</span></td></tr>
+
+  <tr><td><b>Lorazepam</b>, damar içi</td>
+      <td data-l="Doz ve veriliş"><span class="ey">0,1 mg/kg · doz başına en çok 4 mg · 2 dakikada</span>
+        <span class="ip">Etkisizse <b>3-5 dakika sonra bir kez tekrarlanır</b>. Kilo ne olursa olsun
+        tek doz 4 mg'ı aşmaz — 40 kilonun üzerindeki her hastada doz aynıdır.</span>
+        <span class="k">ENLS 6.0</span></td>
+      <td data-l="Yeri, dikkat ve kontrendikasyon"><span class="ey">Damar yolu varsa birinci seçenek.</span>
+        Lorazepam ile diazepam arasında etkinlik farkı gösterilmemiştir.
+        <span class="uy"><b>Türkiye'de damar içi nüshası yoktur.</b> Ruhsatlı tek lorazepam ürünü
+        <b>ağızda dağılan tablettir</b> (Ativan Expidet 1 mg ve 2,5 mg); ampul ya da flakon nüshası
+        bulunamadı. <b>Türkiye'de bu satır uygulanamaz</b> — yerine damar içi diazepam ya da kas içi
+        midazolam verilir, sıra atlanmaz. Satır, dışarıdan gelen kılavuz metinleriyle karşılaştırma
+        yapılabilsin diye çizelgede bırakılmıştır.
+        <span class="k">TİTCK ruhsatlı ürün taraması · 27.08.2026</span></span>
+        <span class="k">AES 2016 · düzey A</span></td></tr>
+
+  <tr><td><b>Diazepam</b>, damar içi</td>
+      <td data-l="Doz ve veriliş"><span class="ey">0,15 mg/kg · en çok 10 mg</span>
+        <span class="ip">Lorazepam yoksa eşdeğer seçenektir; bir kez tekrarlanabilir.</span>
+        <span class="k">ENLS 6.0</span></td>
+      <td data-l="Yeri, dikkat ve kontrendikasyon"><span class="ey">Etki hızlı başlar, kısa sürer.</span>
+        Beyinden hızla dağıldığı için nöbet yineleyebilir; <b>ikinci basamak ilaç yine de yüklenir</b>.
+        <span class="k">AES 2016</span></td></tr>
+
+  <tr class="sec"><th colspan="3">Basamak 2 — ikinci ilaç, biri seçilir (20.-40. dakika)</th></tr>
+
+  <tr><td><b>Levetirasetam</b></td>
+      <td data-l="Doz ve veriliş"><span class="ey">60 mg/kg damar içi · en çok 4500 mg</span>
+        <span class="ip">Yetmiş beş kilonun üzerinde doz tavana oturur. İnfüzyon konsantresi
+        <b>100 mg/mL, 5 mL flakon = 500 mg</b>; tavan doz <b>dokuz flakon</b> eder, hazırlaması zaman alır.
+        <span class="k">EMA ürün bilgisi</span></span>
+        <span class="k">ENLS 6.0</span><span class="k">ESETT</span></td>
+      <td data-l="Yeri, dikkat ve kontrendikasyon"><span class="ey">Üç ajan arasında seçim serbesttir.</span>
+        ESETT'te levetirasetam, fosfenitoin ve valproik asit arasında <b>etkinlik ve güvenlik farkı
+        bulunmadı</b>; üçü de hastaların kabaca yarısında nöbeti bir saat içinde durdurdu.
+        <span class="k">ESETT · Lancet 2020</span></td></tr>
+
+  <tr><td><b>Valproik asit</b></td>
+      <td data-l="Doz ve veriliş"><span class="ey">40 mg/kg damar içi · 10 dakikada · en çok 3000 mg</span>
+        <span class="k">ENLS 6.0</span><span class="k">ESETT</span></td>
+      <td data-l="Yeri, dikkat ve kontrendikasyon"><span class="ey">Benzodiazepin sonrası fenitoine benzer etkinlikte.</span>
+        <span class="uy"><b>Karbapenem ile birlikte verilmez</b> — valproat düzeyi düşer ve nöbet eşiği kırılır.
+        <span class="k">UpToDate Topic 1606</span></span>
+        <span class="uy"><b>Gebelikte ve çocuk doğurma potansiyeli olan kadında kontrendikedir:</b>
+        uygun bir alternatif varsa gebelikte, <b>Gebelik Önleme Programı</b>nın koşulları sağlanmadıkça da
+        doğurganlık çağındaki kadında verilmez. <b>Ama mutlak değildir:</b> ürün bilgisi, gebelikte süren
+        tonik-klonik status epileptikusun <b>anne ve bebek için ayrı bir ölüm riski</b> taşıdığını yazar ve
+        istisnai durumda kullanımı öngörür. Acil kararı veren, alternatifin elde olup olmadığına bakar.
+        <span class="k">TİTCK KÜB · valproat enjeksiyonluk</span></span>
+        <span class="ip">Türkiye'de damar içi nüshası <b>400 mg flakon</b> olarak bulunur;
+        80 kiloda tavan doz (3000 mg) <b>yedi buçuk flakon</b> eder.
+        <span class="k">TİTCK KÜB · 400 mg/4 mL</span></span>
+        <span class="k">AES 2016 · düzey C</span></td></tr>
+
+  <tr><td><b>Fosfenitoin</b></td>
+      <td data-l="Doz ve veriliş"><span class="ey">20 mg FE/kg damar içi · en çok <b>150 mg/dakika</b> · en çok 1500 mg FE</span>
+        <span class="ip"><b>FE = fenitoin eşdeğeri.</b> İstem bu birimle yazılır; miligram ile karıştırılırsa
+        doz hatası doğar.</span>
+        <span class="k">ENLS 6.0</span></td>
+      <td data-l="Yeri, dikkat ve kontrendikasyon"><span class="ey">İkisi bulunuyorsa fenitoine tercih edilir.</span>
+        Tolere edilebilirlik üstünlüğü nedeniyle yeğlenir (<b>düzey B</b>); <b>etkinlik farkı
+        gösterilmemiştir</b>, fenitoin kabul edilebilir seçenektir.
+        <span class="uy"><b>Türkiye'de ruhsatlı fosfenitoin ürünü bulunamadı.</b> Etkin madde taramasında
+        yalnız <b>fenitoin sodyum</b> nüshaları çıkıyor. <b>Pratikte ikinci basamak fenitoindir</b>
+        ve hız sınırı üçte birine iner: 150 değil <b>50 mg/dakika</b>.
+        <span class="k">TİTCK ruhsatlı ürün taraması · 27.08.2026</span></span>
+        <span class="k">AES 2016 · düzey B</span></td></tr>
+
+  <tr><td><b>Fenitoin</b></td>
+      <td data-l="Doz ve veriliş"><span class="ey">20 mg/kg damar içi · en çok <b>50 mg/dakika</b> · en çok 1500 mg</span>
+        <span class="ip">Fosfenitoinin üçte biri hızla verilir; yükleme buna göre uzar —
+        80 kiloda 1500 mg tavan doz <b>en az 30 dakika</b> sürer. Türkiye'de ampul
+        <b>250 mg/5 mL = 50 mg/mL</b>; tavan doz <b>altı ampul</b> eder. Serum fizyolojik ile seyreltilir,
+        son derişim <b>10 mg/mL'yi aşmaz</b>, karışım bir saat içinde bitirilir.
+        <span class="k">TİTCK KÜB · 250 mg/5 mL</span></span>
+        <span class="k">ENLS 6.0</span></td>
+      <td data-l="Yeri, dikkat ve kontrendikasyon"><span class="ey">Hız sınırı doz kadar bağlayıcıdır.</span>
+        <span class="uy">Hızlı verilirse <b>hipotansiyon ve ritim bozukluğu</b> olur; infüzyon boyunca
+        <b>kardiyak monitör</b> gerekir. İnfüzyon yerinde ağrı fosfenitoine göre belirgin daha sıktır.</span>
+        <b>Ağızdan ya da sonda ile verilen fenitoinin emilimi düzensizdir;</b> status epileptikusta
+        damar içi verilir ve düzey bakılır.
+        <span class="k">AES 2016</span><span class="k">ICS 2025</span></td></tr>
+
+  <tr class="sec"><th colspan="3">Basamak 3 — refrakter nöbet: entübe et, sürekli EEG başlat</th></tr>
+
+  <tr><td><b>Midazolam</b> infüzyonu</td>
+      <td data-l="Doz ve veriliş"><span class="ey">0,2 mg/kg yükleme (2-5 dakikada) · başlangıç hız 0,1 mg/kg/saat ·
+        idame <b>0,05-2 mg/kg/saat</b></span>
+        <span class="ip">Nöbet durana kadar <b>her 5 dakikada bir 0,2 mg/kg</b> tekrar; toplam yükleme
+        <b>en çok 2 mg/kg</b>. <b>Hız her artırılışında önce bolus verilir</b>, yalnız hız yükseltmek
+        yavaş kalır. Aşağıdaki kiloya göre çizelgede mL/saat karşılıkları var.</span>
+        <span class="k">ENLS 6.0</span></td>
+      <td data-l="Yeri, dikkat ve kontrendikasyon"><span class="ey">Refrakter nöbette ilk seçeneklerden biri.</span>
+        Propofole göre daha az hipotansiyon beklenir. Birikme ve uyanmada gecikme yüksek dozda kaçınılmazdır.
+        <span class="k">ENLS 6.0</span></td></tr>
+
+  <tr><td><b>Propofol</b> infüzyonu</td>
+      <td data-l="Doz ve veriliş"><span class="ey">1-2 mg/kg yükleme (3-5 dakikada) · başlangıç hız 20 mcg/kg/dk ·
+        idame <b>30-200 mcg/kg/dk</b></span>
+        <span class="ip">Nöbet durana kadar <b>her 3-5 dakikada bir</b> bolus tekrarı; toplam yükleme
+        <b>en çok 10 mg/kg</b>.</span>
+        <span class="k">ENLS 6.0</span></td>
+      <td data-l="Yeri, dikkat ve kontrendikasyon"><span class="ey">Hipotansiyon doz sınırlayıcıdır.</span>
+        <span class="uy"><b>İnfüzyon sendromu:</b> 200 mcg/kg/dk = <b>12 mg/kg/saat</b>, yani bu dosyadaki
+        sedasyon tavanının çok üzerindedir. <b>4 mg/kg/saat üzerinde kreatin kinaz ve trigliserit izlenir,
+        günlük EKG çekilir.</b> Ayrıntı için sedasyon bölümündeki infüzyon sendromu kutusu.</span>
+        <span class="k">ENLS 6.0</span><span class="k">ICS 2025</span></td></tr>
+</table>
+
+<div class="warn bad">
+  <span class="ey">Türkiye'de basamaklar böyle işlemiyor.</span> Kılavuzların birinci ve ikinci
+  basamakta öne koyduğu iki ilacın <b>Türkiye'de damar içi nüshası yok</b>:
+  <b>lorazepam</b> yalnız ağızda dağılan tablet olarak, <b>fosfenitoin</b> ise hiç ruhsatlı değil.
+  Pratik karşılığı şudur: <b>birinci basamak</b> damar yolu varsa <b>diazepam 0,15 mg/kg (en çok 10 mg)</b>,
+  damar yolu yoksa <b>kas içi midazolam 10 mg</b>. <b>İkinci basamak</b> levetirasetam, valproik asit ya da
+  <b>fenitoin</b>; fenitoin seçilirse hız sınırı <b>50 mg/dakika</b>'dır ve kardiyak monitör zorunludur.
+  <span class="uy"><b>Bu bir kılavuz önerisi değil, bulunabilirlik saptamasıdır.</b> Kendi
+  eczanenizde farklıysa sizinki geçerlidir; ilaç ruhsat durumu değişebilir.</span>
+  <span class="k">TİTCK ruhsatlı ürün taraması · 27.08.2026</span>
+</div>
+
+<div class="warn bad">
+  <span class="ey">Nöbet dozu sedasyon dozu değildir.</span> Aynı üç ilaç bu dosyada iki ayrı yerde,
+  iki ayrı aralıkla geçiyor ve <b>karıştırılırsa hasta ya nöbette kalır ya aşırı doz alır</b>:
+  <b>midazolam</b> sedasyonda 0,02-0,1 mg/kg/saat, refrakter nöbette <b>0,05-2 mg/kg/saat</b> — üst sınır
+  <b>yirmi kat</b>. <b>Propofol</b> sedasyonda 5-50 mcg/kg/dk, refrakter nöbette <b>30-200 mcg/kg/dk</b> —
+  <b>dört kat</b>. Nöbet için kullanılan doz <b>entübe, sürekli EEG'li hastanın</b> dozudur;
+  sedasyon tablosundaki değerler nöbeti durdurmaz.
+</div>
+
+<div class="warn bad">
+  <span class="ey">Sık yapılan üç hata.</span>
+  <b>Bir:</b> benzodiazepin eksik dozlanır. İlk doz <b>bölünmeden, tam</b> verilir; küçük dozlara
+  yayılmaz. Yalnız lorazepam ve diazepam <b>bir kez</b> tekrarlanır.
+  <b>İki:</b> solunum baskılanır diye doz kısılır. Tedavi edilmeyen nöbette solunum sorunu,
+  benzodiazepin verilen hastadakinden <b>daha sıktır</b> — bu <b>düzey A</b> bir sonuçtur.
+  <b>Üç:</b> konvülziyon durunca tedavi bitmiş sayılır. Hasta hızla uyanmıyorsa <b>nöbet sürüyor
+  olabilir</b>; benzodiazepinin etkisi kısadır, <b>ikinci basamak ilaç mutlaka yüklenir</b>.
+  Üçüncü basamağa geçilirken de <b>ikinci basamak ilaç kesilmez, sürdürülür</b>.
+  <span class="k">AES 2016 · düzey A</span><span class="k">ENLS 6.0</span>
+</div>
+
+<div class="warn">
+  <span class="ey">Nöbetin nedeni ilaçla birlikte aranır.</span> Metabolik neden düzeltilmeden
+  nöbet ilaçla zor kontrol edilir. Zehirlenmede ilaç seçimi değişir:
+  <b>izoniyazid</b> — lorazepam, ardından <b>piridoksin 70 mg/kg (en çok 5 g)</b>;
+  <b>trisiklik antidepresan</b> — EKG'de QRS genişlemesi aranır, <b>sodyum bikarbonat</b> verilir;
+  <b>organofosfat</b> — atropin, midazolam ve pralidoksim;
+  <b>alkol yoksunluğu</b> — artan dozda benzodiazepin;
+  ayrıca teofilin, kokain ve sempatomimetikler. Hipoksi, hipotansiyon ve elektrolit bozukluğu
+  yapan <b>hemen her ilaç</b> dolaylı olarak nöbete yol açabilir.
+  <span class="k">ENLS 6.0</span>
+</div>
+
+<div class="warn">
+  <span class="ey">Konvülziyonsuz status epileptikus.</span> Belirgin motor bulgusu olmayan
+  status epileptikustur; <b>tanısı EEG'ye bağlıdır</b>. <b>Bilinç bozukluğuyla giden nüshası
+  yüksek ölümlüdür ve konvülzif status epileptikus gibi tedavi edilir.</b> Yalnız davranış ya da
+  bilinç durumunda değişiklikle giden olguda risk daha belirsizdir ve çoğu kez yoğun bakım gerekmez,
+  ama erken etkin tedavi yine istenir. <b>Konvülzif nöbetten sonra bilinci açılmayan hastada</b>
+  akla ilk gelmesi gereken tanıdır; sürekli EEG yoksa nöbetin durup durmadığı bilinemez.
+  <span class="k">ICS 2025</span><span class="k">ENLS 6.0</span>
+</div>
+
+<div class="warn">
+  <span class="ey">Süper refrakter nöbet — 24 saati geçen.</span> Anestezik infüzyon <b>en az 24 saat</b>
+  sürdürülür, sonra azaltılır; klinik ya da EEG'de nöbet yinelerse yeniden başlanır.
+  <b>İnfüzyon ani kesilmez, kademeli azaltılır</b> — hızlı kesme geri tepme nöbetinin bilinen nedenidir.
+  Bu aşamada denenen yollar: <b>tiyopental gibi başka bir anestezikle 48 saat</b>, <b>ketamin infüzyonu</b>
+  ya da izofluran gibi soluma anesteziği, <b>lakozamid ya da fenobarbital</b> eklenmesi,
+  magnezyum düzeyinin <b>1,0-1,5 mmol/L</b> aralığında tutulması. Otoimmün ensefalit, NORSE ve FIRES
+  düşünülür; ilk basamak bağışıklık tedavisi <b>metilprednizolon 1 g/gün, 3 gün</b>, damar içi
+  immünglobulin ya da plazma değişimidir.
+  <span class="uy"><b>Bu aşama nöroloji ile birlikte yürütülür</b> ve hasta üçüncü basamak bir
+  nöroyoğun bakıma devredilir. Tek bir girişimin üstünlüğünü gösteren kanıt yoktur; tedavi altta yatan
+  nedene yönelir.</span>
+  <span class="k">ICS 2025</span>
+</div>
+
+<div class="warn ok">
+  <span class="ey">Bu bölümün kaynakları.</span> Dozların tamamı <b>Emergency Neurological Life Support,
+  Status Epilepticus Protocol, sürüm 6.0</b> (Neurocritical Care Society; Swor DE, Waybright RA;
+  son güncelleme <b>Temmuz 2024</b>) belgesinden alınmıştır. Kanıt düzeyleri ve ajan sırası
+  <b>AES 2016</b> kılavuzundan, ikinci basamağın üç ajanının eşdeğerliği <b>ESETT</b> çalışmasından,
+  süper refrakter ve konvülziyonsuz status epileptikus ifadeleri <b>Intensive Care Society 2025</b>
+  erişkin rehberinden gelir. Türkiye'ye özgü üç ifade — lorazepamın damar içi nüshasının olmaması,
+  fosfenitoinin ruhsatlı olmaması, valproatın gebelikteki durumu — <b>27.08.2026'da TİTCK ruhsatlı
+  ürün taraması ve kısa ürün bilgileriyle doğrulandı</b>; bu bölümde artık <b>doğrulanmadı</b> rozeti
+  taşıyan ifade yoktur. <b>Bölüm henüz UpToDate ile karşılaştırılmadı.</b>
+  <span class="k">ENLS 6.0</span><span class="k">AES 2016</span><span class="k">ESETT</span><span class="k">ICS 2025</span><span class="k">TİTCK</span>
+</div>
+</div>
+
+<details class="kat" id="nobetcizelge">
+  <summary><span class="bas">Nöbet dozlarının kiloya göre çizelgesi</span><span class="roz"></span><span class="aciklama">Yükleme dozları miligram, refrakter infüzyonlar mL/saat olarak. Kapalı geldi ki belgeyi tararken araya girmesin; <b>dokununca açılır</b>.</span></summary>
+  <div class="ic">
+<div class="warn ok"><b>İki ayrı birim var, karıştırılmaz.</b> Birinci çizelge <b>miligram</b> verir — verilecek ilaç miktarıdır, pompa hızı değildir. Sonraki üç çizelge <b>mL/saat</b> verir ve başlıkta yazan derişimi varsayar; <b>derişiminiz farklıysa çizelge geçersizdir</b>, hesap alanını kullanın. Tavana oturan hücreler ayrıca işaretlidir: o kiloda kilo başına doz değil, <b>tavan doz</b> verilir. Ara kilolarda tavana oturmayan değerler <b>doğrusaldır</b>. Bu bölümdeki <b>162 hücrenin tamamı</b> ayrı bir betikle, yarımlar yukarı yuvarlanarak (<code>ROUND_HALF_UP</code>) yeniden hesaplanmıştır.</div>
+<div class="warn bad"><b>Yüksek hızda hacim sorunu.</b> Midazolam çizelgesi <b>1 mg/mL</b> derişimi varsayar; bu derişimde 100 kg hastada 2 mg/kg/saat <b>200 mL/saat</b> eder. Refrakter nöbette üst hızlara çıkılacaksa <b>daha derişik hazırlanır</b>, yoksa saatler içinde ciddi sıvı yükü doğar. Propofolde de üst hızlar <b>infüzyon sendromu eşiğinin çok üzerindedir</b>; yukarıdaki uyarı kutusu geçerlidir.</div>
+<div class="tbl kgsar"><table class="kgtab" id="nobet-yukleme"><tr class="sec"><th colspan="7">Yükleme dozları &nbsp;·&nbsp; <span style="font-weight:400;color:var(--dim)">değerler <b>miligramdır</b>, mL/saat değildir</span></th></tr><tr class="hdr"><th>İlaç ve doz</th><th class="n">50 kg</th><th class="n">60 kg</th><th class="n">70 kg</th><th class="n">80 kg</th><th class="n">90 kg</th><th class="n">100 kg</th></tr><tr><td>Lorazepam 0,1 mg/kg</td><td class="n" data-l="50 kg"><b>4</b> <span style="color:var(--dim)">tavan</span></td><td class="n" data-l="60 kg"><b>4</b> <span style="color:var(--dim)">tavan</span></td><td class="n" data-l="70 kg"><b>4</b> <span style="color:var(--dim)">tavan</span></td><td class="n" data-l="80 kg"><b>4</b> <span style="color:var(--dim)">tavan</span></td><td class="n" data-l="90 kg"><b>4</b> <span style="color:var(--dim)">tavan</span></td><td class="n" data-l="100 kg"><b>4</b> <span style="color:var(--dim)">tavan</span></td></tr><tr><td>Diazepam 0,15 mg/kg</td><td class="n" data-l="50 kg">7,5</td><td class="n" data-l="60 kg">9</td><td class="n" data-l="70 kg"><b>10</b> <span style="color:var(--dim)">tavan</span></td><td class="n" data-l="80 kg"><b>10</b> <span style="color:var(--dim)">tavan</span></td><td class="n" data-l="90 kg"><b>10</b> <span style="color:var(--dim)">tavan</span></td><td class="n" data-l="100 kg"><b>10</b> <span style="color:var(--dim)">tavan</span></td></tr><tr><td>Levetirasetam 60 mg/kg</td><td class="n" data-l="50 kg">3000</td><td class="n" data-l="60 kg">3600</td><td class="n" data-l="70 kg">4200</td><td class="n" data-l="80 kg"><b>4500</b> <span style="color:var(--dim)">tavan</span></td><td class="n" data-l="90 kg"><b>4500</b> <span style="color:var(--dim)">tavan</span></td><td class="n" data-l="100 kg"><b>4500</b> <span style="color:var(--dim)">tavan</span></td></tr><tr><td>Valproik asit 40 mg/kg</td><td class="n" data-l="50 kg">2000</td><td class="n" data-l="60 kg">2400</td><td class="n" data-l="70 kg">2800</td><td class="n" data-l="80 kg"><b>3000</b> <span style="color:var(--dim)">tavan</span></td><td class="n" data-l="90 kg"><b>3000</b> <span style="color:var(--dim)">tavan</span></td><td class="n" data-l="100 kg"><b>3000</b> <span style="color:var(--dim)">tavan</span></td></tr><tr><td>Fenitoin / fosfenitoin 20 mg/kg</td><td class="n" data-l="50 kg">1000</td><td class="n" data-l="60 kg">1200</td><td class="n" data-l="70 kg">1400</td><td class="n" data-l="80 kg"><b>1500</b> <span style="color:var(--dim)">tavan</span></td><td class="n" data-l="90 kg"><b>1500</b> <span style="color:var(--dim)">tavan</span></td><td class="n" data-l="100 kg"><b>1500</b> <span style="color:var(--dim)">tavan</span></td></tr><tr><td>Midazolam, refrakter tek bolus 0,2 mg/kg</td><td class="n" data-l="50 kg">10</td><td class="n" data-l="60 kg">12</td><td class="n" data-l="70 kg">14</td><td class="n" data-l="80 kg">16</td><td class="n" data-l="90 kg">18</td><td class="n" data-l="100 kg">20</td></tr><tr><td>Midazolam, refrakter toplam yükleme tavanı 2 mg/kg</td><td class="n" data-l="50 kg">100</td><td class="n" data-l="60 kg">120</td><td class="n" data-l="70 kg">140</td><td class="n" data-l="80 kg">160</td><td class="n" data-l="90 kg">180</td><td class="n" data-l="100 kg">200</td></tr><tr><td>Propofol, refrakter bolus 1 mg/kg</td><td class="n" data-l="50 kg">50</td><td class="n" data-l="60 kg">60</td><td class="n" data-l="70 kg">70</td><td class="n" data-l="80 kg">80</td><td class="n" data-l="90 kg">90</td><td class="n" data-l="100 kg">100</td></tr><tr><td>Propofol, refrakter bolus 2 mg/kg</td><td class="n" data-l="50 kg">100</td><td class="n" data-l="60 kg">120</td><td class="n" data-l="70 kg">140</td><td class="n" data-l="80 kg">160</td><td class="n" data-l="90 kg">180</td><td class="n" data-l="100 kg">200</td></tr><tr><td>Propofol, refrakter toplam yükleme tavanı 10 mg/kg</td><td class="n" data-l="50 kg">500</td><td class="n" data-l="60 kg">600</td><td class="n" data-l="70 kg">700</td><td class="n" data-l="80 kg">800</td><td class="n" data-l="90 kg">900</td><td class="n" data-l="100 kg">1000</td></tr></table></div>
+<div class="tbl kgsar"><table class="kgtab" id="nobet-mdz"><tr class="sec"><th colspan="7">Midazolam infüzyonu, refrakter nöbet &nbsp;·&nbsp; 100 mg / 100 mL &nbsp;·&nbsp; 1 mg/mL &nbsp;·&nbsp; <span style="font-weight:400;color:var(--dim)">derişim kaynağı: KİH-02</span></th></tr><tr class="hdr"><th>Doz</th><th class="n">50 kg</th><th class="n">60 kg</th><th class="n">70 kg</th><th class="n">80 kg</th><th class="n">90 kg</th><th class="n">100 kg</th></tr><tr><td>0,05 mg/kg/saat</td><td class="n" data-l="50 kg">2,5</td><td class="n" data-l="60 kg">3,0</td><td class="n" data-l="70 kg">3,5</td><td class="n" data-l="80 kg">4,0</td><td class="n" data-l="90 kg">4,5</td><td class="n" data-l="100 kg">5,0</td></tr><tr><td>0,1 mg/kg/saat</td><td class="n" data-l="50 kg">5,0</td><td class="n" data-l="60 kg">6,0</td><td class="n" data-l="70 kg">7,0</td><td class="n" data-l="80 kg">8,0</td><td class="n" data-l="90 kg">9,0</td><td class="n" data-l="100 kg">10,0</td></tr><tr><td>0,2 mg/kg/saat</td><td class="n" data-l="50 kg">10,0</td><td class="n" data-l="60 kg">12,0</td><td class="n" data-l="70 kg">14,0</td><td class="n" data-l="80 kg">16,0</td><td class="n" data-l="90 kg">18,0</td><td class="n" data-l="100 kg">20,0</td></tr><tr><td>0,5 mg/kg/saat</td><td class="n" data-l="50 kg">25,0</td><td class="n" data-l="60 kg">30,0</td><td class="n" data-l="70 kg">35,0</td><td class="n" data-l="80 kg">40,0</td><td class="n" data-l="90 kg">45,0</td><td class="n" data-l="100 kg">50,0</td></tr><tr><td>1 mg/kg/saat</td><td class="n" data-l="50 kg">50,0</td><td class="n" data-l="60 kg">60,0</td><td class="n" data-l="70 kg">70,0</td><td class="n" data-l="80 kg">80,0</td><td class="n" data-l="90 kg">90,0</td><td class="n" data-l="100 kg">100,0</td></tr><tr><td>1,5 mg/kg/saat</td><td class="n" data-l="50 kg">75,0</td><td class="n" data-l="60 kg">90,0</td><td class="n" data-l="70 kg">105,0</td><td class="n" data-l="80 kg">120,0</td><td class="n" data-l="90 kg">135,0</td><td class="n" data-l="100 kg">150,0</td></tr><tr><td>2 mg/kg/saat</td><td class="n" data-l="50 kg">100,0</td><td class="n" data-l="60 kg">120,0</td><td class="n" data-l="70 kg">140,0</td><td class="n" data-l="80 kg">160,0</td><td class="n" data-l="90 kg">180,0</td><td class="n" data-l="100 kg">200,0</td></tr></table></div>
+<div class="tbl kgsar"><table class="kgtab" id="nobet-prop2"><tr class="sec"><th colspan="7">Propofol %2 infüzyonu, refrakter nöbet &nbsp;·&nbsp; 2000 mg / 100 mL &nbsp;·&nbsp; 20 mg/mL &nbsp;·&nbsp; <span style="font-weight:400;color:var(--dim)">derişim kaynağı: KİH-02</span></th></tr><tr class="hdr"><th>Doz</th><th class="n">50 kg</th><th class="n">60 kg</th><th class="n">70 kg</th><th class="n">80 kg</th><th class="n">90 kg</th><th class="n">100 kg</th></tr><tr><td>30 mcg/kg/dk</td><td class="n" data-l="50 kg">4,5</td><td class="n" data-l="60 kg">5,4</td><td class="n" data-l="70 kg">6,3</td><td class="n" data-l="80 kg">7,2</td><td class="n" data-l="90 kg">8,1</td><td class="n" data-l="100 kg">9,0</td></tr><tr><td>50 mcg/kg/dk</td><td class="n" data-l="50 kg">7,5</td><td class="n" data-l="60 kg">9,0</td><td class="n" data-l="70 kg">10,5</td><td class="n" data-l="80 kg">12,0</td><td class="n" data-l="90 kg">13,5</td><td class="n" data-l="100 kg">15,0</td></tr><tr><td>100 mcg/kg/dk</td><td class="n" data-l="50 kg">15,0</td><td class="n" data-l="60 kg">18,0</td><td class="n" data-l="70 kg">21,0</td><td class="n" data-l="80 kg">24,0</td><td class="n" data-l="90 kg">27,0</td><td class="n" data-l="100 kg">30,0</td></tr><tr><td>150 mcg/kg/dk</td><td class="n" data-l="50 kg">22,5</td><td class="n" data-l="60 kg">27,0</td><td class="n" data-l="70 kg">31,5</td><td class="n" data-l="80 kg">36,0</td><td class="n" data-l="90 kg">40,5</td><td class="n" data-l="100 kg">45,0</td></tr><tr><td>200 mcg/kg/dk</td><td class="n" data-l="50 kg">30,0</td><td class="n" data-l="60 kg">36,0</td><td class="n" data-l="70 kg">42,0</td><td class="n" data-l="80 kg">48,0</td><td class="n" data-l="90 kg">54,0</td><td class="n" data-l="100 kg">60,0</td></tr></table></div>
+<div class="tbl kgsar"><table class="kgtab" id="nobet-prop1"><tr class="sec"><th colspan="7">Propofol %1 infüzyonu, refrakter nöbet &nbsp;·&nbsp; 1000 mg / 100 mL &nbsp;·&nbsp; 10 mg/mL &nbsp;·&nbsp; <span style="font-weight:400;color:var(--dim)">derişim kaynağı: KİH-02</span></th></tr><tr class="hdr"><th>Doz</th><th class="n">50 kg</th><th class="n">60 kg</th><th class="n">70 kg</th><th class="n">80 kg</th><th class="n">90 kg</th><th class="n">100 kg</th></tr><tr><td>30 mcg/kg/dk</td><td class="n" data-l="50 kg">9,0</td><td class="n" data-l="60 kg">10,8</td><td class="n" data-l="70 kg">12,6</td><td class="n" data-l="80 kg">14,4</td><td class="n" data-l="90 kg">16,2</td><td class="n" data-l="100 kg">18,0</td></tr><tr><td>50 mcg/kg/dk</td><td class="n" data-l="50 kg">15,0</td><td class="n" data-l="60 kg">18,0</td><td class="n" data-l="70 kg">21,0</td><td class="n" data-l="80 kg">24,0</td><td class="n" data-l="90 kg">27,0</td><td class="n" data-l="100 kg">30,0</td></tr><tr><td>100 mcg/kg/dk</td><td class="n" data-l="50 kg">30,0</td><td class="n" data-l="60 kg">36,0</td><td class="n" data-l="70 kg">42,0</td><td class="n" data-l="80 kg">48,0</td><td class="n" data-l="90 kg">54,0</td><td class="n" data-l="100 kg">60,0</td></tr><tr><td>150 mcg/kg/dk</td><td class="n" data-l="50 kg">45,0</td><td class="n" data-l="60 kg">54,0</td><td class="n" data-l="70 kg">63,0</td><td class="n" data-l="80 kg">72,0</td><td class="n" data-l="90 kg">81,0</td><td class="n" data-l="100 kg">90,0</td></tr><tr><td>200 mcg/kg/dk</td><td class="n" data-l="50 kg">60,0</td><td class="n" data-l="60 kg">72,0</td><td class="n" data-l="70 kg">84,0</td><td class="n" data-l="80 kg">96,0</td><td class="n" data-l="90 kg">108,0</td><td class="n" data-l="100 kg">120,0</td></tr></table></div>
+  </div>
+</details>
+
+<h2 id="b-arrest">Kardiyak arrest</h2>
 <div class="card tbl acil-blok"><span class="acil-etiket">Acil — arrest, tek doz</span>
 <table>
   <tr class="sec"><th colspan="2">Kardiyak arrest</th></tr>
@@ -1018,13 +1551,13 @@ rozetler tartışma içindir. Seyreltmeler <b>KİH-02</b>'dendir (bkz. Kaynaklar
   <b>Arrestte verilmeyecekler.</b> <b>Rutin</b> kalsiyum, sodyum bikarbonat ve kortikosteroid; yüksek doz
   adrenalin; <b>vazopressin</b> — septik şokta yeri vardır, arrestte adrenaline üstünlük
   sağlamamıştır. <b>“Rutin” sözcüğü önemlidir:</b> hiperpotasemik arrestte kalsiyum ve sodyum
-  bikarbonat <i>endikedir</i> (yukarıdaki satır), burulmalı VT’de magnezyum düşünülür; yasak olan
+  bikarbonat <i>endikedir</i> (yukarıdaki satır), burulmalı VT’de (torsades de pointes) magnezyum düşünülür; yasak olan
   bunların ayrım gözetmeden her arreste verilmesidir. 
 </div>
 
 </div>
 
-<h2>Aritmi, elektrolit ve kanama</h2>
+<h2 id="b-aritmi">Aritmi, elektrolit ve kanama</h2>
 <div class="card tbl">
 <div class="warn"><span class="ey">Bu tablo ortamı satır satır belirtir.</span>
 Tek bir arrest/infüzyon rengi burada yanıltıcı olurdu: aynı tabloda <b>hem arrest hem stabil hasta
@@ -1112,7 +1645,7 @@ dozu</b> yan yana durur — amiodaron arrestte <b>300&nbsp;mg itme</b>, stabil v
         <span class="k">AHA 2025 · ERC 2025</span><span class="k">TİTCK ürün bilgileri</span></td></tr>
 
   <tr><td><b>Magnezyum</b></td>
-      <td data-l="Ortam ve doz"><span class="ey">Burulmalı VT: 1-2 g damar içi (erişkinde çoğunlukla 2 g)</span>
+      <td data-l="Ortam ve doz"><span class="ey">Burulmalı VT (torsades de pointes): 1-2 g damar içi (erişkinde çoğunlukla 2 g)</span>
         <span class="ip">Kılavuz metni sayı vermez; bu yerleşik uygulamadır.</span></td>
       <td data-l="Dikkat ve kontrendikasyon"><span class="ey">Yalnız uzun QT'ye eşlik eden burulmalı VT'de.</span>
         <span class="uy"><b>QT normalse verilmez.</b> Arrestte rutin magnezyum ROSC ve sağkalımı iyileştirmemiştir.
@@ -1198,6 +1731,16 @@ dozu</b> yan yana durur — amiodaron arrestte <b>300&nbsp;mg itme</b>, stabil v
 </div>
 
 <div class="warn">
+  <span class="ey">Bu dosyada kasıtlı olarak bulunmayanlar.</span>
+  <b>Metilen mavisi, anjiyotensin II ve ağızdan midodrin</b> bu çizelgede yoktur. Üçü de Surviving Sepsis
+  Campaign 2026'nın hemodinamik soru listesinde geçer, ama <b>kılavuz hiçbiri için sayısal doz vermez</b> ve
+  üçü de <b>KİH-02'de bulunmaz</b> — yani bu dosyanın iki dayanağı da bir doz ve derişim üretmiyor.
+  Eklemek, kaynağı bu belgenin ilkesini karşılamayan üçüncü bir kaynaktan sayı almak anlamına gelirdi.
+  <b>Bunlar gerektiğinde kendi biriminizin protokolüne ve eczanenize başvurun.</b>
+  Yokluğu unutulmuşluk değil, karardır.
+</div>
+
+<div class="warn">
   <span class="ey">Bu bölümün iki sınırı.</span> <i>Bir:</i> levosimendan ve fenilefrinin
   <b>standart sulandırması bu dosyada doğrulanmış değildir</b> — doz aralıkları var, derişimi kendi
   biriminizden alın. <i>İki:</i> <b>arrest dozu ile stabil hasta dozunu karıştırmak bu dosyanın en
@@ -1205,7 +1748,7 @@ dozu</b> yan yana durur — amiodaron arrestte <b>300&nbsp;mg itme</b>, stabil v
   <b>150&nbsp;mg 10&nbsp;dakikada</b>dır.
 </div>
 
-<h2>En sık üç hata</h2>
+<h2 id="b-hata">En sık üç hata</h2>
 <div class="card">
   <table>
     <tr><td><b>1</b></td><td>Derişimi mikrograma çevirmemek. <code>4 mg/100 mL</code> önce
@@ -1216,7 +1759,7 @@ dozu</b> yan yana durur — amiodaron arrestte <b>300&nbsp;mg itme</b>, stabil v
   </table>
 </div>
 
-<h2>"Altı kuralı" iki ayrı şeydir</h2>
+<h2 id="b-alti">"Altı kuralı" iki ayrı şeydir</h2>
 <div class="card">
   <p style="margin:.2rem 0 .6rem"><b>Sulandırma reçetesi (1994, pediatri).</b> 6 × kilo kadar mg
   ilacı 100 mL'ye koyarsanız <b>1 mL/saat = 1 mcg/kg/dk</b> olur. Cebiri: 6W mg/100 mL = 60W mcg/mL;
@@ -1233,10 +1776,10 @@ dozu</b> yan yana durur — amiodaron arrestte <b>300&nbsp;mg itme</b>, stabil v
   duyulan "ampuller damla sayısı tutsun diye üretiliyor" sözünün karşılığı büyük olasılıkla budur.</p>
 </div>
 
-<h2>Kurum rehberinden aktarılan ek çizelgeler</h2>
+<h2 id="b-ek">Kurum rehberinden aktarılan ek çizelgeler</h2>
 
-<details>
-  <summary><span class="bas">Antimikrobiyal infüzyon süreleri, sodyum yükü, steroid eşdeğerliği, sıvı içerikleri, stres ülseri</span><span class="roz"></span><span class="aciklama">Pompa hızı hesabının dışında kalan, ama aynı hastada aynı anda gereken bilgiler. <b>Dokununca açılır.</b></span></summary>
+<details open>
+  <summary><span class="bas">Antimikrobiyal infüzyon süreleri, sodyum yükü, steroid eşdeğerliği, sıvı içerikleri, stres ülseri</span><span class="roz"></span><span class="aciklama">Pompa hızı hesabının dışında kalan, ama aynı hastada aynı anda gereken bilgiler. <b>Açık gelir; başlığa dokununca katlanır.</b></span></summary>
 
 <div class="warn bad">
   <span class="ey">Kurum rehberinin kendi kilo çizelgelerinde altı hücre hatalıdır.</span>
@@ -1295,7 +1838,7 @@ dozu</b> yan yana durur — amiodaron arrestte <b>300&nbsp;mg itme</b>, stabil v
   <tr><td><b>Metronidazol</b></td><td data-l="Seyreltme ve süre">Kullanıma hazır</td><td data-l="Dikkat">1 saat.</td></tr>
   <tr><td><b>Mikafungin</b></td><td data-l="Seyreltme ve süre">SF ya da %5 dekstroz · 1 saat</td><td data-l="Dikkat">100 mL son hacim.</td></tr>
   <tr><td><b>Moksifloksasin</b></td><td data-l="Seyreltme ve süre">Kullanıma hazır</td><td data-l="Dikkat">1 saat.</td></tr>
-  <tr><td><b>Piperasilin-tazobaktam</b></td><td data-l="Seyreltme ve süre">SF ya da %5 dekstroz · 30 dakika</td><td data-l="Dikkat">50-150 mL. Sepsiste uzatılmış infüzyon ayrı bir karardır.</td></tr>
+  <tr><td><b>Piperasilin-tazobaktam</b></td><td data-l="Seyreltme ve süre">SF ya da %5 dekstroz · 30 dakika · <b>sepsiste yükleme sonrası uzatılmış ya da sürekli</b></td><td data-l="Dikkat">50-150 mL. <b>Sepsis ve septik şokta uzatılmış infüzyon artık güçlü öneridir</b> (SSC 2026, yüksek kanıt); kısa yarı ömrü nedeniyle kazancın en belirgin olduğu ilaçlardan biri. Aşağıdaki kutuya bakınız. <span class="k">SSC 2026 · güçlü öneri</span></td></tr>
   <tr><td><b>Polimiksin B</b></td><td data-l="Seyreltme ve süre">%5 dekstroz ya da SF · yükleme 2 saat, idame 1 saat</td><td data-l="Dikkat">Flakon başına en az 100 mL.</td></tr>
   <tr><td><b>Kolistin (polimiksin E)</b></td><td data-l="Seyreltme ve süre">SF ya da %5 dekstroz · 30-60 dakika</td><td data-l="Dikkat">Flakon 2 mL enjeksiyonluk suyla çözülür, sonra 100-1000 mL.</td></tr>
   <tr><td><b>Sefazolin</b></td><td data-l="Seyreltme ve süre">SF ya da %5 dekstroz · 30-60 dakika</td><td data-l="Dikkat">50-100 mL.</td></tr>
@@ -1304,7 +1847,7 @@ dozu</b> yan yana durur — amiodaron arrestte <b>300&nbsp;mg itme</b>, stabil v
   <tr><td><b>Sefoperazon-sulbaktam</b></td><td data-l="Seyreltme ve süre">SF ya da %5 dekstroz · 15-60 dakika</td><td data-l="Dikkat">20 mL ile seyreltilir.</td></tr>
   <tr><td><b>Seftazidim</b></td><td data-l="Seyreltme ve süre">SF ya da %5 dekstroz · 15-30 dakika; uzatılmış 3-4 saat</td><td data-l="Dikkat">50-100 mL.</td></tr>
   <tr><td><b>Seftazidim-avibaktam</b></td><td data-l="Seyreltme ve süre">SF ya da %5 dekstroz · <b>2 saat</b></td><td data-l="Dikkat">2,5 g için 50-250 mL.</td></tr>
-  <tr><td><b>Seftriakson</b></td><td data-l="Seyreltme ve süre">SF ya da %5 dekstroz · en az 30 dakika</td><td data-l="Dikkat"><b>Kalsiyum içeren çözeltilerle eşzamanlı verilmez.</b> 10-40 mg/mL.</td></tr>
+  <tr><td><b>Seftriakson</b></td><td data-l="Seyreltme ve süre">SF ya da %5 dekstroz · en az 30 dakika</td><td data-l="Dikkat"><b>Kalsiyum kuralı üç basamaklıdır, tek cümle değildir.</b> <b>Bir:</b> hiçbir yaşta kalsiyum içeren çözeltiyle <b>eşzamanlı, Y kolundan</b> verilmez — kalsiyumlu parenteral beslenme dahil. <b>İki:</b> sulandırma ve seyreltmede <b>kalsiyumlu çözelti kullanılmaz</b> (Ringer, Hartmann) — çökelti oluşur. <b>Üç:</b> <b>28 günden büyük hastada</b> kalsiyumlu çözeltiyle <b>ardışık</b> verilebilir, koşul hattın uygun sıvıyla iyice yıkanmasıdır; <b>yenidoğanda (≤28 gün) ayrı hattan ve ayrı zamanda bile kontrendikedir</b>, akciğer ve böbrekte çökelme sonucu ölüm bildirilmiştir. <b>Ayrıca vankomisin, aminoglikozit ve flukonazol ile aynı karışımda geçimsizdir</b>; ardışık verilir ve arada hat yıkanır. 10-40 mg/mL. <span class="k">FDA seftriakson reçete bilgisi</span></td></tr>
   <tr><td><b>Sefuroksim</b></td><td data-l="Seyreltme ve süre">SF ya da %5 dekstroz · 15-60 dakika (itme 3-5 dakika)</td><td data-l="Dikkat">50-100 mL.</td></tr>
   <tr><td><b>Siprofloksasin</b></td><td data-l="Seyreltme ve süre">Kullanıma hazır</td><td data-l="Dikkat">60 dakika.</td></tr>
   <tr><td><b>Teikoplanin</b></td><td data-l="Seyreltme ve süre">SF ya da %5 dekstroz · 30 dakika ya da 3-5 dakikada itme</td><td data-l="Dikkat">100 mL.</td></tr>
@@ -1314,12 +1857,31 @@ dozu</b> yan yana durur — amiodaron arrestte <b>300&nbsp;mg itme</b>, stabil v
   <tr><td><b>Vorikonazol</b></td><td data-l="Seyreltme ve süre">SF ya da %5 dekstroz · 1-3 saat</td><td data-l="Dikkat"><b>Saatte en çok 3 mg/kg.</b> İtme uygun değil. 0,5-5 mg/mL.</td></tr>
 </table>
 
+<div class="warn bad">
+  <span class="ey">Beta-laktamda infüzyon süresi artık bir tercih değil, öneri.</span>
+  <b>Sepsis ve septik şokta beta-laktamlar, yükleme dozundan sonra uzatılmış infüzyonla verilir</b> —
+  <b>güçlü öneri, yüksek kanıt</b>. On sekiz randomize çalışma ve 9108 hastalık meta-analizde (BLING III dahil)
+  kısa dönem ölüm <b>RR 0,91 (%95 GA 0,85-0,97)</b>, yani <b>bin hastada 25 daha az ölüm</b>; yoğun bakım ve
+  hastane dışında geçen gün sayısı da arttı.
+  <b>Uzatılmış infüzyon</b>, doz aralığının <b>en az yarısı</b> kadar süren infüzyon ya da sürekli infüzyondur.
+  <b>Yarı ömrü kısa olan ilaçta kazanç en büyüktür</b> — piperasilin-tazobaktam, karbapenemler.
+  <span class="uy"><b>Yükleme dozu atlanmaz:</b> uzatılmış infüzyona doğrudan başlanırsa etkin derişime
+  ulaşmak gecikir. <b>İkinci tuzak hattır:</b> uzatılmış ve sürekli infüzyon damar yolunu aralıklı infüzyondan
+  çok daha uzun süre işgal eder; bu yüzden <b>ilaç dayanıklılığı ve Y kolu geçimliliği</b> burada aralıklı
+  uygulamadakinden daha önemlidir — aşağıdaki Y-seti listesi bu bölümle birlikte okunur.</span>
+  <span class="k">SSC 2026 · güçlü öneri · yüksek kanıt</span>
+</div>
+
 <div class="warn">
   <b>Bu çizelgenin kaynağı ayrıdır.</b> Kurum rehberi bu bölümde Gahart's Intravenous Medications (2022),
   UpToDate ve RxMediaPharma'yı kaynak gösterir; erişim tarihi Şubat 2024'tür.
-  Yukarıdaki vazopresör ve sedasyon bölümlerinden farklı olarak <b>bu satırlar kılavuz denetiminden geçmemiştir</b>;
-  doz değil, hazırlama ve süre bilgisidir. Böbrek ve karaciğer işlevine göre doz ayarı bu çizelgede yoktur.
-  <span class="k">doğrulanmadı</span>
+  Doz değil, <b>hazırlama ve süre</b> bilgisidir; böbrek ve karaciğer işlevine göre doz ayarı bu çizelgede yoktur.
+  <b>27.08.2026'da bu başlığa ilk kez dış kaynakla bakıldı</b> ve denetim <b>kısmi kaldı:</b>
+  beta-laktamlarda uzatılmış infüzyon ilkesi <b>SSC 2026</b> ile, seftriakson-kalsiyum kuralı <b>FDA reçete
+  bilgisiyle</b> karşılaştırıldı; <b>vankomisin satırı değişmedi</b> — reçete bilgisi de en az 60 dakika ve
+  10 mg/dakika sınırını veriyor. <b>Geri kalan otuz altı satır hâlâ tek kaynaklıdır</b> ve kılavuz
+  denetiminden geçmemiştir.
+  <span class="k">doğrulanmadı — 36 satır</span>
 </div>
 
 <table>
@@ -1396,7 +1958,7 @@ dozu</b> yan yana durur — amiodaron arrestte <b>300&nbsp;mg itme</b>, stabil v
 
 </details>
 
-<h2>Kaynaklar — kılavuz, yıl, kapsam</h2>
+<h2 id="b-kaynak">Kaynaklar — kılavuz, yıl, kapsam</h2>
 <div class="card tbl">
 <table>
   <tr class="hdr"><th>Kılavuz / kaynak</th><th>Yıl</th><th>Bu dosyada kapsadığı bölüm</th></tr>
@@ -1423,7 +1985,8 @@ dozu</b> yan yana durur — amiodaron arrestte <b>300&nbsp;mg itme</b>, stabil v
       ve fentanil 80 kg sütunu (16 ve 24 yazıyor, doğrusu 6,4 ve 12,8). <b>Bu dosyadaki sayılar formülle
       üretildiği için etkilenmez.</b></td></tr>
   <tr><td><b>Surviving Sepsis Campaign</b> — Prescott HC, Antonelli M, Alhazzani W, ve ark. <i>Crit Care Med</i> 2026;54(4):725-812 · <i>Intensive Care Med</i> 2026;52:863-936</td><td class="n">2026</td>
-      <td>Noradrenalinin birinci basamak olması ve kanıt düzeyleri, periferden başlama önerisi, vazopressinin artan doz altında eklenmesi, adrenalinin üçüncü ajan ve kardiyak işlev bozukluğunda birinci basamak olması, inotropun vazopresöre ek verilmesi, dobutamin-milrinon karşılaştırmasında veri yetersizliği, levosimendanın ve beta blokerlerin önerilmemesi</td></tr>
+      <td><b>Beta-laktamlarda yükleme sonrası uzatılmış infüzyon</b> (güçlü öneri, yüksek kanıt; 18 randomize çalışma, 9108 hasta, RR 0,91).
+      Noradrenalinin birinci basamak olması ve kanıt düzeyleri, periferden başlama önerisi, vazopressinin artan doz altında eklenmesi, adrenalinin üçüncü ajan ve kardiyak işlev bozukluğunda birinci basamak olması, inotropun vazopresöre ek verilmesi, dobutamin-milrinon karşılaştırmasında veri yetersizliği, levosimendanın ve beta blokerlerin önerilmemesi</td></tr>
   <tr><td>Surviving Sepsis Campaign (önceki sürüm)</td><td class="n">2021</td>
       <td>Vazopressin ekleme eşiğinin sayısal değeri (0,25-0,5 mcg/kg/dk) — 2026 metninde sayısal eşik yoktur</td></tr>
   <tr><td>FDA reçete bilgisi — dopamin, fenilefrin, adrenalin</td><td class="n">—</td>
@@ -1434,6 +1997,56 @@ dozu</b> yan yana durur — amiodaron arrestte <b>300&nbsp;mg itme</b>, stabil v
       <td>Perioperatif doz tablosu: adrenalin doz basamakları, fenilefrin ameliyathane aralığı, esmolol 50-300 mcg/kg/dk, nitrogliserin ve nikardipin değerleri</td></tr>
   <tr><td><a href="https://www.uptodate.com/contents/sedative-analgesia-in-ventilated-adults-medication-properties-dose-regimens-and-adverse-effects" style="color:var(--accent)">UpToDate — Sedative-analgesia in ventilated adults: Medication properties, dose regimens, and adverse effects</a> (Fuchs B, Bellamy C; <b>Topic 1616, sürüm 84.0</b>; konu güncellemesi 06.05.2026; literatür taraması Temmuz 2026; doz tablosu Graphic 79667, sürüm 53.0)</td><td class="n">2026</td>
       <td><b>Sedasyon-analjezi tablosunun tamamı.</b> Propofol, deksmedetomidin, midazolam ve ketaminin yükleme/idame aralıkları, etki başlangıcı ve süresi, titrasyon adımları, kontrendikasyon ve yan etki profilleri; <b>fentanil, remifentanil ve morfinin doz aralıkları</b>; propofol infüzyon sendromunun güncel tanımı, risk etkenleri, tanı çalışması ve ölüm oranı; propofolde trigliserit eşiği ve izlem düzeni; deksmedetomidinde yoksunluk ve etki başlangıcı; midazolamda etkin metabolit ve CYP3A4 etkileşimleri</td></tr>
+  <tr><td><b>UpToDate — Sedative-analgesia in ventilated adults: Management strategies, agent selection,
+      monitoring, and withdrawal</b> (Fuchs B, Bellamy C; <b>Topic 1606, sürüm 74.0</b>; konu güncellemesi
+      <b>14.08.2026</b>) — <b>bu dosyadaki en yeni tarihli kaynak</b></td><td class="n">2026</td>
+      <td>Ajan seçimi: benzodiazepin infüzyonundan kaçınma ve birinci basamak kaldığı iki durum;
+      deksmedetomidin tercihinin dayandığı SCCM 2025 meta-analizi ile bunu doğrulamayan A2B randomize
+      çalışmasının sayıları; antipsikotiklerin önleyici kullanılmaması ve haloperidol-ketiapin ayrımı;
+      <b>kesme ve yoksunluk bölümünün tamamı</b> (azaltma sırası ve hızı, benzodiazepin-opioid-deksmedetomidin
+      yoksunluğunda izlenen yol, klonidin şeması); valproik asidin karbapenemle birlikte kullanılamaması</td></tr>
+  <tr><td><b>ENLS — Emergency Neurological Life Support, Status Epilepticus Protocol</b>, sürüm 6.0
+      (Neurocritical Care Society; Swor DE, Waybright RA; son güncelleme Temmuz 2024)</td><td class="n">2024</td>
+      <td><b>Nöbet bölümündeki dozların tamamı:</b> kas içi midazolam 10 mg, lorazepam 0,1 mg/kg (tavan 4 mg),
+      diazepam 0,15 mg/kg (tavan 10 mg); ikinci basamakta levetirasetam 60 mg/kg, valproik asit 40 mg/kg,
+      fosfenitoin ve fenitoin 20 mg/kg ile hız sınırları; refrakter nöbette midazolam ve propofol yükleme,
+      başlangıç ve idame aralıkları; zehirlenmeye özgü tedaviler ve infüzyonun kademeli azaltılması</td></tr>
+  <tr><td><b>AES — Evidence-Based Guideline: Treatment of Convulsive Status Epilepticus in Children and Adults</b>
+      (Glauser T, Shinnar S, Gloss D, ve ark. <i>Epilepsy Curr</i> 2016;16(1):48-61)</td><td class="n">2016</td>
+      <td>Basamak sırası ve kanıt düzeyleri: damar yolu yokken kas içi midazolamın üstünlüğü (düzey A),
+      ilk dozun bölünmeden verilmesi ve yalnız bir kez tekrarlanması, fosfenitoinin tolere edilebilirlik
+      üstünlüğü (düzey B), ikinci ilacın birinciden, üçüncünün ikinciden belirgin daha az etkili olması,
+      tedavi edilmeyen nöbette solunum sorununun benzodiazepin verilenden daha sık olması (düzey A).
+      <b>Kılavuz halen yürürlüktedir;</b> 08.2026 itibarıyla yerine geçen yeni bir AES ya da NCS tedavi
+      kılavuzu bulunamadı</td></tr>
+  <tr><td><b>ESETT</b> — Kapur J ve ark. <i>N Engl J Med</i> 2019;381:2103-2113 · Chamberlain JM ve ark.
+      <i>Lancet</i> 2020;395:1217-1224</td><td class="n">2019-2020</td>
+      <td>İkinci basamağın üç ajanı arasında etkinlik ve güvenlik farkı bulunmaması; dosyadaki
+      60 / 40 / 20 mg/kg dozlarının ve tavanlarının çalışma protokolüyle aynı olması</td></tr>
+  <tr><td><b>Intensive Care Society — Guidance for: The acute management of status epilepticus in adult
+      patients</b> (Mullhi R, Hayton T, Veenith T, ve ark. <i>J Intensive Care Soc</i> 2025;26(2):249-263)</td><td class="n">2025</td>
+      <td>Süper refrakter nöbet kutusunun tamamı (anesteziğin en az 24 saat sürdürülmesi, tiyopental,
+      ketamin ve izofluran seçenekleri, magnezyum 1,0-1,5 mmol/L, metilprednizolon 1 g/gün 3 gün),
+      konvülziyonsuz status epileptikusun tanımı ve bilinç bozukluğuyla gidenin konvülzif gibi tedavi
+      edilmesi, ağızdan fenitoinin düzensiz emilimi, propofolde 4 mg/kg/saat üzerinde kreatin kinaz
+      ve trigliserit izlemi. <b>Doz ekleri metin değil resimdir; sayılar bu kaynaktan alınmadı</b></td></tr>
+  <tr><td><b>TİTCK ruhsatlı ürün taraması ve kısa ürün bilgileri</b> (etkin madde bazında ürün listeleri;
+      fenitoin sodyum, lorazepam, valproat enjeksiyonluk KÜB'leri)</td><td class="n">2026</td>
+      <td><b>Nöbet bölümünün Türkiye karşılığı:</b> lorazepamın damar içi nüshasının bulunmaması
+      (ruhsatlı iki ürün de ağızda dağılan tablet), fosfenitoinin ruhsatlı ürününün bulunamaması,
+      fenitoin ampulünün 250 mg/5 mL olması ve seyreltmede 10 mg/mL sınırı, valproat flakonunun
+      400 mg olması, valproatın gebelik ve Gebelik Önleme Programı kuralları ile gebelikte süren
+      status epileptikusun kendi ölüm riski. <b>Tarama 27.08.2026'da yapıldı;</b> ruhsat durumu değişebilir</td></tr>
+  <tr><td>FDA reçete bilgisi — seftriakson · kalsiyum glukonat · kalsiyum klorür</td><td class="n">—</td>
+      <td>Seftriakson-kalsiyum kuralının üç basamağı: Y kolundan eşzamanlı verilmemesi (her yaşta),
+      kalsiyumlu çözeltiyle sulandırılmaması, 28 günden büyükte hat yıkanarak ardışık verilebilmesi,
+      yenidoğanda ayrı hattan bile kontrendike olması; ayrıca vankomisin, aminoglikozit ve flukonazolle
+      karışım geçimsizliği</td></tr>
+  <tr><td>FDA reçete bilgisi — vankomisin</td><td class="n">—</td>
+      <td>İnfüzyonun 60 dakikadan kısa sürmemesi ve hızlı uygulamada infüzyon tepkimesi;
+      <b>dosyadaki satırı değiştirmedi</b></td></tr>
+  <tr><td>EMA ürün bilgisi — levetirasetam infüzyon konsantresi</td><td class="n">—</td>
+      <td>Flakon gücü: 100 mg/mL, 5 mL flakon = 500 mg</td></tr>
   <tr><td>EMA polimiksin değerlendirmesi (EMA/643444/2014) ve kolistimetat ürün bilgileri</td><td class="n">2014</td>
       <td>Kolistin birim dönüşümü: 1 MÜ ≈ 80 mg kolistimetat ≈ 33 mg kolistin baz etkinliği</td></tr>
   <tr><td><b>PADIS odaklı güncellemesi</b> — Lewis K, Balas MC, Stollings JL, ve ark. <i>Crit Care Med</i> 2025;53(3):e711-e727 (yönetici özeti e701-e710)</td><td class="n">2025</td>
@@ -1513,10 +2126,39 @@ dozu</b> yan yana durur — amiodaron arrestte <b>300&nbsp;mg itme</b>, stabil v
   değişmedi</b> — propofol, deksmedetomidin, ketamin ve midazolam kaynakla birebir tuttu; düzeltmeler
   <b>izlem kuralı, etkin metabolit ve etkileşim listesinde</b> oldu, opioid satırı doz kazandı ve infüzyon
   sendromu kutusu güncel tanıma göre yeniden yazıldı.
-  <b>Geriye dış kaynakla karşılaştırılmamış tek başlık kaldı:</b> yeni eklenen <b>antimikrobiyal hazırlama
-  çizelgesi</b>; kılavuz denetiminden geçmemiştir ve kendi kutusunda böyle işaretlenmiştir. Bunun dışında
+  <b>Sekizinci turda (v21)</b> ikinci UpToDate konusu okundu — <i>Sedative-analgesia in ventilated adults:
+  Management strategies, agent selection, monitoring, and withdrawal</i> (Topic 1606, sürüm 74.0, 14.08.2026);
+  <b>dosyadaki en yeni tarihli kaynaktır</b>. Ajan seçimi kutusu buna göre yeniden yazıldı: deksmedetomidin
+  tercihinin arkasındaki meta-analiz sayıları ile <b>bunu doğrulamayan A2B randomize çalışması yan yana kondu</b>.
+  Aynı turda <b>üç yeni tablo</b> eklendi — deliryumda antipsikotikler, nonopioid analjezikler, ve sedasyon
+  tablosuna lorazepam ile diazepam satırları — ayrıca <b>kesme ve yoksunluk</b> kutusu yazıldı.
+  Tüm doz değerleri Topic 1616'nın doz tablosundan (Graphic 79667) alınmıştır.
+  <b>Dokuzuncu turda (v22)</b> dosyaya <b>yeni bir bölüm eklendi</b>: ateşi olmayan jeneralize nöbet.
+  Bu bir <b>ekleme turudur</b>, denetim turu değil — mevcut hiçbir satıra dokunulmadı. Dozlar
+  <b>ENLS 6.0</b> (Neurocritical Care Society, Temmuz 2024) belgesinden alındı; basamak sırası ve kanıt
+  düzeyleri <b>AES 2016</b>'dan, ikinci basamağın eşdeğerliği <b>ESETT</b>'ten, süper refrakter ve
+  konvülziyonsuz status epileptikus ifadeleri <b>ICS 2025</b> rehberinden geldi. <b>Bu bölüm henüz
+  UpToDate ile karşılaştırılmadı;</b> ayrıca lorazepam ile fosfenitoinin Türkiye'de bulunabilirliği ve
+  valproatın gebelikteki durumu <b>doğrulanmadı</b> rozetiyle işaretlidir.
+  <b>Onuncu turda (v23)</b> nöbet bölümünün <b>doğrulanmamış üç ifadesi kapatıldı</b>: TİTCK ruhsatlı
+  ürün taraması ve kısa ürün bilgileriyle lorazepamın damar içi nüshasının bulunmadığı, fosfenitoinin
+  ruhsatlı ürününün bulunmadığı ve valproatın gebelikteki kuralları doğrulandı. Bu, <b>bölümün ilk iki
+  basamağının Türkiye karşılığını değiştirdi</b> ve kendi kutusuna yazıldı; ayrıca fenitoin, valproat ve
+  levetirasetamın ampul/flakon güçleri satırlara eklendi. <b>Hiçbir kılavuz dozu değişmedi.</b>
+  <b>On birinci turda (v24)</b> antimikrobiyal hazırlama çizelgesine <b>ilk kez dış kaynakla bakıldı</b>.
+  <b>SSC 2026'nın tam metni serbest erişilebilir bir nüshada bulundu</b> ve okundu; kılavuzun 33 numaralı
+  önerisi — sepsiste beta-laktamların yükleme sonrası <b>uzatılmış infüzyonla</b> verilmesi, <b>güçlü öneri
+  ve yüksek kanıt</b> — çizelgeye kendi kutusuyla girdi ve <b>piperasilin-tazobaktam satırı düzeltildi</b>.
+  Ayrıca <b>seftriakson-kalsiyum kuralı</b> FDA reçete bilgisiyle karşılaştırıldı ve tek cümlelik hâli
+  <b>üç basamaklı doğru kurala</b> çevrildi; <b>vankomisin satırı değişmedi</b>.
+  <b>Kılavuzun ek dosyaları (SDC 1-8) açılamadı:</b> sekizi de yayıncının ödemeli bağlantısında
+  (<code>links.lww.com/CCM/H904-H911</code>) ve 402 döndürüyor. Bunlar GRADE kanıt profilleridir,
+  sayısal doz taşımazlar; ana metin okunduğu için kayıp sınırlıdır.
+  <b>Geriye kısmen denetlenmiş tek başlık kaldı:</b> <b>antimikrobiyal hazırlama
+  çizelgesinin otuz altı satırı</b>; hâlâ tek kaynaklıdır ve kendi kutusunda böyle işaretlenmiştir. Bunun dışında
   yalnız iki cümle işaretlidir: rokuronyumun karaciğer yetmezliğinde uzaması ve infüzyon sendromunda
   Brugada benzeri EKG örüntüsü — ikisi de bulundukları yerde <b>doğrulanmadı</b> rozetiyle durur.
+  <b>v22'de nöbet bölümüyle gelen üç işaret, v23'te TİTCK taramasıyla kapatıldı.</b>
   <b>Bu başlık dışında</b> dosyadaki sayıların ve kural ifadelerinin tamamı en az bir kez dış
   kaynakla karşılaştırılmıştır. Denetim üç düzeltme ve iki çelişki ortaya çıkardı; ikisi
   (potasyumun periferik derişimi, Y-seti listesi) <b>kurum belgesiyle yayımlanmış çalışmalar
@@ -1527,13 +2169,163 @@ dozu</b> yan yana durur — amiodaron arrestte <b>300&nbsp;mg itme</b>, stabil v
 </div>
 </div>
 
-<h2>Değişiklik günlüğü</h2>
+<h2 id="b-gunluk">Değişiklik günlüğü</h2>
 <details class="kat">
   <summary><span class="bas">Sürüm sürüm ne değişti</span><span class="roz"></span><span class="aciklama">Hangi sayının ne zaman ve neden düzeltildiğinin dökümü. Günlük uzundur, bu yüzden kapalı gelir; <b>dokununca açılır.</b> Bir sayıya güvenip güvenmeyeceğinizi tartışıyorsanız burası ve Kaynaklar bölümü birlikte okunur.</span></summary>
   <div class="ic">
 <div class="card tbl">
 <table>
   <tr class="hdr"><th>Tarih</th><th>Değişiklik</th></tr>
+  <tr><td class="n">28.08.2026</td><td>v25 — <b>Biçim turu; hiçbir doz değeri, hiçbir kaynak rozeti ve
+      hiçbir çizelge hücresi değişmedi.</b> Dosya makineyle baştan sona denetlendi; iki kusur bulundu ve
+      düzeltildi. <b>Bir: yazı tipi altkümesinde alt çizgi yoktu.</b> Gömülü nüshalar belgede geçen
+      karakterlere altkümelendiği için 110 karakter taşıyor; nöbet çizelgesi kutusundaki
+      <code>ROUND_HALF_UP</code> ifadesindeki alt çizgi bu kümede bulunmadığından yedek yazı tipiyle
+      basılıyordu. İfade kod etiketine alındı; kod etiketi zaten tek aralıklı yazı tipi kullandığı için
+      sorun ortadan kalktı ve dosyadaki diğer teknik terimlerle tutarlı hale geldi.
+      <b>İki: baskı bloğundaki yorum yanıltıcıydı.</b> Yorum, gezinme katmanını gizleyen kuralın en sondaki
+      blokta durması gerektiğini söylüyordu; kural ortadaki blokta duruyor ve <code>!important</code>
+      taşıdığı için fiilen çalışıyor. Yorum gerçeğe uyacak biçimde yeniden yazıldı — <b>kuralın kendisine
+      dokunulmadı.</b> <b>Bu sürümde çalıştırılan denetimler:</b> kiloya göre çizelgelerin 534 hücresi
+      formülle yeniden hesaplandı (yarımlar yukarı yuvarlanarak) ve hepsi uyuştu; kilodan bağımsız on satır
+      ile nöbet yükleme tablosunun tavan mantığı ayrıca denetlendi; <b>on beş ilacın her birinde hesaplayıcının
+      ürettiği değer ile çizelgenin 70 kg hücresi karşılaştırıldı ve aynı çıktı</b> — iki ayrı üretim yolu
+      birbirini doğruladı; etiket dengesi tam, 59 kimlikte çakışma yok, on üç başlık ile on üç içindekiler
+      bağı birebir eşleşiyor. <b>Renk kontrastı ölçüldü:</b> koyu temada gövde 16,1:1, soluk metin ve
+      vurgu 7,2:1; açık temada tümü 5:1 üzerinde — her iki tema da WCAG AA eşiğini geçiyor.
+      <b>Doz alanının geçersiz girdi davranışı sınandı:</b> virgüllü, boş, harfli ve negatif değerlerin
+      hepsinde sonuç alanı boş kalıyor ve "Alanları doldurun" uyarısı çıkıyor — <b>yanlış bir sayı
+      üretilmesi mümkün değil.</b></td></tr>
+  <tr><td class="n">27.08.2026</td><td>v24 — <b>Antimikrobiyal çizelgesine ilk kez dış kaynakla bakıldı;
+      iki satır düzeltildi, bir kutu eklendi.</b> Bu bir <b>denetim turudur</b>; biçime dokunulmadı, yeni bölüm
+      eklenmedi. <b>Kaynak: SSC 2026'nın tam metni serbest erişilebilir bir nüshada bulundu</b> ve okundu —
+      kılavuzun ödemeli ek dosyaları (SDC 1-8, <code>links.lww.com/CCM/H904-H911</code>) <b>402 döndürdüğü için
+      açılamadı</b>; bunlar GRADE kanıt profilleridir ve sayısal doz taşımazlar.
+      <b>Bir: beta-laktamlarda uzatılmış infüzyon.</b> Kılavuzun 33 numaralı önerisi, sepsis ve septik şokta
+      yükleme dozundan sonra uzatılmış ya da sürekli infüzyonu <b>güçlü öneri ve yüksek kanıtla</b> destekliyor
+      (18 randomize çalışma, 9108 hasta, kısa dönem ölümde RR 0,91; bin hastada 25 daha az ölüm).
+      Çizelge bunu taşımıyordu: <b>piperasilin-tazobaktam satırı "sepsiste uzatılmış infüzyon ayrı bir karardır"
+      diyordu</b>, oysa artık bir karar değil, öneri. Satır düzeltildi ve ilkeyi anlatan kutu eklendi —
+      uzatılmış infüzyonun tanımı (doz aralığının en az yarısı), yükleme dozunun atlanmaması ve hattın uzun süre
+      işgal edilmesi nedeniyle <b>Y kolu geçimliliğinin burada daha da önemli</b> olduğu yazıldı.
+      <b>İki: seftriakson-kalsiyum.</b> Çizelgede tek cümle vardı — "kalsiyum içeren çözeltilerle eşzamanlı
+      verilmez". FDA reçete bilgisine göre kural <b>üç basamaklıdır</b> ve tek cümle hem eksik hem yanıltıcıydı:
+      Y kolundan eşzamanlı verme her yaşta yasak, kalsiyumlu çözeltiyle sulandırma da yasak, ama
+      <b>28 günden büyük hastada hat yıkanarak ardışık verilebilir</b>; buna karşılık <b>yenidoğanda ayrı hattan
+      ve ayrı zamanda bile kontrendikedir</b> ve bu kısıt ölümlerden doğmuştur. Satıra ayrıca vankomisin,
+      aminoglikozit ve flukonazolle karışım geçimsizliği eklendi.
+      <b>Üç: vankomisin değişmedi.</b> Reçete bilgisi de en az 60 dakika ve 10 mg/dakika sınırını veriyor;
+      dosyadaki 60-120 dakika, ≤10 mg/dakika ve en çok 5 mg/mL değerleri kaynakla tuttu.
+      <b>Denetim kısmi kaldı:</b> çizelgenin <b>otuz altı satırı</b> hâlâ tek kaynaklıdır ve kutusunda
+      <i>doğrulanmadı — 36 satır</i> diye işaretlidir. <b>Hiçbir seyreltme hacmi ya da derişim değeri
+      değişmedi.</b></td></tr>
+  <tr><td class="n">27.08.2026</td><td>v23 — <b>Nöbet bölümünün üç doğrulanmamış ifadesi TİTCK ile
+      kapatıldı; sonuç ilk iki basamağı değiştirdi.</b> Bu bir <b>denetim turudur</b>; yeni bölüm
+      eklenmedi, biçime dokunulmadı, <b>hiçbir kılavuz dozu değişmedi</b>.
+      <b>Bir:</b> lorazepamın Türkiye'de <b>damar içi nüshası yok</b> — ruhsatlı iki ürün de ağızda dağılan
+      tablet (Ativan Expidet 1 ve 2,5 mg). v22'de bu satır "birinci seçenek" diye duruyordu ve yanında
+      yalnız <i>doğrulanmadı</i> rozeti vardı; artık satır <b>Türkiye'de uygulanamaz</b> diye işaretli.
+      <b>İki:</b> <b>fosfenitoinin ruhsatlı ürünü bulunamadı</b>; etkin madde taramasında yalnız fenitoin
+      sodyum nüshaları çıkıyor. Bunun doğrudan bir güvenlik sonucu var: fosfenitoinin 150 mg/dakika hız
+      sınırı yerine fenitoinin <b>50 mg/dakika</b> sınırı geçerlidir ve bu satıra yazıldı.
+      <b>Üç:</b> valproatın gebelik ifadesi kısa ürün bilgisiyle değiştirildi — uygun alternatif varsa
+      gebelikte, Gebelik Önleme Programı koşulları sağlanmadıkça doğurganlık çağındaki kadında
+      <b>kontrendike</b>; ancak ürün bilgisi <b>gebelikte süren tonik-klonik status epileptikusun kendi
+      ölüm riskini</b> de yazar ve istisnai kullanımı öngörür. v22'deki "kaçınılır" ifadesi bu ayrımı
+      taşımıyordu. <b>Yeni kutu:</b> "Türkiye'de basamaklar böyle işlemiyor" — pratik sıra
+      (damar yolu varsa diazepam, yoksa kas içi midazolam; ikinci basamakta levetirasetam, valproat ya da
+      fenitoin) tek yerde toplandı. <b>Ampul ve flakon güçleri eklendi:</b> fenitoin 250 mg/5 mL
+      (seyreltmede 10 mg/mL sınırı), valproat 400 mg flakon, levetirasetam 500 mg flakon —
+      tavan dozların kaç ampul ettiği satırlarda yazıyor. <b>Nöbet bölümünde artık doğrulanmadı rozeti
+      taşıyan ifade kalmadı;</b> bölüm hâlâ UpToDate ile karşılaştırılmadı.</td></tr>
+  <tr><td class="n">27.08.2026</td><td>v22 — <b>Yeni bölüm: ateşi olmayan jeneralize nöbet
+      (status epileptikus).</b> Bu bir <b>ekleme turudur</b>; <b>hiçbir mevcut doz değeri değişmedi</b>,
+      hiçbir tabloya dokunulmadı, biçim değişikliği yapılmadı. Bölüm entübasyon ile kardiyak arrest
+      arasına, ayrı başlık olarak kondu. <b>Kaynak:</b> dozların tamamı <b>ENLS Status Epilepticus
+      Protocol sürüm 6.0</b> (Neurocritical Care Society, Temmuz 2024); basamak sırası ve kanıt düzeyleri
+      <b>AES 2016</b>; ikinci basamağın üç ajanının eşdeğerliği <b>ESETT</b>; süper refrakter ve
+      konvülziyonsuz status epileptikus <b>ICS 2025</b>. <b>Neden bu kaynak:</b> AES 2016 hâlâ yürürlükteki
+      kılavuzdur ama doz algoritması yalnız resim olarak yayımlanmıştır; ENLS aynı kurumun metin hâlindeki
+      ve daha yeni protokolüdür. <b>Bölümün içeriği:</b> üç basamak (benzodiazepin — levetirasetam,
+      valproik asit, fosfenitoin ya da fenitoin — refrakterde midazolam ya da propofol infüzyonu),
+      <b>nöbet dozu ile sedasyon dozunun ayrımı</b> (midazolamda üst sınır yirmi kat, propofolde dört kat),
+      sık yapılan üç hata, zehirlenmeye özgü tedaviler, konvülziyonsuz status epileptikus ve süper
+      refrakter kutusu. <b>Kiloya göre yeni çizelge eklendi:</b> yükleme dozları miligram olarak,
+      refrakter midazolam ve propofol infüzyonları mL/saat olarak — <b>162 hücre</b>, yarımlar yukarı
+      yuvarlanarak ayrı bir betikle hesaplandı. <b>Doğrulanmadı rozeti taşıyan üç yeni ifade:</b>
+      lorazepamın ve fosfenitoinin Türkiye'de bulunabilirliği, valproatın gebelikteki durumu.
+      <b>Bu bölüm henüz UpToDate ile karşılaştırılmadı.</b></td></tr>
+  <tr><td class="n">27.08.2026</td><td>v21 — <b>İkinci UpToDate konusu okundu; üç yeni tablo, bir yeni kutu
+      ve bir kanıt düzeltmesi.</b> Kaynak: <i>Sedative-analgesia in ventilated adults: Management strategies,
+      agent selection, monitoring, and withdrawal</i> (<b>Topic 1606, sürüm 74.0, konu güncellemesi
+      14.08.2026</b>) — bu dosyadaki en yeni tarihli kaynaktır.
+      <b>Ajan seçimi kutusu tek yönlü kanıt sunuyordu, düzeltildi.</b> Kutu v20'ye kadar yalnız
+      deksmedetomidin tercihini yazıyordu; yeni konu <b>2025'in iki ayrı sonucunu</b> yan yana veriyor.
+      SCCM'nin 29 randomize çalışmalık meta-analizinde deksmedetomidin deliryumu azaltıyor (RR 0,55),
+      süresini ~26 saat kısaltıyor, ama <b>ventilasyon süresine ve ölüme etkisi yok</b> ve bradikardiyi
+      artırıyor (RR 1,65). Buna karşılık <b>A2B çalışması</b> (41 yoğun bakım, 1404 hasta) ekstübasyona
+      kadar geçen sürede fark bulmadı (HR 1,09), deliryum ve koma oranları benzerdi, <b>ajitasyon
+      deksmedetomidinle daha sıktı</b> ve <b>ağır bradikardi %33'e karşı %20</b> görüldü. Kutuya
+      pratik karşılığı yazıldı: tercih <b>deliryum önceliğine dayanır</b>, gösterilmiş bir sağkalım
+      üstünlüğüne değil. Ayrıca benzodiazepinin birinci basamak kaldığı iki durum açıkça yazıldı
+      (alkol-madde yoksunluğu, daha derin sedasyon gerektiren hastalık ağırlığı).
+      <b>Sedasyon tablosuna lorazepam ve diazepam eklendi</b> — ikisi de propilen glikol taşır;
+      lorazepamda propilen glikol zehirlenmesi (0,1 mg/kg/saat üzeri, osmolar açık &gt;10 mmol/L) ve
+      diazepamda flebit ile sürekli infüzyona uygunsuzluk ayrıca yazıldı.
+      <b>Yeni tablo: deliryumda antipsikotikler</b> — haloperidol, olanzapin, ketiapin, ziprasidon.
+      İki kural kendi kutusunda: <b>önleyici verilmezler</b> (beş randomize çalışmanın meta-analizinde
+      deliryumsuz gün, ölüm, ventilasyon süresi ve yatış süresi değişmedi) ve <b>QTc 500 msn'yi aşarsa
+      hiçbiri verilmez</b>. Bu dosyada birlikte bulunması olası QT uzatan ilaçlar (amiodaron, makrolidler,
+      florokinolonlar, azoller, ondansetron, metadon) adıyla sayıldı.
+      <b>Yeni tablo: nonopioid analjezikler</b> — parasetamol, ketorolak, ibuprofen, gabapentin, pregabalin.
+      Ketorolak ve ibuprofenin kaçınma listesi ile koroner baypas cerrahisindeki kontrendikasyonu,
+      parasetamolde karaciğer yetmezliğinde ≤2 g/gün sınırı yazıldı.
+      <b>Yeni kutu: kesme ve yoksunluk.</b> Ağrı değerlendirilemiyorsa <b>opioid en sona bırakılır</b>;
+      7 gün ve altında saatler içinde kesmek kabul edilebilir, 7 günü aşmış ve taşiflaksi varsa
+      <b>günde %10-25</b> azaltılır. Yoksunluk hastaların üçte birine kadar görülür; benzodiazepin
+      yoksunluğunda aralıklı lorazepam (0,5-1 mg, 6-12 saatte bir), deksmedetomidin yoksunluğunda
+      <b>ağızdan klonidin 0,1-0,3 mg, 6 saatte bir</b> ve 5-6 günde aralık açılarak azaltma.
+      Valproik asidin <b>karbapenem alan hastaya verilemeyeceği</b> eklendi.
+      <b>Kapsam kararı yazıldı:</b> metilen mavisi, anjiyotensin II ve ağızdan midodrin bu dosyada
+      <b>kasıtlı olarak yoktur</b> — SSC 2026 üçü için de sayısal doz vermiyor ve üçü de KİH-02'de
+      geçmiyor, yani dosyanın iki dayanağı da doz üretmiyor. Yokluğu unutulmuşluk değil, karardır.
+      <b>Opioid satırı üç ayrı satır olarak kaldı</b> (v16'da bölünmüştü): üç ilacın dozu, etki
+      başlangıcı ve organ yetmezliğindeki davranışı farklıdır ve tablonun düzeni satır başına bir ilaçtır.
+      <b>Hiçbir mevcut doz değeri değişmedi</b> — bu tur yalnız ekleme ve bir kanıt düzeltmesidir.</td></tr>
+  <tr><td class="n">27.08.2026</td><td>v20 — <b>Sol sütun kaldırıldı, üst çubuk metin sütunuyla hizalandı,
+      torsades de pointes karşılığı yazıldı.</b>
+      <b>Yerleşim:</b> v19'da masaüstünde içindekiler solda sürekli açık duruyordu; gövde sütununu daraltıp
+      satır sayısını artırdığı için kaldırıldı. Metin sütunu artık <b>her ekranda 860 pikselde</b> kalıyor ve
+      içindekiler her genişlikte üst çubuktaki başlığa dokununca <b>yandan açılıyor</b>. Genişliğe bakan
+      koşullar hem stilden hem betikten çıkarıldı.
+      <b>Hizalama:</b> üst çubuğun iç genişliği ve yan boşluğu gövdeninkiyle birebir eşitlendi (860 piksel,
+      aynı kenar payı); içindekiler düğmesi ile arama kutusu artık gövde metniyle aynı hizada başlayıp bitiyor.
+      <b>Terim:</b> <b>burulmalı VT</b> ifadesi korundu — Türkçe kardiyoloji yazınında yerleşik karşılık budur —
+      ancak yanına <b>(torsades de pointes)</b> parantezi eklendi. Üç yerde: magnezyum satırında, arrestte
+      verilmeyecekler kutusunda ve levosimendanın kontrendikasyonlarında. Değişiklik günlüğündeki geçmiş
+      kayıtlara dokunulmadı. <b>Hiçbir doz değeri değişmedi.</b></td></tr>
+  <tr><td class="n">27.08.2026</td><td>v19 — <b>Gezinme: içindekiler sütunu, üste sabitlenen bölüm
+      başlığı ve arama. İçerikte hiçbir değişiklik yoktur.</b>
+      <b>Üst çubuk</b> sayfayla birlikte kaymaz; içinde bulunduğunuz bölümün adını sürekli gösterir.
+      <b>Masaüstünde</b> (1100 piksel ve üzeri) içindekiler solda sürekli açık bir sütundur, sayfa
+      kaydıkça yapışık kalır ve bulunulan başlık işaretlenir. <b>Dar ekranda</b> aynı liste üst
+      çubuktaki başlığa dokununca çekmece olarak açılır. On iki bölüm başlığına <b>kalıcı kimlik</b>
+      verildi (<code>#b-hesapla</code>, <code>#b-aritmi</code> gibi), böylece doğrudan bir bölüme
+      bağlantı verilebiliyor.
+      <b>Arama</b> üst çubuktadır ve belgenin kendisinden kurulan bir dizinde çalışır: bölüm
+      başlıkları, çizelge başlıkları ve ilaç satırları. Türkçe harfler karşılaştırmadan önce
+      sadeleştirilir — "İ" yazan bir satır "i" aramasında da bulunur. Sonuç katlanmış bir bölümün
+      içindeyse <b>o bölüm kendiliğinden açılır</b> ve satır kısa süre işaretlenir. Değişiklik
+      günlüğünün tarih sütunu ile numaralı satırlar dizin dışında tutuldu.
+      <b>Kurum rehberinden aktarılan ek çizelgeler artık açık geliyor</b>, katlanır olmaktan çıktı;
+      açıklama cümlesi buna göre düzeltildi. Kiloya göre çizelgeler kapalı kalmayı sürdürüyor —
+      belgeyi baştan sona tararken araya girmemesi için.
+      <b>Bir kırılganlık düzeltildi:</b> gezinme kodu ilk yazıldığında hesaplayıcının kurulumundan
+      önce çalışıyordu; desteklenmeyen tek bir tarayıcı çağrısı (<code>matchMedia</code>) tüm
+      kurulumu düşürüp <b>çipleri de bağlanmamış bırakıyordu</b>. Gezinme katmanı artık en sona
+      alındı ve korumaya sarıldı; çökse bile hesap alanı, çipler ve bağlantılar çalışır.
+      <b>Bağlantı hedefleri</b> üst çubuğun altında kalmasın diye tüm kimlikli öğelere kaydırma
+      payı verildi. Üst çubuk, içindekiler ve perde <b>baskıda görünmez</b>.</td></tr>
   <tr><td class="n">27.08.2026</td><td>v18 — <b>Yazı tipinin kaynağı değişti; görünümde ve içerikte
       değişiklik yoktur.</b> v17'de gömülen nüsha IBM'in kod deposunun ana dalından alınmıştı
       (<b>sürüm 3.000</b>, aile adı "IBM Plex Sans Var"). Yerine <b>Google Fonts dağıtımının 09.09.2025
@@ -1808,7 +2600,7 @@ dozu</b> yan yana durur — amiodaron arrestte <b>300&nbsp;mg itme</b>, stabil v
 </details>
 
 <div class="foot">
-  <b>Pompa Hızı Çizelgesi · paylaşım sürümü v18 · 27.08.2026</b><br>
+  <b>Pompa Hızı Çizelgesi · paylaşım sürümü v25 · 27.08.2026</b><br>
   Hazırlayan: Dr. Tacim Yılmaz. Kişisel çalışma notlarından türetilmiştir; hiçbir kurumun ya da
   derneğin resmî belgesi değildir.<br><br>
   <b>Kaynaklar.</b> Seyreltmeler: kurum içi bir eğitim ve araştırma hastanesinin <b>Ameliyathane ve Yoğun Bakımlar İlaç Hazırlama Rehberi, KİH-02, 10.12.2024, revizyon 00</b> (kurum adı bu paylaşım sürümünde anonimleştirilmiştir; belge tek bir hastaneye aittir, ulusal standart değildir). Arrest ve bradiaritmi dozları
@@ -1825,6 +2617,7 @@ dozu</b> yan yana durur — amiodaron arrestte <b>300&nbsp;mg itme</b>, stabil v
   protokolüne göre verilir. Kullanmadan önce kendi biriminizin protokolüyle doğrulayın.</b>
 </div>
 
+</main>
 </div>
 
 <script>
@@ -2042,7 +2835,185 @@ function dozOynat(yon){
   window.addEventListener("hashchange", function(){ acVeGit(location.hash.slice(1)); });
   if (location.hash) acVeGit(location.hash.slice(1));
 
+
   sec(0);
+
+  /* Gezinme katmanı en sona alındı ve korumaya sarıldı: buradaki bir hata
+     hesaplayıcıyı, çipleri ve bağlantı davranışını düşürmemeli. */
+  try {
+  /* ————— Üst çubuk, içindekiler ve arama (v19) —————
+     Betik kapalı görüntüleyicide içindekiler durağan liste olarak zaten
+     çalışır (çekmece :target ile açılır); buradaki kod yalnız üç şey ekler:
+     bulunulan bölümü üste yazmak, sütunda işaretlemek ve aramayı çalıştırmak. */
+  document.documentElement.classList.add("js");
+
+  var ustEl   = document.getElementById("ust");
+  var tocEl   = document.getElementById("toc");
+  var tocBtn  = document.getElementById("tocBtn");
+  var perde   = document.getElementById("tocPerde");
+  var ustBas  = document.getElementById("ustBaslik");
+  var bolumler = [].slice.call(document.querySelectorAll("main.ana h2[id]"));
+  var tocBaglar = [].slice.call(document.querySelectorAll("#tocListe a"));
+
+  function ustYuk(){ return ustEl ? ustEl.getBoundingClientRect().height : 52; }
+  /* v19'da masaüstünde sürekli açık bir sol sütun vardı ve genişlik sorgusuyla
+     ayrılıyordu. v20'de sütun kaldırıldı: içindekiler her ekranda çekmecedir,
+     bu yüzden genişliğe bakan dal da kalktı. */
+
+  function cekmece(ac){
+    document.body.classList.toggle("toc-acik", ac);
+    tocBtn.setAttribute("aria-expanded", ac ? "true" : "false");
+    if (perde) perde.hidden = !ac;
+    if (ac && location.hash === "#toc") history.replaceState(null, "", " ");
+  }
+  tocBtn.addEventListener("click", function(e){
+    e.preventDefault();
+    cekmece(!document.body.classList.contains("toc-acik"));
+  });
+  if (perde) perde.addEventListener("click", function(e){ e.preventDefault(); cekmece(false); });
+  var kapatBag = document.querySelector(".toc-kapat");
+  if (kapatBag) kapatBag.addEventListener("click", function(e){ e.preventDefault(); cekmece(false); });
+  tocBaglar.forEach(function(a){
+    a.addEventListener("click", function(){ setTimeout(function(){ cekmece(false); }, 0); });
+  });
+
+  /* Bulunulan bölüm: üst çubuğa yazılır, sütunda işaretlenir. */
+  var sonAcik = null;
+  function bolumIsaretle(){
+    var sinir = ustYuk() + 16, bulunan = null;
+    for (var i = 0; i < bolumler.length; i++){
+      if (bolumler[i].getBoundingClientRect().top <= sinir) bulunan = bolumler[i]; else break;
+    }
+    var kimlik = bulunan ? bulunan.id : null;
+    if (kimlik === sonAcik) return;
+    sonAcik = kimlik;
+    ustBas.textContent = bulunan ? bulunan.textContent.trim() : "Pompa hızı çizelgesi";
+    tocBaglar.forEach(function(a){
+      var etkin = kimlik && a.getAttribute("href") === "#" + kimlik;
+      a.classList.toggle("acik", !!etkin);
+      if (etkin){ a.setAttribute("aria-current", "true"); goster(a); }
+      else a.removeAttribute("aria-current");
+    });
+  }
+  function goster(a){
+    if (!document.body.classList.contains("toc-acik")) return;
+    var k = tocEl.getBoundingClientRect(), e = a.getBoundingClientRect();
+    if (e.top < k.top + 4) tocEl.scrollTop -= (k.top + 4 - e.top);
+    else if (e.bottom > k.bottom - 4) tocEl.scrollTop += (e.bottom - k.bottom + 4);
+  }
+  var bekliyor = false;
+  function tetikle(){
+    if (bekliyor) return; bekliyor = true;
+    requestAnimationFrame(function(){ bekliyor = false; bolumIsaretle(); });
+  }
+  window.addEventListener("scroll", tetikle, {passive:true});
+  window.addEventListener("resize", tetikle);
+  bolumIsaretle();
+
+  /* ————— Arama —————
+     Dizin belgenin kendisinden kurulur: bölüm başlıkları, çizelge başlıkları
+     ve ilaç satırlarının ilk hücresi. Türkçe harfler karşılaştırma için
+     sadeleştirilir, yoksa "İ" yazan "i" aramasında bulunamaz. */
+  var ARA_HARF = {"ı":"i","İ":"i","I":"i","ş":"s","Ş":"s","ğ":"g","Ğ":"g","ç":"c","Ç":"c",
+                  "ö":"o","Ö":"o","ü":"u","Ü":"u","â":"a","î":"i","û":"u","’":"'","“":'"',"”":'"'};
+  function sade(x){
+    return String(x).replace(/[ıİIşŞğĞçÇöÖüÜâîû’“”]/g, function(c){ return ARA_HARF[c] || c; })
+                    .toLowerCase().replace(/\s+/g, " ").trim();
+  }
+
+  var dizin = [], sayac = 0;
+  function kimlikVer(el, on){
+    if (!el.id) el.id = on + "-" + (++sayac);
+    return el.id;
+  }
+  bolumler.forEach(function(h){ dizin.push({ad:h.textContent.trim(), tur:"Bölüm", id:h.id}); });
+  [].forEach.call(document.querySelectorAll("main.ana tr.sec th"), function(th){
+    var ad = th.textContent.replace(/\s+/g, " ").trim();
+    dizin.push({ad:ad, tur:"Çizelge", id:kimlikVer(th.parentNode, "cz")});
+  });
+  [].forEach.call(document.querySelectorAll("main.ana table tr"), function(tr){
+    if (tr.classList.contains("sec") || tr.classList.contains("hdr")) return;
+    var h = tr.querySelector("td");
+    if (!h) return;
+    var ad = h.textContent.replace(/\s+/g, " ").trim();
+    /* Sayıyla başlayanlar elenir: değişiklik günlüğünün tarih sütunu ve
+       "en sık üç hata" tablosunun 1-2-3 numaraları dizine girmemeli. */
+    if (!ad || ad.length < 3 || ad.length > 60 || /^[0-9]/.test(ad)) return;
+    /* Etiket olarak bulunduğu çizelgenin başlığı yazılır; "Satır" demek
+       aramada hangi tablodan geldiğini göstermiyordu. */
+    var tablo = tr.closest ? tr.closest("table") : null;
+    var bas = tablo && tablo.querySelector("tr.sec th");
+    var etiket = bas ? bas.textContent.replace(/\s+/g, " ").split(" · ")[0].trim() : "";
+    if (etiket.length > 42) etiket = etiket.slice(0, 40) + "…";
+    dizin.push({ad:ad, tur:etiket || "Satır", id:kimlikVer(tr, "sr")});
+  });
+  dizin.forEach(function(k){ k.sade = sade(k.ad); });
+
+  var araEl = document.getElementById("ara"), sonucEl = document.getElementById("araSonuc");
+  var sonuclar = [], imlec = -1;
+
+  function sonucKapat(){ sonucEl.hidden = true; sonucEl.innerHTML = ""; sonuclar = []; imlec = -1; }
+
+  function araYap(){
+    var q = sade(araEl.value);
+    if (q.length < 2){ sonucKapat(); return; }
+    var bas = [], ic = [];
+    for (var i = 0; i < dizin.length && bas.length + ic.length < 60; i++){
+      var p = dizin[i].sade.indexOf(q);
+      if (p === 0) bas.push(dizin[i]); else if (p > 0) ic.push(dizin[i]);
+    }
+    sonuclar = bas.concat(ic).slice(0, 8);
+    if (!sonuclar.length){
+      sonucEl.innerHTML = '<div class="ara-bos">Eşleşme yok.</div>';
+      sonucEl.hidden = false; imlec = -1; return;
+    }
+    sonucEl.innerHTML = sonuclar.map(function(k){
+      return '<a href="#' + k.id + '">' + k.ad.replace(/[<>&]/g, "") +
+             '<span class="tur">' + k.tur + '</span></a>';
+    }).join("");
+    sonucEl.hidden = false; imlec = 0; imlecCiz();
+  }
+  function imlecCiz(){
+    var a = sonucEl.querySelectorAll("a");
+    for (var i = 0; i < a.length; i++) a[i].classList.toggle("secili", i === imlec);
+  }
+  function git(k){
+    sonucKapat(); araEl.blur();
+    cekmece(false);
+    var el = document.getElementById(k.id);
+    if (!el) return;
+    var d = el.closest ? el.closest("details") : null;
+    while (d){ d.open = true; d = d.parentElement && d.parentElement.closest ?
+        d.parentElement.closest("details") : null; }
+    if (el.scrollIntoView) el.scrollIntoView({block:"start"});
+    el.classList.remove("vurgu"); void el.offsetWidth; el.classList.add("vurgu");
+    setTimeout(function(){ el.classList.remove("vurgu"); }, 1900);
+  }
+  araEl.addEventListener("input", araYap);
+  araEl.addEventListener("focus", araYap);
+  araEl.addEventListener("keydown", function(e){
+    if (e.key === "Escape"){ sonucKapat(); araEl.blur(); return; }
+    if (!sonuclar.length) return;
+    if (e.key === "ArrowDown"){ e.preventDefault(); imlec = (imlec + 1) % sonuclar.length; imlecCiz(); }
+    else if (e.key === "ArrowUp"){ e.preventDefault(); imlec = (imlec - 1 + sonuclar.length) % sonuclar.length; imlecCiz(); }
+    else if (e.key === "Enter"){ e.preventDefault(); if (imlec >= 0) git(sonuclar[imlec]); }
+  });
+  sonucEl.addEventListener("click", function(e){
+    var a = e.target.closest ? e.target.closest("a") : null;
+    if (!a) return;
+    e.preventDefault();
+    var i = [].indexOf.call(sonucEl.querySelectorAll("a"), a);
+    if (i >= 0) git(sonuclar[i]);
+  });
+  document.addEventListener("click", function(e){
+    if (!sonucEl.hidden && !e.target.closest(".ust-ara")) sonucKapat();
+  });
+  document.addEventListener("keydown", function(e){
+    if (e.key === "Escape" && document.body.classList.contains("toc-acik")) cekmece(false);
+  });
+  } catch (hata) {
+    if (window.console && console.warn) console.warn("Gezinme katmanı kurulamadı:", hata);
+  }
 })();
 </script>
 </body>
