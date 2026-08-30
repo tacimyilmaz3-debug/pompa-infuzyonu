@@ -7,7 +7,7 @@
 <meta name="theme-color" content="#f6f8fb" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
 <meta name="format-detection" content="telephone=no">
-<title>Pompa Hızı Çizelgesi v25 — Dr. Tacim Yılmaz</title>
+<title>Pompa Hızı Çizelgesi v27 — Dr. Tacim Yılmaz</title>
 <style>
 /* IBM Plex Sans 3.201 (Google Fonts dagitimi, 09.09.2025) — Copyright 2017 IBM Corp.,
    SIL Open Font License 1.1 (https://openfontlicense.org). Degisken Roman, agirlik ekseni
@@ -209,6 +209,36 @@ input:focus-visible,.chip:focus-visible{outline:2px solid var(--accent);outline-
 @media (prefers-color-scheme: light){ .chip.on{color:#fff} }
 
 /* ---------- tablolar ---------- */
+/* Chromium'da border-collapse:collapse olan tablolarda hucre position:sticky
+   CALISMAZ. Ilk sutunun yapisabilmesi icin bu iki cizelge kabindaki tablolar
+   separate'e alinir; hucrelerde yalnizca border-bottom kullanildigi icin
+   gorunum degismez (border-spacing:0). */
+.tbl > table, .kgsar > table{ border-collapse:separate; border-spacing:0 }
+
+/* v27 — yatay kaydirmali cizelgede ilk sutun ekranda kalir. v26'da 200 px
+   kaydirildiginda doz etiketi 29 px'den -171 px'e gidiyordu, yani 90-100 kg
+   sutununa bakarken hangi dozda oldugunuz gorunmuyordu. */
+.tbl tbody th:first-child, .tbl td:first-child,
+.kgsar tbody th:first-child, .kgsar td:first-child{
+  position:sticky; left:0; z-index:2;
+  background:var(--panel); box-shadow:1px 0 0 var(--line);
+}
+.tbl thead th:first-child, .kgsar thead th:first-child{
+  position:sticky; left:0; z-index:3; background:var(--panel2);
+}
+/* Kaydirilabilir oldugunu gosteren sag kenar solmasi; kaydirma bitince kalkar. */
+.tbl, .kgsar{
+  background-image:linear-gradient(to left, rgba(0,0,0,.28), rgba(0,0,0,0) 26px);
+  background-position:right center; background-repeat:no-repeat; background-size:26px 100%;
+  background-attachment:local, scroll;
+}
+/* Cift dokunmayla yakinlastirma ve gecikmeli dokunma kalkar. */
+button, .adim, .chip, summary, a.ust-nav{ touch-action:manipulation }
+
+.yanki{color:var(--dim);font-size:.86rem;margin:0 0 2px;font-variant-numeric:tabular-nums}
+.aralik{color:var(--warn);font-size:.86rem;margin:4px 0 0}
+.big.disari{color:var(--warn)}
+
 .tbl{overflow-x:auto;-webkit-overflow-scrolling:touch}
 table{width:100%;border-collapse:collapse;font-size:.85rem;margin:10px 0 16px;
       line-height:1.5}
@@ -433,7 +463,7 @@ details.kat .ic{padding:0 14px 14px;border-top:1px solid var(--line)}
 <main class="ana">
 
 <h1>Pompa hızı çizelgesi</h1>
-<div class="sub">Yoğun bakım ve acil infüzyonlarında pompa hızı hesabı &nbsp;·&nbsp; <b>paylaşım sürümü v26</b> &nbsp;·&nbsp; 30.08.2026 &nbsp;·&nbsp; Hazırlayan: Dr. Tacim Yılmaz</div>
+<div class="sub">Yoğun bakım ve acil infüzyonlarında pompa hızı hesabı &nbsp;·&nbsp; <b>paylaşım sürümü v27</b> &nbsp;·&nbsp; 30.08.2026 &nbsp;·&nbsp; Hazırlayan: Dr. Tacim Yılmaz</div>
 
 <div class="qr-kutu">
   <a class="qr-link" href="https://tacimyilmaz3-debug.github.io/pompa-infuzyonu/" aria-label="Güncel sürümün adresi">
@@ -477,19 +507,19 @@ details.kat .ic{padding:0 14px 14px;border-top:1px solid var(--line)}
   <div class="chips" id="chips"><a class="chip on" href="#ilac-0">Noradrenalin, periferik</a><a class="chip" href="#ilac-1">Noradrenalin, santral</a><a class="chip" href="#ilac-2">Adrenalin</a><a class="chip" href="#ilac-3">Dopamin</a><a class="chip" href="#ilac-4">Dobutamin</a><a class="chip" href="#ilac-5">Deksmedetomidin</a><a class="chip" href="#ilac-6">Esmolol</a><a class="chip" href="#ilac-7">Vazopressin</a><a class="chip" href="#ilac-8">Nitrogliserin</a><a class="chip" href="#ilac-9">Milrinon</a><a class="chip" href="#ilac-10">Propofol %1</a><a class="chip" href="#ilac-11">Propofol %2</a><a class="chip" href="#ilac-12">Ketamin</a><a class="chip" href="#ilac-13">Midazolam</a><a class="chip" href="#ilac-14">Fenilefrin</a></div>
 
   <div class="row">
-    <div class="fld"><label>Kilo (kg)</label><input id="kg" type="number" inputmode="decimal" value="70" min="1" step="1"></div>
+    <div class="fld"><label>Kilo (kg)</label><input id="kg" type="text" inputmode="decimal" autocomplete="off" value="70"></div>
     <div class="fld"><label id="dozLbl">Doz (mcg/kg/dk)</label>
       <div class="adimli">
         <button type="button" class="adim" id="dozAz" aria-label="Dozu azalt">&minus;</button>
-        <input id="doz" type="number" inputmode="decimal" value="0.1" step="0.01" min="0">
+        <input id="doz" type="text" inputmode="decimal" autocomplete="off" value="0,1">
         <button type="button" class="adim" id="dozArt" aria-label="Dozu artır">+</button>
       </div>
       <span class="ip" id="adimLbl">Basamak: 0,025</span>
     </div>
   </div>
   <div class="row">
-    <div class="fld"><label>İlaç miktarı (mg)</label><input id="mg" type="number" inputmode="decimal" value="4" step="0.1" min="0"></div>
-    <div class="fld"><label>Toplam hacim (mL)</label><input id="ml" type="number" inputmode="decimal" value="100" step="1" min="1"></div>
+    <div class="fld"><label>İlaç miktarı (mg)</label><input id="mg" type="text" inputmode="decimal" autocomplete="off" value="4"></div>
+    <div class="fld"><label>Toplam hacim (mL)</label><input id="ml" type="text" inputmode="decimal" autocomplete="off" value="100"></div>
   </div>
 
   <div class="serit" id="serit">
@@ -499,7 +529,9 @@ details.kat .ic{padding:0 14px 14px;border-top:1px solid var(--line)}
   </div>
 
   <div class="out">
+    <div class="yanki" id="yanki">—</div>
     <div class="big" id="hiz">— <small>mL/saat</small></div>
+    <div class="aralik" id="aralik" hidden></div>
     <div class="note" id="not"></div>
     <noscript><div class="betiksiz" style="display:block;margin:10px 0 0">
       <b>Sonuç hesaplanmıyor</b> — bu görüntüleyici betik çalıştırmıyor; ne yazarsanız yazın
@@ -2583,7 +2615,17 @@ dozu</b> yan yana durur — amiodaron arrestte <b>300&nbsp;mg itme</b>, stabil v
       önerilmemesi doğrulandı ve satırlara işlendi; dopamin (2-50 mcg/kg/dk) ve fenilefrin
       (0,5-6 mcg/kg/dk) FDA etiketiyle karşılaştırıldı, değişiklik gerekmedi. Kaynaklar tablosuna
       SSC 2021, FDA reçete bilgileri ve iki UpToDate konusu eklendi.</td></tr>
-  <tr><td class="n">30.08.2026</td><td>v26 — <b>Hesap alanı ile çizelge arasındaki tek sapma kapandı.</b> Deksmedetomidin 0,7 mcg/kg/saat × 90 kg için çizelge 15,8, hesap alanı 15,7 veriyordu; çizelge 25.08’de düzeltilmiş ama hesap alanı düzeltilmemişti. Neden yuvarlama kuralı değil, ikili kayan nokta: 0,7 bu tabanda tam yazılamadığı için çarpım eşiğin altına düşüyor ve yarım yukarı kuralı hiç tetiklenmiyor. Yuvarlama işlevi (<code>vir</code>) artık değeri önce 15 anlamlı basamağa oturtup ölçekleyerek yuvarlıyor. <b>442 hücrenin tamamı</b> hesap alanının kendi yolundan yeniden hesaplandı: eski kodla 1 sapma, yeni kodla 0. <b>Hücre sayısı da düzeltildi:</b> belge 436 diyordu, gerçek sayı 442 (432 kiloya bağlı + 10 kilodan bağımsız); 436’nın nereden geldiği yeniden kurulamadı, düzeltme ölçüme dayanıyor.</td></tr>
+  <tr><td class="n">30.08.2026</td><td>v27 — <b>Ondalık virgül artık kabul ediliyor.</b>
+  v26'da doz alanına Türkçe klavyeyle <b>0,7</b> yazıldığında tarayıcı virgülü siliyor, alan
+  <b>07</b> gösteriyor ve hesap 7 mcg/kg/saat üzerinden yürüyordu: 90 kg için 15,8 yerine
+  <b>157,5 mL/saat</b>. Dört girdi alanı da <code>type="number"</code> olmaktan çıktı; sayıyı
+  virgül ya da nokta kabul eden tek bir okuyucu okuyor, biçimsiz girdide sayı hiç gösterilmiyor.
+  Ayrıca: çıktının üstünde <b>ilaç · kilo · doz</b> yankısı belirdi; doz ilacın kendi çizelgesinin
+  dışındaysa aralık yazılıyor, çizelgenin on katını aşarsa sayı gösterilmiyor; kilo 1–300 kg
+  dışındaysa sayı gösterilmiyor. Çizelgelerde <b>ilk sütun artık yana kaydırınca ekranda kalıyor</b>
+  ve kabın sağ kenarındaki solma çizelgenin kaydığını gösteriyor.
+  <span style="color:var(--dim)">(Hata Defteri kayıt 73.)</span></td></tr>
+<tr><td class="n">30.08.2026</td><td>v26 — <b>Hesap alanı ile çizelge arasındaki tek sapma kapandı.</b> Deksmedetomidin 0,7 mcg/kg/saat × 90 kg için çizelge 15,8, hesap alanı 15,7 veriyordu; çizelge 25.08’de düzeltilmiş ama hesap alanı düzeltilmemişti. Neden yuvarlama kuralı değil, ikili kayan nokta: 0,7 bu tabanda tam yazılamadığı için çarpım eşiğin altına düşüyor ve yarım yukarı kuralı hiç tetiklenmiyor. Yuvarlama işlevi (<code>vir</code>) artık değeri önce 15 anlamlı basamağa oturtup ölçekleyerek yuvarlıyor. <b>442 hücrenin tamamı</b> hesap alanının kendi yolundan yeniden hesaplandı: eski kodla 1 sapma, yeni kodla 0. <b>Hücre sayısı da düzeltildi:</b> belge 436 diyordu, gerçek sayı 442 (432 kiloya bağlı + 10 kilodan bağımsız); 436’nın nereden geldiği yeniden kurulamadı, düzeltme ölçüme dayanıyor.</td></tr>
 <tr><td class="n">25.08.2026</td><td>v6 — kurum adı ve belge kodu (YB.RH.02 → KİH-02) anonimleştirildi;
       JS kısayol kuralındaki eşleşme hatası düzeltildi (hiç tetiklenmiyordu); digoksinin üç ayrı
       yerdeki dozu birbirine bağlandı; deksmedetomidin 0,7 mcg/kg/saat × 90 kg hücresi 15,7 → 15,8
@@ -2601,7 +2643,7 @@ dozu</b> yan yana durur — amiodaron arrestte <b>300&nbsp;mg itme</b>, stabil v
 </details>
 
 <div class="foot">
-  <b>Pompa Hızı Çizelgesi · paylaşım sürümü v25 · 27.08.2026</b><br>
+  <b>Pompa Hızı Çizelgesi · paylaşım sürümü v27 · 30.08.2026</b><br>
   Hazırlayan: Dr. Tacim Yılmaz. Kişisel çalışma notlarından türetilmiştir; hiçbir kurumun ya da
   derneğin resmî belgesi değildir.<br><br>
   <b>Kaynaklar.</b> Seyreltmeler: kurum içi bir eğitim ve araştırma hastanesinin <b>Ameliyathane ve Yoğun Bakımlar İlaç Hazırlama Rehberi, KİH-02, 10.12.2024, revizyon 00</b> (kurum adı bu paylaşım sürümünde anonimleştirilmiştir; belge tek bir hastaneye aittir, ulusal standart değildir). Arrest ve bradiaritmi dozları
@@ -2672,6 +2714,19 @@ function vir(x, basamak){
 // doz yazımı: sondaki gereksiz sıfırları atar, virgülle yazar.
 // (Eski kod vir(d,3).replace(",0","") kullanıyordu; 0,05 -> "050" ve 0,02 -> "020"
 //  veriyordu, 0,375 de 0,38'e yuvarlanıyordu. 10.08.2026'da düzeltildi.)
+/* Ondalik okuyucu. Turkce klavyede ondalik ayraci VIRGULDUR; type="number"
+   alani virgulu sessizce siliyordu ve "0,7" -> "07" -> 7 oluyordu: 90 kg icin
+   15,8 yerine 157,5 mL/saat. Alanlar artik type="text" inputmode="decimal";
+   sayiyi bu islev okur, virgul de nokta da kabul edilir, bicimsiz girdi
+   null doner ve sayi HIC gosterilmez. (Kayit 73, 30.08.2026.) */
+function sayiOku(x){
+  var t = String(x == null ? "" : x).trim().replace(/\s/g, "").replace(",", ".");
+  if (t === "") return null;
+  if (!/^\d*\.?\d+$/.test(t)) return null;
+  var v = parseFloat(t);
+  return isFinite(v) ? v : null;
+}
+
 function dozYaz(d){
   var s = String(Math.round(d * 1000) / 1000);
   return s.replace(".", ",");
@@ -2686,20 +2741,75 @@ function akis(il, doz, kg, der){
   return pay / der;
 }
 
+/* Aralik, ilacin KENDI cizelgesindeki en kucuk ve en buyuk dozdur (il.dozlar).
+   Disaridan bir kilavuz degeri uydurulmadi; kaynak belgenin kendi cizelgesidir.
+   Bu yuzden cizelge disi bir doz ENGELLENMEZ, yalnizca isaretlenir: cizelge
+   araligi mutlak bir tavan degildir. Sayi ancak deger absurtse gizlenir. */
+function araliktaMi(il, doz){
+  if (!il.dozlar || !il.dozlar.length) return {durum:"bilinmiyor"};
+  var alt = il.dozlar[0], ust = il.dozlar[il.dozlar.length - 1];
+  if (doz < alt - 1e-9) return {durum:"altinda", alt:alt, ust:ust};
+  if (doz > ust + 1e-9) return {durum:"ustunde", alt:alt, ust:ust};
+  return {durum:"icinde", alt:alt, ust:ust};
+}
+function absurtMu(il, doz, kg){
+  if (il.kilo && (kg < 1 || kg > 300)) return "Kilo 1-300 kg arasında olmalı.";
+  if (doz < 0) return "Doz negatif olamaz.";
+  if (il.dozlar && il.dozlar.length){
+    var ust = il.dozlar[il.dozlar.length - 1];
+    if (doz > ust * 10) return "Girilen doz, çizelgenin en yüksek dozunun on katından fazla.";
+  }
+  return null;
+}
+function yankiYaz(il, doz, kg){
+  var y = document.getElementById("yanki");
+  if (!y) return;
+  y.textContent = il.ad + " · " + (il.kilo ? dozYaz(kg) + " kg · " : "") +
+                  dozYaz(doz) + " " + il.birim;
+}
+
+/* Her erken cikista aralik satiri da temizlenir; yoksa onceki turdan kalan
+   "cizelge disi" uyarisi, sayi "—" iken ekranda asili kalir. (v27 sinamasi.) */
+function aralikTemizle(){
+  var a = document.getElementById("aralik");
+  if (a){ a.hidden = true; a.textContent = ""; }
+  var o = document.getElementById("hiz");
+  if (o) o.classList.remove("disari");
+}
+
 function hesapla(){
-  var kg = parseFloat(document.getElementById("kg").value);
-  var doz = parseFloat(document.getElementById("doz").value);
-  var mg = parseFloat(document.getElementById("mg").value);
-  var ml = parseFloat(document.getElementById("ml").value);
+  var kg = sayiOku(document.getElementById("kg").value);
+  var doz = sayiOku(document.getElementById("doz").value);
+  var mg = sayiOku(document.getElementById("mg").value);
+  var ml = sayiOku(document.getElementById("ml").value);
   var il = ILAC[secili];
   var out = document.getElementById("hiz");
   var not = document.getElementById("not");
+  var yanki = document.getElementById("yanki");
 
-  if (!(mg > 0) || !(ml > 0) || !(doz >= 0) || (il.kilo && !(kg > 0))){
+  if (kg === null || doz === null || mg === null || ml === null){
+    aralikTemizle();
     out.innerHTML = "—";
-    not.textContent = "Alanları doldurun.";
+    not.textContent = "Girdi okunamadı. Ondalık için virgül ya da nokta kullanın.";
+    if (yanki) yanki.textContent = "—";
     return;
   }
+  if (!(mg > 0) || !(ml > 0) || !(doz >= 0) || (il.kilo && !(kg > 0))){
+    aralikTemizle();
+    out.innerHTML = "—";
+    not.textContent = "Alanları doldurun.";
+    if (yanki) yanki.textContent = "—";
+    return;
+  }
+  var absurt = absurtMu(il, doz, kg);
+  if (absurt){
+    aralikTemizle();
+    out.innerHTML = "—";
+    not.textContent = absurt + " Sayı gösterilmiyor.";
+    yankiYaz(il, doz, kg);
+    return;
+  }
+  yankiYaz(il, doz, kg);
 
   // derişim: unite ise ünite/mL, değilse mcg/mL
   var der = il.unite ? (mg / ml) : (mg * 1000 / ml);
@@ -2707,6 +2817,20 @@ function hesapla(){
 
   out.innerHTML = vir(hiz) + " <small>mL/saat</small>";
   seritYaz(il, mg, ml, der, doz);
+
+  var ar = araliktaMi(il, doz);
+  var arEl = document.getElementById("aralik");
+  if (arEl){
+    if (ar.durum === "ustunde" || ar.durum === "altinda"){
+      arEl.textContent = "Çizelge dışı: bu ilacın çizelgesi " + dozYaz(ar.alt) + "–" +
+                         dozYaz(ar.ust) + " " + il.birim + " arasını gösteriyor.";
+      arEl.hidden = false;
+      out.classList.add("disari");
+    } else {
+      arEl.hidden = true; arEl.textContent = "";
+      out.classList.remove("disari");
+    }
+  }
 
   var p = [];
   p.push("Derişim " + (il.unite ? vir(der,2) + " ünite/mL"
@@ -2748,9 +2872,9 @@ function sec(i){
   var degisti = (secili !== i);
   secili = i;
   var il = ILAC[i];
-  document.getElementById("mg").value = il.mg;
-  document.getElementById("ml").value = il.ml;
-  document.getElementById("doz").value = il.doz;
+  document.getElementById("mg").value = dozYaz(il.mg);
+  document.getElementById("ml").value = dozYaz(il.ml);
+  document.getElementById("doz").value = dozYaz(il.doz);
   document.getElementById("dozLbl").textContent = "Doz (" + il.birim + ")";
   document.getElementById("kg").disabled = !il.kilo;
   document.getElementById("kg").style.opacity = il.kilo ? "1" : "0.45";
@@ -2774,10 +2898,10 @@ function sec(i){
 function dozOynat(yon){
   var il = ILAC[secili], d = document.getElementById("doz");
   var adim = il.adim || 0.1;
-  var v = parseFloat(d.value); if (!isFinite(v)) v = il.doz;
+  var v = sayiOku(d.value); if (v === null) v = il.doz;
   var n = Math.round((v + yon * adim) / adim) * adim;
   if (n < 0) n = 0;
-  d.value = String(Math.round(n * 10000) / 10000);
+  d.value = dozYaz(Math.round(n * 10000) / 10000);
   hesapla();
 }
 
