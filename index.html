@@ -20,7 +20,9 @@
 :root{
   color-scheme: light dark;
   --bg:#0d1117; --yuzey:#161b22; --yuzey2:#1c2230; --cizgi:#2b3444;
-  --murekkep:#e8edf5; --soluk:#93a1b5; --vurgu:#4da3ff; --uyari:#ffb454; --kotu:#ff6b6b; --iyi:#5ddba1;
+  --murekkep:#c9d4e2; --soluk:#93a1b5; --vurgu:#4da3ff; --uyari:#ffb454; --kotu:#ff6b6b; --iyi:#5ddba1;
+  --murekkep-guclu:#ffffff; --kaynak-zemin:#222c3d; --kaynak-murekkep:#9dc2ec;
+  --vurgu-uzeri:#0d1117; --kotu-uzeri:#0d1117; --uyari-uzeri:#0d1117;
   --r:12px;
   /* Govde agirligi tema degiskeni. Koyu zeminde ayni agirlik ince gorunur (isik yayilmasi);
      degisken yazi tipi sayesinde 20 birim kalinlastirmak ek dosya gerektirmiyor. */
@@ -34,24 +36,42 @@
    biner. Aydınlık belirteçler iki kez yazılıdır — bir kez dizge kipi için
    (kullanıcı seçmemişse), bir kez de açık seçim için. CSS'te bir bildirim
    kümesini iki koşula bağlamanın başka yolu yok; yineleme bilinçlidir ve
-   ikisi birlikte değiştirilir. */
+   ikisi birlikte değiştirilir.
+
+   Renge bağlı HER değişken bu beş bloğun içinde yaşar; başka hiçbir yerde
+   tema rengi bildirilmez. v31'e kadar dört değişken (--murekkep-guclu,
+   --kaynak-zemin, --kaynak-murekkep ve --murekkep'in ikinci bir nüshası)
+   aşağıdaki "v12" bloğunda, bu blokların dışında duruyordu; data-kip
+   belirteçleri onları hiç bildirmediği için kip elle seçildiğinde kalın
+   yazılar zeminle aynı renge düşüyordu — aydınlıkta beyaz, karanlıkta
+   siyah. Yeni bir renk değişkeni gerekirse beşine birden yazılır. */
 @media (prefers-color-scheme: light){
   html:not([data-kip="karanlik"]):not([data-kip="aydinlik"]){ --bg:#f6f8fb; --yuzey:#fff; --yuzey2:#eef2f7; --cizgi:#d6dee9;
   --murekkep:#101720; --soluk:#54637a; --vurgu:#0b62c4; --uyari:#8a5000; --kotu:#b3261e; --iyi:#0f7a52;
+  --murekkep-guclu:#000000; --kaynak-zemin:#e8eef7; --kaynak-murekkep:#28527f;
+  --vurgu-uzeri:#ffffff; --kotu-uzeri:#ffffff; --uyari-uzeri:#ffffff;
   --govde:400; color-scheme:light; }
 }
 html[data-kip="aydinlik"]{ --bg:#f6f8fb; --yuzey:#fff; --yuzey2:#eef2f7; --cizgi:#d6dee9;
   --murekkep:#101720; --soluk:#54637a; --vurgu:#0b62c4; --uyari:#8a5000; --kotu:#b3261e; --iyi:#0f7a52;
+  --murekkep-guclu:#000000; --kaynak-zemin:#e8eef7; --kaynak-murekkep:#28527f;
+  --vurgu-uzeri:#ffffff; --kotu-uzeri:#ffffff; --uyari-uzeri:#ffffff;
   --govde:400; color-scheme:light; }
 html[data-kip="karanlik"]{ --bg:#0d1117; --yuzey:#161b22; --yuzey2:#1c2230; --cizgi:#2b3444;
-  --murekkep:#e8edf5; --soluk:#93a1b5; --vurgu:#4da3ff; --uyari:#ffb454; --kotu:#ff6b6b; --iyi:#5ddba1;
+  --murekkep:#c9d4e2; --soluk:#93a1b5; --vurgu:#4da3ff; --uyari:#ffb454; --kotu:#ff6b6b; --iyi:#5ddba1;
+  --murekkep-guclu:#ffffff; --kaynak-zemin:#222c3d; --kaynak-murekkep:#9dc2ec;
+  --vurgu-uzeri:#0d1117; --kotu-uzeri:#0d1117; --uyari-uzeri:#0d1117;
   --govde:420; color-scheme:dark; }
 /* Kısık ışık yalnız karanlık yürürlükteyken anlamlıdır. */
 html[data-kisik="1"][data-kip="karanlik"]{ --bg:#090c11; --yuzey:#0f1319; --yuzey2:#141922; --cizgi:#232b38;
-  --murekkep:#c3ccd9; --soluk:#7a8799; --vurgu:#3f86d6; --uyari:#d9973f; --kotu:#d95c5c; --iyi:#4bb389; }
+  --murekkep:#c3ccd9; --soluk:#7a8799; --vurgu:#3f86d6; --uyari:#d9973f; --kotu:#d95c5c; --iyi:#4bb389;
+  --murekkep-guclu:#e4eaf2; --kaynak-zemin:#1b2433; --kaynak-murekkep:#8fb4de;
+  --vurgu-uzeri:#090c11; --kotu-uzeri:#090c11; --uyari-uzeri:#090c11; }
 @media (prefers-color-scheme: dark){
   html[data-kisik="1"]:not([data-kip="aydinlik"]){ --bg:#090c11; --yuzey:#0f1319; --yuzey2:#141922; --cizgi:#232b38;
-  --murekkep:#c3ccd9; --soluk:#7a8799; --vurgu:#3f86d6; --uyari:#d9973f; --kotu:#d95c5c; --iyi:#4bb389; }
+  --murekkep:#c3ccd9; --soluk:#7a8799; --vurgu:#3f86d6; --uyari:#d9973f; --kotu:#d95c5c; --iyi:#4bb389;
+  --murekkep-guclu:#e4eaf2; --kaynak-zemin:#1b2433; --kaynak-murekkep:#8fb4de;
+  --vurgu-uzeri:#090c11; --kotu-uzeri:#090c11; --uyari-uzeri:#090c11; }
 }
 
 /* Betiğe bağlı denetimler betik kapalıyken hiç yer kaplamaz (§18). */
@@ -420,10 +440,10 @@ details.giris .ic .kap b{color:var(--uyari)}
 .formula.kucuk{font-size:.85rem;padding:10px 13px;margin:14px 0 10px}
 
 /* ================= v12: okunabilirlik ve ergonomi ================= */
-:root{ --murekkep-guclu:#ffffff; --kaynak-zemin:#222c3d; --kaynak-murekkep:#9dc2ec; --murekkep:#c9d4e2; }
-@media (prefers-color-scheme: light){
-  :root{ --murekkep-guclu:#000000; --kaynak-zemin:#e8eef7; --kaynak-murekkep:#28527f; --murekkep:#1d2733; }
-}
+/* Bu bloğun renk bildirimleri v31'de yukarıdaki beş tema bloğuna taşındı.
+   Buradaki :root nüshaları data-kip belirteçlerinden zayıf kaldığı için kip
+   elle seçildiğinde uygulanmıyordu; sonuç, zeminle aynı renkte kalın yazıydı.
+   Tema rengi artık yalnız orada bildirilir — buraya renk yazılmaz. */
 /* Kalın metin: koyu temada gövde metninden ayrılsın diye hem ağırlık hem renk artırıldı */
 b,strong{font-weight:700;color:var(--murekkep-guclu)}
 td b,td strong,li b{font-weight:700}
