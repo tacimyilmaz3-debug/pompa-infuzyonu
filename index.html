@@ -217,12 +217,18 @@ b,strong{font-weight:600}
 p{margin:.2rem 0 .6rem}
 .panel{background:var(--yuzey);border:1px solid var(--cizgi);border-radius:var(--r);
       padding:14px;margin-bottom:14px}
+/* Renkli dolgu üzerindeki mürekkep tema değişkenidir, sabit beyaz değildir.
+   Ölçüm: karanlık kipte beyaz yazı --vurgu (#4da3ff) üzerinde 2,63:1,
+   --kotu (#ff6b6b) üzerinde 2,78:1 veriyordu; WCAG AA eşiği 4,5:1.
+   Karanlık ve kısık kipte dolgular açık renk olduğu için mürekkep koyu,
+   aydınlıkta dolgular koyu olduğu için mürekkep beyazdır. Yeni değerler
+   sırasıyla 7,21 / 6,82 ve 5,22 / 5,26 ve 5,90 / 6,54. */
 .acil-blok{border-left:4px solid var(--kotu)}
-.acil-etiket{display:inline-block;background:var(--kotu);color:#fff;font-size:.72rem;
+.acil-etiket{display:inline-block;background:var(--kotu);color:var(--kotu-uzeri);font-size:.72rem;
       font-weight:700;letter-spacing:.04em;text-transform:uppercase;border-radius:5px;
       padding:3px 8px;margin-bottom:8px}
 .infuzyon-blok{border-left:4px solid var(--vurgu)}
-.infuzyon-etiket{display:inline-block;background:var(--vurgu);color:#fff;font-size:.72rem;
+.infuzyon-etiket{display:inline-block;background:var(--vurgu);color:var(--vurgu-uzeri);font-size:.72rem;
       font-weight:700;letter-spacing:.04em;text-transform:uppercase;border-radius:5px;
       padding:3px 8px;margin-bottom:8px}
 /* ---------- karekod kutusu ---------- */
@@ -280,13 +286,12 @@ input:focus-visible,.chip:focus-visible{outline:2px solid var(--vurgu);outline-o
       display:inline-flex;align-items:center;text-decoration:none;
       -webkit-tap-highlight-color:transparent}
 .chip:visited{color:var(--murekkep)}
-.chip.on:visited{color:#fff}
+.chip.on:visited{color:var(--vurgu-uzeri)}
 .betiksiz{display:none;background:var(--yuzey2);border:1px solid var(--uyari);
       border-radius:10px;padding:11px 13px;margin-bottom:12px;font-size:.85rem;
       line-height:1.5}
 .chip:hover{border-color:var(--vurgu);color:var(--vurgu)}
-.chip.on{background:var(--vurgu);border-color:var(--vurgu);color:#fff}
-@media (prefers-color-scheme: light){ .chip.on{color:#fff} }
+.chip.on{background:var(--vurgu);border-color:var(--vurgu);color:var(--vurgu-uzeri)}
 
 /* ---------- tablolar ---------- */
 /* Chromium'da border-collapse:collapse olan tablolarda hucre position:sticky
@@ -469,7 +474,7 @@ details.kat>summary{cursor:pointer;list-style:none;padding:13px 14px;min-height:
 details.kat>summary::-webkit-details-marker{display:none}
 details.kat>summary .baslik{font-weight:700;color:var(--murekkep-guclu);font-size:.95rem}
 details.kat>summary .aciklama{flex:1 1 100%;color:var(--soluk);font-size:.82rem;line-height:1.45}
-details.kat>summary .roz{margin-left:auto;background:var(--vurgu);color:#fff;border-radius:999px;
+details.kat>summary .roz{margin-left:auto;background:var(--vurgu);color:var(--vurgu-uzeri);border-radius:999px;
    padding:5px 11px;font-size:.73rem;font-weight:700;white-space:nowrap}
 details.kat>summary .roz::after{content:"\25BE\00a0 dokunun, açılır"}
 details.kat[open]>summary .roz{background:var(--yuzey2);color:var(--soluk);border:1px solid var(--cizgi)}
@@ -483,7 +488,7 @@ details.kat .ic{padding:0 14px 14px;border-top:1px solid var(--cizgi)}
    border-radius:9px;font-size:1.3rem;font-weight:700;cursor:pointer;min-height:46px;
    -webkit-appearance:none;appearance:none;display:flex;align-items:center;justify-content:center;
    -webkit-tap-highlight-color:transparent;font-family:inherit}
-.adim:active{background:var(--vurgu);color:#fff;border-color:var(--vurgu)}
+.adim:active{background:var(--vurgu);color:var(--vurgu-uzeri);border-color:var(--vurgu)}
 .adim:focus-visible{outline:2px solid var(--vurgu);outline-offset:2px}
 
 /* derişim şeridi — hangi ampul/seyreltme varsayılıyor */
@@ -491,11 +496,11 @@ details.kat .ic{padding:0 14px 14px;border-top:1px solid var(--cizgi)}
    border:2px solid var(--vurgu);background:var(--yuzey2);border-radius:10px;
    padding:10px 12px;margin:4px 0 8px;font-size:.88rem;text-align:center}
 .serit .yol{font-size:.72rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
-   border-radius:5px;padding:3px 9px;background:var(--vurgu);color:#fff}
+   border-radius:5px;padding:3px 9px;background:var(--vurgu);color:var(--vurgu-uzeri)}
 .serit .der{font-weight:700;color:var(--murekkep-guclu);font-variant-numeric:tabular-nums}
 .serit .not{flex:1 1 100%;color:var(--kotu);font-weight:700;font-size:.83rem;line-height:1.45}
-.serit.per{border-color:var(--uyari)} .serit.per .yol{background:var(--uyari);color:#1a1000}
-.serit.kirmizi{border-color:var(--kotu)} .serit.kirmizi .yol{background:var(--kotu);color:#fff}
+.serit.per{border-color:var(--uyari)} .serit.per .yol{background:var(--uyari);color:var(--uyari-uzeri)}
+.serit.kirmizi{border-color:var(--kotu)} .serit.kirmizi .yol{background:var(--kotu);color:var(--kotu-uzeri)}
 @keyframes seritYanip{from{box-shadow:0 0 0 0 var(--vurgu)}to{box-shadow:0 0 0 12px transparent}}
 .serit.degisti{animation:seritYanip .9s ease-out}
 @media print{.serit,.adim{display:none}details.kat>summary .roz{display:none}
