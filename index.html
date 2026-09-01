@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="tr" data-bicim="b004" data-surum="p32">
+<html lang="tr" data-bicim="b004" data-surum="p33">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -7,7 +7,7 @@
 <meta name="theme-color" content="#f6f8fb" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
 <meta name="format-detection" content="telephone=no">
-<title>Pompa Hızı Çizelgesi v32 — Dr. Tacim Yılmaz</title>
+<title>Pompa Hızı Çizelgesi v33 — Dr. Tacim Yılmaz</title>
 <style>
 /* IBM Plex Sans 3.201 (Google Fonts dagitimi, 09.09.2025) — Copyright 2017 IBM Corp.,
    SIL Open Font License 1.1 (https://openfontlicense.org). Degisken Roman, agirlik ekseni
@@ -843,7 +843,7 @@ main.ana .foot, .kunye{ max-width:var(--metin-eni) }
 <main class="ana">
 
 <h1>Pompa hızı çizelgesi</h1>
-<div class="sub">Yoğun bakım ve acil infüzyonlarında pompa hızı hesabı &nbsp;·&nbsp; <b>paylaşım sürümü v32</b> &nbsp;·&nbsp; 01.09.2026 &nbsp;·&nbsp; Hazırlayan: Dr. Tacim Yılmaz</div>
+<div class="sub">Yoğun bakım ve acil infüzyonlarında pompa hızı hesabı &nbsp;·&nbsp; <b>paylaşım sürümü v33</b> &nbsp;·&nbsp; 01.09.2026 &nbsp;·&nbsp; Hazırlayan: Dr. Tacim Yılmaz</div>
 
 <div class="qr-kutu">
   <a class="qr-link" href="https://tacimyilmaz3-debug.github.io/pompa-infuzyonu/" aria-label="Güncel sürümün adresi">
@@ -2590,6 +2590,27 @@ dozu</b> yan yana durur — amiodaron arrestte <b>300&nbsp;mg itme</b>, stabil v
 <div class="panel tablo-kap">
 <table>
   <thead><tr class="hdr"><th scope="col">Tarih</th><th scope="col">Değişiklik</th></tr></thead><tbody>
+  <tr><td class="sayi">01.09.2026</td><td>v33 — <b>Erişim turu ve bir kurgu düzeltmesi; hiçbir
+      doz, derişim ya da çizelge hücresi değişmedi.</b> Bu tur biçime değil, belgenin klavye ve
+      ekran okuyucuyla kullanılabilirliğine baktı. <b>Bir: hesap alanları programatik olarak
+      etiketsizdi.</b> Dört girdinin görünen etiketi vardı ama <code>for</code> bağlantısı
+      yoktu; ekran okuyucu dördünü de <b>adsız</b> okuyordu — hangi alanın kilo, hangisinin doz
+      olduğu duyulmadan hesap yapılamaz. <b>İki: kapalı içindekiler çekmecesi sekme sırasında
+      duruyordu.</b> Çekmece yalnız görünüm olarak kaydırılıyordu; ölçüldü, klavyeyle gezen biri
+      sayfanın içeriğine varmadan önce <b>ekranın dışındaki on dört görünmez bağlantıda</b>
+      takılıyordu. Artık kapalıyken odak almıyor; betik kapalıyken çalışan yol bozulmadı.
+      <b>Üç: çizelge başlıklarında <code>scope</code> yoktu</b> — yedi sütunlu kilo
+      matrislerinde ekran okuyucu hangi sayının hangi kiloya ait olduğunu bildiremiyordu; 213
+      başlık hücresine eklendi. <b>Dört: türetilmiş gibi sunulan iki dakika aralığının kurgusu
+      düzeltildi.</b> Noradrenalin “seksen kiloda kabaca 5-15” ve adrenalin “1-15” diyordu, ama
+      0,05 × 80 = 4 ve 0,2 × 80 = 16 eder. Sayılar yanlış değil — <b>kaynağın kendi mutlak
+      dakika aralıkları</b>, kilodan türetilmemişler; yanlış olan onları türetilmiş gibi sunan
+      cümleydi. <b>Sayılara dokunulmadı</b>, ifade düzeltildi. Fenilefrin satırındaki aynı kalıp
+      gerçekten türetilmiş ve doğru olduğu için olduğu gibi bırakıldı.
+      <b>Ayrıca bütün çizelgeler yeniden çapraz doğrulandı:</b> 442 pompa hücresi, 102 nöbet
+      infüzyon hücresi ve 60 yükleme hücresi (tavan mantığı dahil) sayfanın kendi hesap
+      işleviyle yeniden hesaplandı — <b>uyuşmazlık yok</b>; 17 derişim ifadesinin aritmetiği ve
+      görünür metindeki 3069 sayının tamamı da denetlendi.</td></tr>
   <tr><td class="sayi">01.09.2026</td><td>v32 — <b>Bakım turu; hiçbir doz, derişim, kaynak
       rozeti ya da çizelge hücresi değişmedi.</b> Üç iş yapıldı, üçü de dosyanın kendi
       düzenini sadeleştirmeye yönelik. <b>Bir: yinelenen satır içi biçem nitelikleri
@@ -3066,7 +3087,7 @@ dozu</b> yan yana durur — amiodaron arrestte <b>300&nbsp;mg itme</b>, stabil v
 </details>
 
 <div class="foot">
-  <b>Pompa Hızı Çizelgesi · paylaşım sürümü v32 · 01.09.2026</b><br>
+  <b>Pompa Hızı Çizelgesi · paylaşım sürümü v33 · 01.09.2026</b><br>
   Hazırlayan: Dr. Tacim Yılmaz. Kişisel çalışma notlarından türetilmiştir; hiçbir kurumun ya da
   derneğin resmî belgesi değildir.<br><br>
   <b>Kaynaklar.</b> Seyreltmeler: kurum içi bir eğitim ve araştırma hastanesinin <b>Ameliyathane ve Yoğun Bakımlar İlaç Hazırlama Rehberi, KİH-02, 10.12.2024, revizyon 00</b> (kurum adı bu paylaşım sürümünde anonimleştirilmiştir; belge tek bir hastaneye aittir, ulusal standart değildir). Arrest ve bradiaritmi dozları
