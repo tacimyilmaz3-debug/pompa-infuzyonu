@@ -695,6 +695,28 @@ table.kaydir td, table.kaydir th{padding-top:9px;padding-bottom:9px}
   width:calc(var(--iz-oran,1) * 100%)}
 .kaydir-iz[hidden]{display:none}
 @media print{.kaydir-iz{display:none}}
+
+/* ————— v31: metin sütunu —————
+   Gövde 860 pikselde satır başına yaklaşık 104 karakter ediyordu; rahat
+   okuma aralığı 60-75'tir. Metin bloğu daralır, çizelgeler daralmaz:
+   çizelgelerin işi karşılaştırmadır, dar sütun onları yana kaydırmaya
+   zorlar. Kapsam dışı: table, .tablo-kap, .kgsar, details.kat.
+
+   Ölçü rem cinsindendir, piksel değil: A− / A / A+ kök yazı boyunu
+   ölçeklediği için sütun da onunla büyür ve satırdaki karakter sayısı
+   sabit kalır. En büyük ölçekte (1,3) 40rem = 832 px eder; .wrap'in iç
+   genişliği de 832 px olduğundan taşma olmaz.
+
+   :where() bilerek kullanılmadı. Sıfır özgüllük burada işe yarardı ama
+   desteklemeyen eski bir tarayıcıda geçersiz seçici kuralın tamamını
+   düşürür; düz seçici her yerde geçerlidir ve max-width üzerinde
+   yarıştığı başka kural yok (dosyadaki bildirimler denetlendi). */
+:root{ --metin-eni:40rem }
+main.ana p, main.ana .sub, main.ana .warn, main.ana .formula,
+main.ana details.giris, main.ana .qr-kutu, main.ana #hesapKart,
+main.ana .foot, .kunye{ max-width:var(--metin-eni) }
+/* Kağıtta sütun genişliği sayfadan gelir. */
+@media print{ :root{ --metin-eni:none } }
 </style>
 <script>
 /* Kafa betiği (§21): tek işi boyamadan önce kipi kurmak. Saklanan durum
