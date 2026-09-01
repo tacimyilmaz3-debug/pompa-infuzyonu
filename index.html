@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="tr" data-bicim="b004" data-surum="p28">
+<html lang="tr" data-bicim="b004" data-surum="p31">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -20,7 +20,9 @@
 :root{
   color-scheme: light dark;
   --bg:#0d1117; --yuzey:#161b22; --yuzey2:#1c2230; --cizgi:#2b3444;
-  --murekkep:#e8edf5; --soluk:#93a1b5; --vurgu:#4da3ff; --uyari:#ffb454; --kotu:#ff6b6b; --iyi:#5ddba1;
+  --murekkep:#c9d4e2; --soluk:#93a1b5; --vurgu:#4da3ff; --uyari:#ffb454; --kotu:#ff6b6b; --iyi:#5ddba1;
+  --murekkep-guclu:#ffffff; --kaynak-zemin:#222c3d; --kaynak-murekkep:#9dc2ec;
+  --vurgu-uzeri:#0d1117; --kotu-uzeri:#0d1117; --uyari-uzeri:#0d1117;
   --r:12px;
   /* Govde agirligi tema degiskeni. Koyu zeminde ayni agirlik ince gorunur (isik yayilmasi);
      degisken yazi tipi sayesinde 20 birim kalinlastirmak ek dosya gerektirmiyor. */
@@ -34,24 +36,42 @@
    biner. Aydınlık belirteçler iki kez yazılıdır — bir kez dizge kipi için
    (kullanıcı seçmemişse), bir kez de açık seçim için. CSS'te bir bildirim
    kümesini iki koşula bağlamanın başka yolu yok; yineleme bilinçlidir ve
-   ikisi birlikte değiştirilir. */
+   ikisi birlikte değiştirilir.
+
+   Renge bağlı HER değişken bu beş bloğun içinde yaşar; başka hiçbir yerde
+   tema rengi bildirilmez. v31'e kadar dört değişken (--murekkep-guclu,
+   --kaynak-zemin, --kaynak-murekkep ve --murekkep'in ikinci bir nüshası)
+   aşağıdaki "v12" bloğunda, bu blokların dışında duruyordu; data-kip
+   belirteçleri onları hiç bildirmediği için kip elle seçildiğinde kalın
+   yazılar zeminle aynı renge düşüyordu — aydınlıkta beyaz, karanlıkta
+   siyah. Yeni bir renk değişkeni gerekirse beşine birden yazılır. */
 @media (prefers-color-scheme: light){
   html:not([data-kip="karanlik"]):not([data-kip="aydinlik"]){ --bg:#f6f8fb; --yuzey:#fff; --yuzey2:#eef2f7; --cizgi:#d6dee9;
   --murekkep:#101720; --soluk:#54637a; --vurgu:#0b62c4; --uyari:#8a5000; --kotu:#b3261e; --iyi:#0f7a52;
+  --murekkep-guclu:#000000; --kaynak-zemin:#e8eef7; --kaynak-murekkep:#28527f;
+  --vurgu-uzeri:#ffffff; --kotu-uzeri:#ffffff; --uyari-uzeri:#ffffff;
   --govde:400; color-scheme:light; }
 }
 html[data-kip="aydinlik"]{ --bg:#f6f8fb; --yuzey:#fff; --yuzey2:#eef2f7; --cizgi:#d6dee9;
   --murekkep:#101720; --soluk:#54637a; --vurgu:#0b62c4; --uyari:#8a5000; --kotu:#b3261e; --iyi:#0f7a52;
+  --murekkep-guclu:#000000; --kaynak-zemin:#e8eef7; --kaynak-murekkep:#28527f;
+  --vurgu-uzeri:#ffffff; --kotu-uzeri:#ffffff; --uyari-uzeri:#ffffff;
   --govde:400; color-scheme:light; }
 html[data-kip="karanlik"]{ --bg:#0d1117; --yuzey:#161b22; --yuzey2:#1c2230; --cizgi:#2b3444;
-  --murekkep:#e8edf5; --soluk:#93a1b5; --vurgu:#4da3ff; --uyari:#ffb454; --kotu:#ff6b6b; --iyi:#5ddba1;
+  --murekkep:#c9d4e2; --soluk:#93a1b5; --vurgu:#4da3ff; --uyari:#ffb454; --kotu:#ff6b6b; --iyi:#5ddba1;
+  --murekkep-guclu:#ffffff; --kaynak-zemin:#222c3d; --kaynak-murekkep:#9dc2ec;
+  --vurgu-uzeri:#0d1117; --kotu-uzeri:#0d1117; --uyari-uzeri:#0d1117;
   --govde:420; color-scheme:dark; }
 /* Kısık ışık yalnız karanlık yürürlükteyken anlamlıdır. */
 html[data-kisik="1"][data-kip="karanlik"]{ --bg:#090c11; --yuzey:#0f1319; --yuzey2:#141922; --cizgi:#232b38;
-  --murekkep:#c3ccd9; --soluk:#7a8799; --vurgu:#3f86d6; --uyari:#d9973f; --kotu:#d95c5c; --iyi:#4bb389; }
+  --murekkep:#c3ccd9; --soluk:#7a8799; --vurgu:#3f86d6; --uyari:#d9973f; --kotu:#d95c5c; --iyi:#4bb389;
+  --murekkep-guclu:#e4eaf2; --kaynak-zemin:#1b2433; --kaynak-murekkep:#8fb4de;
+  --vurgu-uzeri:#090c11; --kotu-uzeri:#090c11; --uyari-uzeri:#090c11; }
 @media (prefers-color-scheme: dark){
   html[data-kisik="1"]:not([data-kip="aydinlik"]){ --bg:#090c11; --yuzey:#0f1319; --yuzey2:#141922; --cizgi:#232b38;
-  --murekkep:#c3ccd9; --soluk:#7a8799; --vurgu:#3f86d6; --uyari:#d9973f; --kotu:#d95c5c; --iyi:#4bb389; }
+  --murekkep:#c3ccd9; --soluk:#7a8799; --vurgu:#3f86d6; --uyari:#d9973f; --kotu:#d95c5c; --iyi:#4bb389;
+  --murekkep-guclu:#e4eaf2; --kaynak-zemin:#1b2433; --kaynak-murekkep:#8fb4de;
+  --vurgu-uzeri:#090c11; --kotu-uzeri:#090c11; --uyari-uzeri:#090c11; }
 }
 
 /* Betiğe bağlı denetimler betik kapalıyken hiç yer kaplamaz (§18). */
@@ -197,12 +217,18 @@ b,strong{font-weight:600}
 p{margin:.2rem 0 .6rem}
 .panel{background:var(--yuzey);border:1px solid var(--cizgi);border-radius:var(--r);
       padding:14px;margin-bottom:14px}
+/* Renkli dolgu üzerindeki mürekkep tema değişkenidir, sabit beyaz değildir.
+   Ölçüm: karanlık kipte beyaz yazı --vurgu (#4da3ff) üzerinde 2,63:1,
+   --kotu (#ff6b6b) üzerinde 2,78:1 veriyordu; WCAG AA eşiği 4,5:1.
+   Karanlık ve kısık kipte dolgular açık renk olduğu için mürekkep koyu,
+   aydınlıkta dolgular koyu olduğu için mürekkep beyazdır. Yeni değerler
+   sırasıyla 7,21 / 6,82 ve 5,22 / 5,26 ve 5,90 / 6,54. */
 .acil-blok{border-left:4px solid var(--kotu)}
-.acil-etiket{display:inline-block;background:var(--kotu);color:#fff;font-size:.72rem;
+.acil-etiket{display:inline-block;background:var(--kotu);color:var(--kotu-uzeri);font-size:.72rem;
       font-weight:700;letter-spacing:.04em;text-transform:uppercase;border-radius:5px;
       padding:3px 8px;margin-bottom:8px}
 .infuzyon-blok{border-left:4px solid var(--vurgu)}
-.infuzyon-etiket{display:inline-block;background:var(--vurgu);color:#fff;font-size:.72rem;
+.infuzyon-etiket{display:inline-block;background:var(--vurgu);color:var(--vurgu-uzeri);font-size:.72rem;
       font-weight:700;letter-spacing:.04em;text-transform:uppercase;border-radius:5px;
       padding:3px 8px;margin-bottom:8px}
 /* ---------- karekod kutusu ---------- */
@@ -260,13 +286,12 @@ input:focus-visible,.chip:focus-visible{outline:2px solid var(--vurgu);outline-o
       display:inline-flex;align-items:center;text-decoration:none;
       -webkit-tap-highlight-color:transparent}
 .chip:visited{color:var(--murekkep)}
-.chip.on:visited{color:#fff}
+.chip.on:visited{color:var(--vurgu-uzeri)}
 .betiksiz{display:none;background:var(--yuzey2);border:1px solid var(--uyari);
       border-radius:10px;padding:11px 13px;margin-bottom:12px;font-size:.85rem;
       line-height:1.5}
 .chip:hover{border-color:var(--vurgu);color:var(--vurgu)}
-.chip.on{background:var(--vurgu);border-color:var(--vurgu);color:#fff}
-@media (prefers-color-scheme: light){ .chip.on{color:#fff} }
+.chip.on{background:var(--vurgu);border-color:var(--vurgu);color:var(--vurgu-uzeri)}
 
 /* ---------- tablolar ---------- */
 /* Chromium'da border-collapse:collapse olan tablolarda hucre position:sticky
@@ -420,10 +445,10 @@ details.giris .ic .kap b{color:var(--uyari)}
 .formula.kucuk{font-size:.85rem;padding:10px 13px;margin:14px 0 10px}
 
 /* ================= v12: okunabilirlik ve ergonomi ================= */
-:root{ --murekkep-guclu:#ffffff; --kaynak-zemin:#222c3d; --kaynak-murekkep:#9dc2ec; --murekkep:#c9d4e2; }
-@media (prefers-color-scheme: light){
-  :root{ --murekkep-guclu:#000000; --kaynak-zemin:#e8eef7; --kaynak-murekkep:#28527f; --murekkep:#1d2733; }
-}
+/* Bu bloğun renk bildirimleri v31'de yukarıdaki beş tema bloğuna taşındı.
+   Buradaki :root nüshaları data-kip belirteçlerinden zayıf kaldığı için kip
+   elle seçildiğinde uygulanmıyordu; sonuç, zeminle aynı renkte kalın yazıydı.
+   Tema rengi artık yalnız orada bildirilir — buraya renk yazılmaz. */
 /* Kalın metin: koyu temada gövde metninden ayrılsın diye hem ağırlık hem renk artırıldı */
 b,strong{font-weight:700;color:var(--murekkep-guclu)}
 td b,td strong,li b{font-weight:700}
@@ -449,7 +474,7 @@ details.kat>summary{cursor:pointer;list-style:none;padding:13px 14px;min-height:
 details.kat>summary::-webkit-details-marker{display:none}
 details.kat>summary .baslik{font-weight:700;color:var(--murekkep-guclu);font-size:.95rem}
 details.kat>summary .aciklama{flex:1 1 100%;color:var(--soluk);font-size:.82rem;line-height:1.45}
-details.kat>summary .roz{margin-left:auto;background:var(--vurgu);color:#fff;border-radius:999px;
+details.kat>summary .roz{margin-left:auto;background:var(--vurgu);color:var(--vurgu-uzeri);border-radius:999px;
    padding:5px 11px;font-size:.73rem;font-weight:700;white-space:nowrap}
 details.kat>summary .roz::after{content:"\25BE\00a0 dokunun, açılır"}
 details.kat[open]>summary .roz{background:var(--yuzey2);color:var(--soluk);border:1px solid var(--cizgi)}
@@ -463,7 +488,7 @@ details.kat .ic{padding:0 14px 14px;border-top:1px solid var(--cizgi)}
    border-radius:9px;font-size:1.3rem;font-weight:700;cursor:pointer;min-height:46px;
    -webkit-appearance:none;appearance:none;display:flex;align-items:center;justify-content:center;
    -webkit-tap-highlight-color:transparent;font-family:inherit}
-.adim:active{background:var(--vurgu);color:#fff;border-color:var(--vurgu)}
+.adim:active{background:var(--vurgu);color:var(--vurgu-uzeri);border-color:var(--vurgu)}
 .adim:focus-visible{outline:2px solid var(--vurgu);outline-offset:2px}
 
 /* derişim şeridi — hangi ampul/seyreltme varsayılıyor */
@@ -471,11 +496,11 @@ details.kat .ic{padding:0 14px 14px;border-top:1px solid var(--cizgi)}
    border:2px solid var(--vurgu);background:var(--yuzey2);border-radius:10px;
    padding:10px 12px;margin:4px 0 8px;font-size:.88rem;text-align:center}
 .serit .yol{font-size:.72rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
-   border-radius:5px;padding:3px 9px;background:var(--vurgu);color:#fff}
+   border-radius:5px;padding:3px 9px;background:var(--vurgu);color:var(--vurgu-uzeri)}
 .serit .der{font-weight:700;color:var(--murekkep-guclu);font-variant-numeric:tabular-nums}
 .serit .not{flex:1 1 100%;color:var(--kotu);font-weight:700;font-size:.83rem;line-height:1.45}
-.serit.per{border-color:var(--uyari)} .serit.per .yol{background:var(--uyari);color:#1a1000}
-.serit.kirmizi{border-color:var(--kotu)} .serit.kirmizi .yol{background:var(--kotu);color:#fff}
+.serit.per{border-color:var(--uyari)} .serit.per .yol{background:var(--uyari);color:var(--uyari-uzeri)}
+.serit.kirmizi{border-color:var(--kotu)} .serit.kirmizi .yol{background:var(--kotu);color:var(--kotu-uzeri)}
 @keyframes seritYanip{from{box-shadow:0 0 0 0 var(--vurgu)}to{box-shadow:0 0 0 12px transparent}}
 .serit.degisti{animation:seritYanip .9s ease-out}
 @media print{.serit,.adim{display:none}details.kat>summary .roz{display:none}
@@ -670,6 +695,28 @@ table.kaydir td, table.kaydir th{padding-top:9px;padding-bottom:9px}
   width:calc(var(--iz-oran,1) * 100%)}
 .kaydir-iz[hidden]{display:none}
 @media print{.kaydir-iz{display:none}}
+
+/* ————— v31: metin sütunu —————
+   Gövde 860 pikselde satır başına yaklaşık 104 karakter ediyordu; rahat
+   okuma aralığı 60-75'tir. Metin bloğu daralır, çizelgeler daralmaz:
+   çizelgelerin işi karşılaştırmadır, dar sütun onları yana kaydırmaya
+   zorlar. Kapsam dışı: table, .tablo-kap, .kgsar, details.kat.
+
+   Ölçü rem cinsindendir, piksel değil: A− / A / A+ kök yazı boyunu
+   ölçeklediği için sütun da onunla büyür ve satırdaki karakter sayısı
+   sabit kalır. En büyük ölçekte (1,3) 40rem = 832 px eder; .wrap'in iç
+   genişliği de 832 px olduğundan taşma olmaz.
+
+   :where() bilerek kullanılmadı. Sıfır özgüllük burada işe yarardı ama
+   desteklemeyen eski bir tarayıcıda geçersiz seçici kuralın tamamını
+   düşürür; düz seçici her yerde geçerlidir ve max-width üzerinde
+   yarıştığı başka kural yok (dosyadaki bildirimler denetlendi). */
+:root{ --metin-eni:40rem }
+main.ana p, main.ana .sub, main.ana .warn, main.ana .formula,
+main.ana details.giris, main.ana .qr-kutu, main.ana #hesapKart,
+main.ana .foot, .kunye{ max-width:var(--metin-eni) }
+/* Kağıtta sütun genişliği sayfadan gelir. */
+@media print{ :root{ --metin-eni:none } }
 </style>
 <script>
 /* Kafa betiği (§21): tek işi boyamadan önce kipi kurmak. Saklanan durum
@@ -744,7 +791,7 @@ table.kaydir td, table.kaydir th{padding-top:9px;padding-bottom:9px}
 <main class="ana">
 
 <h1>Pompa hızı çizelgesi</h1>
-<div class="sub">Yoğun bakım ve acil infüzyonlarında pompa hızı hesabı &nbsp;·&nbsp; <b>paylaşım sürümü v27</b> &nbsp;·&nbsp; 30.08.2026 &nbsp;·&nbsp; Hazırlayan: Dr. Tacim Yılmaz</div>
+<div class="sub">Yoğun bakım ve acil infüzyonlarında pompa hızı hesabı &nbsp;·&nbsp; <b>paylaşım sürümü v31</b> &nbsp;·&nbsp; 01.09.2026 &nbsp;·&nbsp; Hazırlayan: Dr. Tacim Yılmaz</div>
 
 <div class="qr-kutu">
   <a class="qr-link" href="https://tacimyilmaz3-debug.github.io/pompa-infuzyonu/" aria-label="Güncel sürümün adresi">
@@ -2489,6 +2536,28 @@ dozu</b> yan yana durur — amiodaron arrestte <b>300&nbsp;mg itme</b>, stabil v
 <div class="panel tablo-kap">
 <table>
   <thead><tr class="hdr"><th>Tarih</th><th>Değişiklik</th></tr></thead><tbody>
+  <tr><td class="sayi">01.09.2026</td><td>v31 — <b>Biçim turu; hiçbir doz, derişim, kaynak
+      rozeti ya da çizelge hücresi değişmedi.</b> Değişiklikten önce ve sonra belgenin bütün
+      görünür metni çıkarılıp karşılaştırıldı; fark yalnız bu satır ile sürüm ve tarih
+      damgalarından ibaret. <b>Bir: kip elle seçildiğinde kalın yazılar kayboluyordu.</b>
+      Dört renk değişkeni (<code>--murekkep-guclu</code>, iki kaynak rozeti rengi ve
+      <code>--murekkep</code>'in ikinci bir nüshası) beş tema bloğunun dışında, yalnız
+      <code>:root</code> ve dizge kipi sorgusu üzerinden tanımlıydı; <code>data-kip</code>
+      belirteçleri onları hiç bildirmediği için telefonu karanlık olan biri “Aydınlık”
+      seçtiğinde bütün kalın yazılar, eylem satırları, kaynak rozetleri ve derişim şeridindeki
+      sayı <b>beyaz zeminde beyaz</b> kalıyordu; tersi durumda karanlık zeminde siyah.
+      Değişkenler beş bloğun içine taşındı, her birinin tek bir kaynağı kaldı.
+      <b>İki: renkli dolgu üzerindeki yazı okunmuyordu.</b> Karanlık kipte beyaz yazı seçili
+      ilaç çipinde ve derişim şeridi etiketinde <b>2,63:1</b>, acil etiketinde <b>2,78:1</b>
+      veriyordu (WCAG AA eşiği 4,5:1); aydınlık kipte periferik şerit etiketi <b>2,89:1</b>'di.
+      Dolgu üzerindeki mürekkep tema değişkenine bağlandı; ölçülen yeni değerler karanlıkta
+      7,21 / 6,82, kısıkta 5,22 / 5,26, aydınlıkta 5,90 / 6,54. Kısık ışık kipi artık kalın
+      yazıyı da kısıyor — önceden gövde sönerken kalın yazı saf beyaz kalıyordu.
+      <b>Üç: metin sütunu daraltıldı.</b> Satır başına yaklaşık 104 karakter düşüyordu; rahat
+      okuma 60-75. Paragraflar, uyarı kutuları ve hesap kartı 40rem'e indi, <b>çizelgeler tam
+      genişlikte kaldı</b>. Ölçü rem olduğu için A− / A / A+ ile birlikte ölçekleniyor.
+      Ayrıca sürüm damgası dört ayrı yerde dört türlüydü (başlıkta v31, gövdede v27, künyede
+      ayrı bir tarih); hepsi <b>v31 · 01.09.2026</b> olarak eşitlendi.</td></tr>
   <tr><td class="sayi">28.08.2026</td><td>v25 — <b>Biçim turu; hiçbir doz değeri, hiçbir kaynak rozeti ve
       hiçbir çizelge hücresi değişmedi.</b> Dosya makineyle baştan sona denetlendi; iki kusur bulundu ve
       düzeltildi. <b>Bir: yazı tipi altkümesinde alt çizgi yoktu.</b> Gömülü nüshalar belgede geçen
@@ -2924,7 +2993,7 @@ dozu</b> yan yana durur — amiodaron arrestte <b>300&nbsp;mg itme</b>, stabil v
 </details>
 
 <div class="foot">
-  <b>Pompa Hızı Çizelgesi · paylaşım sürümü v27 · 30.08.2026</b><br>
+  <b>Pompa Hızı Çizelgesi · paylaşım sürümü v31 · 01.09.2026</b><br>
   Hazırlayan: Dr. Tacim Yılmaz. Kişisel çalışma notlarından türetilmiştir; hiçbir kurumun ya da
   derneğin resmî belgesi değildir.<br><br>
   <b>Kaynaklar.</b> Seyreltmeler: kurum içi bir eğitim ve araştırma hastanesinin <b>Ameliyathane ve Yoğun Bakımlar İlaç Hazırlama Rehberi, KİH-02, 10.12.2024, revizyon 00</b> (kurum adı bu paylaşım sürümünde anonimleştirilmiştir; belge tek bir hastaneye aittir, ulusal standart değildir). Arrest ve bradiaritmi dozları
@@ -3545,7 +3614,7 @@ function dozOynat(yon){
 <footer class="kunye" id="kunye">
   <p class="bayat"><strong>Bu belge tazelenmedikçe eskir.</strong>
      Basıldığı gün doğru olan bir eşik, bugün doğru olmayabilir; kullanmadan
-     önce künyedeki tarihe bakın. Son düzenleme: <time datetime="2026-08-31">31 Ağustos 2026</time>.</p>
+     önce künyedeki tarihe bakın. Son düzenleme: <time datetime="2026-09-01">1 Eylül 2026</time>.</p>
   <dl>
     <dt>Biçim damgası</dt><dd>b004</dd>
     <dt>Tablo sayısı</dt><dd id="kunyeTablo">—</dd>
