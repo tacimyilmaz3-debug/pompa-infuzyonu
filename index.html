@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="tr" data-bicim="b004" data-surum="p34">
+<html lang="tr" data-bicim="b007" data-surum="p35" data-kip-sema="k1">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -763,7 +763,14 @@ table.kaydir td, table.kaydir th{padding-top:9px;padding-bottom:9px}
    desteklemeyen eski bir tarayıcıda geçersiz seçici kuralın tamamını
    düşürür; düz seçici her yerde geçerlidir ve max-width üzerinde
    yarıştığı başka kural yok (dosyadaki bildirimler denetlendi). */
-:root{ --metin-eni:40rem }
+/* v35 — sütun 40rem'den 32rem'e indi (#14). Ölçüldü: düzeltilmiş ölçüt 6 ile
+   40rem'de satır ölçüsü ortancası 88 karakter çıkıyordu, hedef 62-75. Değer
+   hesaplanmadı, tarayıcıda taranarak bulundu (1280x900, kartlar açık, aydınlık):
+     40rem -> 88 · 36rem -> 77 · 34rem -> 72 · 32rem -> 70 · 30rem -> 66
+   32rem hedefin ortasında; hesap kartı 512 px kalıyor, dar değil. En büyük
+   ölçekte (1,3) 32rem = 666 px eder, .wrap'in 832 px'lik iç genişliğinin
+   altında, taşma yok. */
+:root{ --metin-eni:32rem }
 main.ana p, main.ana .sub, main.ana .warn, main.ana .formula,
 main.ana details.giris, main.ana .qr-kutu, main.ana #hesapKart,
 main.ana .foot, .kunye{ max-width:var(--metin-eni) }
@@ -813,9 +820,16 @@ html[data-betik="1"] body.toc-acik .basa-don.gorunur{
 @media print{ .basa-don{ display:none } }
 </style>
 <script>
-/* Kafa betiği (§21): tek işi boyamadan önce kipi kurmak. Saklanan durum
-   yalnız biçim damgası eşleşirse geçerlidir (§13) — biçim değişince eski
-   seçim sessizce uygulanmaz. */
+/* Kafa betiği (§21): tek işi boyamadan önce kipi kurmak.
+   v35'e kadar saklanan durum `data-bicim`e bağlıydı; biçim damgası her
+   güncellendiğinde kullanıcının kip ve ölçek seçimi siliniyordu. Sonuç şuydu:
+   damgayı güncellemek DOĞRU işlemdi ama kötü bir yan etkisi vardı, bu yüzden
+   hiç yapılmadı ve ölçüt 45 üç tur boyunca kırmızı kaldı (b004 ↔ kılavuz v006).
+   Artık üç ayrı soru üç ayrı damgada duruyor:
+     data-bicim     — hangi kılavuza göre yapıldı (biçim değişince artar)
+     data-surum     — belgenin kendi sürümü (her turda artar)
+     data-kip-sema  — SAKLANAN VERİNİN ŞEKLİ (yalnız şekil değişince artar)
+   Doğrulama üçüncüsüne bakar, böylece ilk ikisi serbestçe güncellenebilir. */
 (function(){
   var d=document.documentElement;
   d.setAttribute('data-betik','1');
@@ -823,7 +837,12 @@ html[data-betik="1"] body.toc-acik .basa-don.gorunur{
     var ham=localStorage.getItem('pompa:kip');
     if(!ham) return;
     var o=JSON.parse(ham);
-    if(!o || o.bicim!==d.getAttribute('data-bicim')) return;
+    if(!o) return;
+    /* Eski nüshalar {bicim:"b004", ...} yazıyordu. Bir kez taşınır: o kayıt
+       geçerli sayılır ve ilk yazmada yeni şekle döner. Böylece bu değişiklik
+       kimsenin kayıtlı ayarını düşürmüyor. */
+    var sema=d.getAttribute('data-kip-sema');
+    if(!(o.sema===sema || (o.sema===undefined && o.bicim==='b004'))) return;
     if(o.kip==='aydinlik'||o.kip==='karanlik') d.setAttribute('data-kip',o.kip);
     if(o.kisik) d.setAttribute('data-kisik','1');
     if(typeof o.olcek==='number' && o.olcek>=0.85 && o.olcek<=1.3)
@@ -2632,6 +2651,7 @@ dozu</b> yan yana durur — amiodaron arrestte <b>300&nbsp;mg itme</b>, stabil v
 <div class="panel tablo-kap">
 <table>
   <thead><tr class="hdr"><th scope="col">Tarih</th><th scope="col">Değişiklik</th></tr></thead><tbody>
+  <tr><td class="sayi">05.09.2026</td><td>v35 — <b>İki biçim düzeltmesi; hiçbir doz, derişim ya da çizelge hücresi değişmedi.</b> <b>Bir: biçim damgası artık kayıtlı ayarınızı silmiyor.</b> Bu belge kip ve yazı ölçeği seçiminizi tarayıcınızda saklıyor ve kaydın hangi biçime ait olduğunu doğruluyor. Doğrulama yanlış damgaya bağlanmıştı: biçim damgası her güncellendiğinde seçiminiz siliniyordu. Bu yüzden damga üç tur boyunca hiç güncellenmedi ve <code>b004</code>’te takılı kaldı. Artık saklanan verinin <b>şekli</b> ayrı bir damga taşıyor; biçim damgası serbestçe güncellenebiliyor ve <code>b007</code>’ye çekildi. Eski kayıtlar bir kez taşınıyor, yani kimsenin ayarı düşmüyor. <b>İki: metin sütunu daraldı.</b> Ölçüldü — masaüstünde satır başına <b>88 karakter</b> düşüyordu; rahat okuma aralığı 62–75, çünkü daha uzun satırda göz satır sonundan bir sonraki satırın başına dönerken hedefi kaçırır. Sütun 40rem’den 32rem’e indi ve ölçüm <b>70</b> karaktere geldi. Değer hesaplanmadı, tarayıcıda taranarak bulundu. Çizelgeler bundan etkilenmiyor; onlar tam genişlikte kalıyor.</td></tr>
   <tr><td class="sayi">05.09.2026</td><td>v34 — <b>Başa dönüş düğmesi eklendi; hiçbir doz, derişim ya da çizelge hücresi değişmedi.</b> Ölçüldü: telefon genişliğinde (390 px) belge <b>69.663 piksel</b>, yani yaklaşık <b>82 ekran</b> uzunlukta; bu uzunlukta içindekiler çekmecesi üzerinden iki dokunuşluk dönüş bile pahalı. Düğme üst çubuğa konmadı — orada ölçülen boş yer 40 px ve 44 px’lik bir dokunma hedefi ancak arama alanı daraltılarak sığardı. Bunun yerine sağ altta yüzen 44×44 düğme; bir buçuk ekran inilmeden görünmez, çekmece açıkken gizlenir, baskıda çıkmaz. Dönüş <b>anlık</b>, yumuşak kaydırmalı değil: 69.000 piksellik bir belgede yumuşak kaydırma dönüşü saniyelere yayar. Düğme <b>bağlantı olarak</b> yazıldı: betik kapalıyken sürekli görünür ve tek başına çalışır, betik açıkken görünürlüğünü betik yönetir. Gizliyken yalnız saydamlık değil <code>visibility</code> de kapatılıyor — v33’te içindekiler çekmecesinde ölçülen "görünmez ama sekmeyle gezilebilir" kusuru burada tekrarlanmasın diye.</td></tr>
   <tr><td class="sayi">01.09.2026</td><td>v33 — <b>Erişim turu ve bir kurgu düzeltmesi; hiçbir
       doz, derişim ya da çizelge hücresi değişmedi.</b> Bu tur biçime değil, belgenin klavye ve
@@ -3130,7 +3150,7 @@ dozu</b> yan yana durur — amiodaron arrestte <b>300&nbsp;mg itme</b>, stabil v
 </details>
 
 <div class="foot">
-  <b>Pompa Hızı Çizelgesi · paylaşım sürümü v34 · 05.09.2026</b><br>
+  <b>Pompa Hızı Çizelgesi · paylaşım sürümü v35 · 05.09.2026</b><br>
   Hazırlayan: Dr. Tacim Yılmaz. Kişisel çalışma notlarından türetilmiştir; hiçbir kurumun ya da
   derneğin resmî belgesi değildir.<br><br>
   <b>Kaynaklar.</b> Seyreltmeler: kurum içi bir eğitim ve araştırma hastanesinin <b>Ameliyathane ve Yoğun Bakımlar İlaç Hazırlama Rehberi, KİH-02, 10.12.2024, revizyon 00</b> (kurum adı bu paylaşım sürümünde anonimleştirilmiştir; belge tek bir hastaneye aittir, ulusal standart değildir). Arrest ve bradiaritmi dozları
@@ -3640,7 +3660,7 @@ function dozOynat(yon){
   var kisikD=document.getElementById('kisikDugme');
   function yaz(){
     try{ localStorage.setItem('pompa:kip', JSON.stringify({
-      bicim:d.getAttribute('data-bicim'),
+      sema:d.getAttribute('data-kip-sema'),
       kip:d.getAttribute('data-kip')||'sistem',
       kisik:d.getAttribute('data-kisik')==='1',
       olcek:parseFloat(d.style.getPropertyValue('--olcek'))||1
@@ -3778,7 +3798,7 @@ function dozOynat(yon){
      Basıldığı gün doğru olan bir eşik, bugün doğru olmayabilir; kullanmadan
      önce künyedeki tarihe bakın. Son düzenleme: <time datetime="2026-09-05">5 Eylül 2026</time>.</p>
   <dl>
-    <dt>Biçim damgası</dt><dd>b004</dd>
+    <dt>Biçim damgası</dt><dd>b007</dd>
     <dt>Tablo sayısı</dt><dd id="kunyeTablo">—</dd>
     <dt>Değer hücresi</dt><dd id="kunyeHucre">—</dd>
     <dt>Görünüm</dt><dd id="kunyeKip">—</dd>
